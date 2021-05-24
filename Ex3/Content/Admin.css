@@ -1,0 +1,75 @@
+﻿body {
+    font-family: 'Rubik', sans-serif;
+}
+
+@media (max-width:479px) {
+}
+
+@media (max-width:767px) and (min-width:480px) {
+}
+
+@media (min-width:768px) and (max-width:1023) {
+}
+
+@media (min-width:1024px) {
+    .adminpage {
+        position:relative;
+        margin:0;
+        padding:0;
+        background-color:#0094ff;
+        box-sizing:border-box;
+    }
+    .adminpage .menubar {
+        height:100vh;
+        width:20%;
+        background:#000000;
+        position:absolute;
+    }
+    .adminpage .content-admin {
+        background-color:#4800ff;
+        height:100vh;
+        width:80%;
+        position:absolute;
+        left:20%;
+        padding:50px;
+    }
+    .adminpage .menubar .logo-cv {
+        margin-right:auto;
+        margin-left:auto;
+        width:100px;
+        height:100px;
+        background-color:aquamarine;
+        margin-top:50px;
+        margin-bottom:50px;
+    }
+    .menubar .btn-bar {
+        width:100%;
+        height:50px;
+        background-color:aliceblue;
+        margin-top:10px;
+        cursor:pointer;
+        padding:0;
+        position:relative;
+    }
+    .menubar .btn-bar a:hover {
+        background-color:#1b1b1b;
+        color:aliceblue;
+    }
+    .menubar .btn-bar a {
+        color:#000000;
+        transition:0.5s;
+        font-size:18px;
+        font-weight:bold;
+        text-transform:uppercase;
+        text-decoration:none;
+        width:100%;
+        height:100%;
+        padding-top:14px;
+        position:absolute;
+        padding-left:30%;
+    }
+    .content-admin .admin-manage {
+        position:relative;
+    }
+    
+}

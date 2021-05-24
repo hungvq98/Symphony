@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="~/Scripts/javazz.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/Content/Admin.css" media="all" />
+</head>
+<body>
+    <div class="adminpage">
+        <div class="menubar">
+            <div class="content"><div class="logo-cv"></div></div>
+            <div class="btn-bar"><a href="#">Course</a></div>
+            <div class="btn-bar"><a href="#">exam</a></div>
+            <div class="btn-bar"><a href="#">faqs</a></div>
+            <div class="btn-bar"><a href="#">grade</a></div>
+            <div class="btn-bar"><a href="#">history course</a></div>
+            <div class="btn-bar"><a href="#">post admin</a></div>
+            <div class="btn-bar"><a href="#">Student</a></div>
+            <div class="btn-bar"><a href="#">feedback</a></div>
+            <div class="btn-bar"><a href="#">teacher</a></div>
+            <div class="btn-bar"><a href="#">Type</a></div>
+
+        </div>
+        <div class="content-admin">
+            <div class="admin-manage">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
