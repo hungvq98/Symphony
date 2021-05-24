@@ -1,0 +1,443 @@
+﻿body {
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Rubik', sans-serif;
+}
+
+@media (max-width:479px) {
+}
+
+@media (max-width:767px) and (min-width:480px) {
+}
+
+@media (min-width:768px) and (max-width:1023px) {
+    .Login-cv {
+        width: 1000px;
+        height: 700px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 6%;
+        position: relative;
+        overflow: hidden;
+        transition: 0.8s;
+        transform:scale(0.7);
+    }
+
+    .login-form form .text {
+        height: 40px;
+        width: 250px;
+        border-radius: 20px;
+        border: none;
+        background: #fee698;
+        padding-left: 20px;
+        outline: none;
+        margin-bottom: 20px;
+    }
+
+    .login-form form button {
+        height: 40px;
+        width: 100px;
+        background: #eeba10;
+        font-weight: bold;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .btn-login-cv {
+        width: 100px;
+        height: 50px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+        .btn-login-cv .btn-login {
+            background: none;
+            border: none;
+            color: white;
+        }
+
+    .login-form form {
+        width: 272px;
+        height: 600px;
+        position: relative;
+        position: absolute;
+        top: 40%;
+        left: 68%;
+    }
+
+        .login-form form button:active {
+            transform: scale(0.95);
+        }
+
+    .regis-form {
+        background: #eeba10;
+        width: 1000px;
+        height: 700px;
+        clip-path: circle(62.3% at 2% 28%);
+        transition: 1s;
+    }
+
+    .pictures {
+        position: absolute;
+        z-index: 10;
+        top: 40%;
+        left: 20%;
+        transition: 1s;
+    }
+
+    .btn-signup {
+        z-index: 20;
+        position: absolute;
+        top: 0;
+    }
+
+    .regis-form input {
+        display: none;
+    }
+
+
+    .regis-form2 form {
+        width: 272px;
+        height: 600px;
+        position: relative;
+        position: absolute;
+        top: 30%;
+        left: 5%;
+    }
+
+        .regis-form2 form .text {
+            height: 40px;
+            width: 250px;
+            border-radius: 20px;
+            border: none;
+            background: #fee698;
+            padding-left: 20px;
+            outline: none;
+            margin-bottom: 20px;
+        }
+
+    .login-form form .btn-login-cv {
+        text-align: center;
+        padding-top: 10px;
+        height: 30px;
+        width: 100px;
+        background: #eeba10;
+        font-weight: bold;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .regis-form2 form .btn-login-cv {
+        text-align: center;
+        padding-top: 10px;
+        height: 30px;
+        width: 100px;
+        background: #eeba10;
+        font-weight: bold;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .regis-form2 form a {
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+    }
+
+    .login-form form a {
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+    }
+
+    .btn-signup {
+        width: 150px;
+        height: 50px;
+        border-radius: 15px;
+        border: solid 2px white;
+        background: transparent;
+        font-size: 20px;
+        font-weight: bolder;
+        color: white;
+        z-index: 10;
+        cursor: pointer;
+        left: 20%;
+    }
+
+    .sign-up-intro {
+        position: relative;
+        position: absolute;
+        height: 500px;
+        width: 300px;
+        z-index: 20;
+        left: 10%;
+        top: 20%;
+        transition: 1.5s;
+    }
+
+        .sign-up-intro span {
+            top: 12%;
+            color: white;
+            font-weight: bolder;
+            position: absolute;
+        }
+
+    .intro-log {
+        transition: 1.5s;
+    }
+
+    .login-btn {
+        width: 150px;
+        height: 50px;
+        border-radius: 15px;
+        border: solid 2px white;
+        background: transparent;
+        font-size: 20px;
+        font-weight: bolder;
+        color: white;
+        z-index: 10;
+        cursor: pointer;
+        position: absolute;
+        right: 10%;
+        top: 5%;
+    }
+
+    log-in-intro {
+        position: relative;
+        position: absolute;
+        height: 200px;
+        width: 300px;
+        z-index: 20;
+        left: 50px;
+        top: 10%;
+        transition: 1.5s;
+    }
+
+    .regis-form span {
+        top: 16%;
+        color: white;
+        font-weight: bolder;
+        width: 300px;
+        position: absolute;
+        right: 3%;
+    }
+}
+
+@media (min-width:1024px) {
+    .Login-cv {
+        width: 1000px;
+        height: 700px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 6%;
+        position: relative;
+        overflow: hidden;
+        transition: 0.8s;
+    }
+
+    .login-form form .text {
+        height: 40px;
+        width: 250px;
+        border-radius: 20px;
+        border: none;
+        background: #fee698;
+        padding-left: 20px;
+        outline: none;
+        margin-bottom: 20px;
+    }
+
+    .login-form form button {
+        height: 40px;
+        width: 100px;
+        background: #eeba10;
+        font-weight: bold;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        margin-right:auto;
+        margin-left:auto;
+    }
+    .btn-login-cv {
+        width: 100px;
+        height:50px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .btn-login-cv .btn-login {
+        background:none;
+        border:none;
+        color:white;
+    }
+    .login-form form {
+        width: 272px;
+        height: 600px;
+        position:relative;
+        position:absolute;
+        top:40%;
+        left:68%;
+    }
+
+    .login-form form button:active {
+        transform: scale(0.95);
+    }
+    .regis-form {
+        background: #eeba10;
+        width: 1000px;
+        height: 700px;
+        clip-path: circle(62.3% at 2% 28%);
+        transition:1s;
+    }
+    .pictures {
+        position:absolute;
+        z-index:10;
+        top:40%;
+        left:20%;
+        transition:1s;
+    }
+    .btn-signup {
+        z-index:20;
+        position:absolute;
+        top:0;
+    }
+    .regis-form input {
+        display: none;
+    }
+
+    
+    .regis-form2 form {
+        width: 272px;
+        height: 600px;
+        position: relative;
+        position: absolute;
+        top: 30%;
+        left: 5%;
+    }
+    .regis-form2 form .text {
+        height: 40px;
+        width: 250px;
+        border-radius: 20px;
+        border: none;
+        background:#fee698;
+        padding-left: 20px;
+        outline: none;
+        margin-bottom: 20px;
+    }
+    .login-form form .btn-login-cv {
+        text-align:center;
+        padding-top:10px;
+        height: 30px;
+        
+        width: 100px;
+        background: #eeba10;
+        font-weight: bold;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .regis-form2 form .btn-login-cv {
+        text-align:center;
+        padding-top:10px;
+        height: 30px;
+        width: 100px;
+        background: #eeba10;
+        font-weight: bold;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .regis-form2 form a {
+        text-decoration:none;
+        color:white;
+        font-size:15px;
+    }
+    .login-form form a {
+        text-decoration: none;
+        color: white;
+        font-size: 15px;
+    }
+    .btn-signup {
+        width:150px;
+        height:50px;
+        border-radius:15px;
+        border:solid 2px white;
+        background:transparent;
+        font-size:20px;
+        font-weight:bolder;
+        color:white;
+        z-index:10;
+        cursor:pointer;
+        left:20%;
+    }
+    .sign-up-intro {
+        position: relative;
+        position: absolute;
+        height: 500px;
+        width: 300px;
+        z-index: 20;
+        left: 10%;
+        top: 20%;
+        transition: 1.5s;
+    }
+    .sign-up-intro span {
+        top:12%;
+        color:white;
+        font-weight:bolder;
+        position:absolute;
+    }
+    .intro-log {
+        transition:1.5s;
+    }
+    .login-btn {
+        width: 150px;
+        height: 50px;
+        border-radius: 15px;
+        border: solid 2px white;
+        background: transparent;
+        font-size: 20px;
+        font-weight: bolder;
+        color: white;
+        z-index: 10;
+        cursor: pointer;
+        position: absolute;
+        right: 10%;
+        top: 5%;
+    }
+
+    log-in-intro {
+        position: relative;
+        position: absolute;
+        height: 200px;
+        width: 300px;
+        z-index: 20;
+        left: 50px;
+        top: 10%;
+        transition: 1.5s;
+    }
+
+    .regis-form span {
+        top: 16%;
+        color: white;
+        font-weight: bolder;
+        width:300px;
+        position:absolute;
+        right:3%;
+    }
+}

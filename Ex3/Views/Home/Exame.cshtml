@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "Exame";
+    Layout = "~/Views/Shared/HomePage.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Exam.css" media="all" />
+<div class="container-fluid">
+    <div class="row sub-head"></div>
+    <div class="row quizs">
+        <div class="container">
+            <div class="quizContainer">
+                <div class="Timer">Time:00:00:00</div>
+                <div class="Timers">Time:00:00:00</div>
+                <div class="answer-box">
+                    <ul class="choiceList">
+                        <div class="question">Question 1: 1+1=?</div>
+                        <li> <input type="radio" id="answer1" class="answer" name="question0" value="A" /> 2 </li>
+                        <li> <input type="radio" id="answer2" class="answer" name="question0" value="B" /> 3</li>
+                        <li> <input type="radio" id="answer3" class="answer" name="question0" value="C" /> 4</li>
+                        <li> <input type="radio" id="answer4" class="answer" name="question0" value="D" /> 5 </li>
+                    </ul>
+                    <ul class="choiceList">
+                        <div class="question">Question 2: 1*1=?</div>
+                        <li> <input type="radio" id="answer1" class="answer" name="question1" value="A" /> 1 </li>
+                        <li> <input type="radio" id="answer2" class="answer" name="question1" value="B" />2</li>
+                        <li> <input type="radio" id="answer3" class="answer" name="question1" value="C" /> 3</li>
+                        <li> <input type="radio" id="answer4" class="answer" name="question1" value="D" /> 4 </li>
+                    </ul>
+                    <ul class="choiceList">
+                        <div class="question">Question 3: 4-1=?</div>
+                        <li> <input type="radio" id="answer1" class="answer" name="question2" value="A" /> 1 </li>
+                        <li> <input type="radio" id="answer2" class="answer" name="question2" value="B" /> 2 </li>
+                        <li> <input type="radio" id="answer3" class="answer" name="question2" value="C" /> 3</li>
+                        <li> <input type="radio" id="answer4" class="answer" name="question2" value="D" /> 4 </li>
+                    </ul>
+                </div>
+                <div class="quizMessage">Please choose answer</div>
+                <div class="result" id="myresults"></div>
+                <div class="result_fail">You Failed</div>
+                <div class="result_passed">You Passed</div>
+                <div class="btn-sub"><button id="btn-sub" onclick="returnScore()">Submit</button></div>
+                <br />
+                <div class="btn-start"><button id="btn-start" onclick="timedCount()">Start</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    var answers = ["A", "A", "C"], //cau dung
+        tot = answers.length;
+
+    function getCheckedValue(radioName) {
+        var radios = document.getElementsByName(radioName); // Get radio group by-name
+        for (var y = 0; y < radios.length; y++)
+            if (radios[y].checked) return radios[y].value; // return the checked value
+    }
+
+    function getScore() {
+        var score = 0;
+        for (var i = 0; i < tot; i++)
+            if (getCheckedValue("question" + i) === answers[i]) score += 1; // increment only
+        return score;
+    }
+
+    function returnScore() {
+        document.getElementById("myresults").innerHTML =
+            "Your score is " + getScore() + "/" + tot;
+        document.getElementById("myresults").style.display = 'block';
+
+
+    }
+
+    var c = 600;
+    var t;
+    var btnsub = document.getElementById('btn-sub');
+    var btnstart = document.getElementById('btn-start');
+    function timedCount() {
+
+        if (c == 185) {
+            return false;
+        }
+
+        var hours = parseInt(c / 3600) % 24;
+        var minutes = parseInt(c / 60) % 60;
+        var seconds = c % 60;
+        var result = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+        $('.Timer').html("Time:" + result);
+
+        if (c == 0) {
+            $('.Timer').html("Time Out!");
+            returnScore();
+
+        } else {
+
+            c = c - 1;
+            t = setTimeout(function () {
+                timedCount();
+            }, 1000);
+        }
+
+
+
+        btnstart.style.display = 'none';
+
+    }
+    $('#btn-start').click(function () {
+        btnsub.style.display = 'block';
+    });
+    $('#btn-sub').click(function () {
+        btnsub.style.display = 'none';
+        $('.Timer').css("display", "none");
+        $('.Timers').css("display", "block");
+        $('.Timers').html("Complete! ♥");
+
+    });
+
+
+
+
+
+
+</script>
+

@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "LoginNRegister";
+    Layout = "~/Views/Shared/LoginPage.cshtml";
+}
+<link rel="stylesheet" href="~/Content/Loginss.css" media="all" />
+<div class="Login-cv">
+    <div class="login-form">
+        <form>
+            <input class="text" type="text" value=""  id="usrname" placeholder="Username" required />
+            <input class="text" type="password" id="pwd" placeholder="Password" required />
+            @*<div class="btn-login-cv"><a href="#">Login</a></div>*@
+        <div class="btn-login-cv" ><input type="submit" class="btn-login" value="Login " /></div>
+        </form>
+    </div>
+    <div class="regis-form2" id="regis-form2">
+        <form>
+            <input class="text" type="text" value="" placeholder="Full Name" required />
+            <input class="text" type="text" value="" placeholder="Username" required />
+            <input class="text" type="password" value="" placeholder="Password" required />
+            <input class="text" type="password" value="" placeholder="Confirm Password" required />
+            <input class="text" type="email" value="" placeholder="Email" required />
+            <input class="text" type="text" value="" placeholder="Address" required />
+            @*<div class="btn-login-cv"><a href="#">Register</a></div>*@
+            
+            <div class="btn-login-cv"><input class="btn-login" type="submit" value="Sign Up" /></div>
+        </form>
+    </div>
+    <div class="pictures" id="pictures"><img id="pictures-inside" width="500" src="~/Upload/PNG/undraw_professor.png" alt="Alternate Text" /></div>
+    <div class="regis-form" id="regis-form">
+
+        <div class="intro-log" id="intro-log">
+            <button onclick="log();" class="login-btn" id="">Login</button>
+            <span>Morbi mollis eros ut rhoncus euismod. Duis ut lacus dictum, consequat elit sit amet, aliquam purus. Nulla id nisi tincidunt, viverra sem nec, hendrerit nisl. Ut a scelerisque risus. Etiam interdum congue commodo.</span>
+        </div>
+            
+
+        
+        <div class="sign-up-intro" id="sign-up-intro">
+            <span>Morbi mollis eros ut rhoncus euismod. Duis ut lacus dictum, consequat elit sit amet, aliquam purus. Nulla id nisi tincidunt, viverra sem nec, hendrerit nisl. Ut a scelerisque risus. Etiam interdum congue commodo.</span>
+            <button class="btn-signup" onclick="sig();">Sign Up</button>
+        </div>
+    </div>
+    
+    
+</div>
+<script>
+    function sig() {
+        var signup = document.getElementById('regis-form');
+        var pic = document.getElementById('pictures');
+        var regisform = document.getElementById('sign-up-intro');
+        var logintro = document.getElementById('intro-log');
+        logintro.style.opacity = '1';
+        regisform.style.opacity = '0';
+        pic.style.left = '40%';
+        pic.style.top = '30%';
+        signup.style.clipPath = 'circle(53.4% at 87% 20%)';
+
+    }
+    function log() {
+        var log = document.getElementById('regis-form');
+        var pic = document.getElementById('pictures');
+        var regisform = document.getElementById('sign-up-intro');
+        var logintro = document.getElementById('intro-log');
+        logintro.style.opacity = '0';
+        regisform.style.opacity = '1';
+        pic.style.left = '20%';
+        pic.style.top = '40%';
+        log.style.clipPath = 'circle(62.3% at 2% 28%)';
+    }
+
+    function CheckInput() {
+        var usrname = document.getElementById("usrname").value;
+        if (usrname === '') {
+
+        }
+    }
+    
+</script>
+
