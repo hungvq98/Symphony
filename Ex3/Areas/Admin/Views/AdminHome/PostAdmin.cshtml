@@ -1,48 +1,43 @@
 ﻿
 @{
-    ViewBag.Title = "Course";
+    ViewBag.Title = "PostAdmin";
     Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
 }
 
 <link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
 <style>
     .Course-cv {
-        height:880px;
+        height: 880px;
         overflow-y: scroll;
     }
 </style>
 <div class="container-fluid ">
     <div class="row Course-cv">
         <div class="col left-input">
-            <div class="container">
+            <div class="container Exam-cv">
                 <form method="post" action="">
-                    <input type="text" required  name="namecourse" value="" placeholder="Name " />
-                    <input type="text" required  name="price" value="" placeholder="Price " />
-                    <input type="text"  required name="time" value="" placeholder="Time " />
-                    <input type="text"  required name="material" value="" placeholder="Material" />
+                    <input type="text" required name="title" value="" placeholder="Title" />
+                    <br />
+
                     <select>
-                        <option disabled required  selected hidden>Select Teacher</option>
-                    </select>
-                    <select>
-                        <option disabled required selected hidden>Select Grade</option>
-                    </select>
-                    <select>
-                        <option disabled  required selected hidden>Select Type</option>
+                        <option required disabled selected hidden>Select Type</option>
                     </select>
                     <br />
                     <img id="output" class="img" />
                     <p><input type="file" accept="image/*" name="myimg" id="myimg" onchange="loadFile(event)" style="display: none;"></p>
                     <p><label for="myimg" style="cursor: pointer; border:1px solid #eeba10; background-color:#eeba10;width:150px;height:40px;padding:9px;font-weight:bold;">Upload Image<i style="font-size:18px;margin-left:5px;" class='bx bx-upload'></i></label></p>
+                    <span style="font-size:18px;font-weight:bold;">Content</span>
                     <textarea class="Content" name="editor1" placeholder="Content">
                 </textarea>
                     <br />
+                    <br />
+
                     <button>ADD</button>
                 </form>
             </div>
 
         </div>
 
-        
     </div>
 </div>
 <script>
@@ -51,5 +46,4 @@
         width:100 + '%'
     });
 </script>
-
 

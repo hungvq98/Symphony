@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "ViewPostAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
+<style>
+    .CourseView {
+        width: 2000px;
+        overflow-x: scroll;
+    }
+
+    .popup-his {
+        width: 40%;
+        height: 50%;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+        position: absolute;
+        top: 20%;
+        margin-left: 20%;
+        padding: 20px;
+        font-weight: bold;
+        border-radius: 5px;
+        display: none;
+        position: fixed;
+    }
+
+        .popup-his button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+            .popup-his button i {
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+    .his-box {
+        position: relative;
+    }
+
+        .his-box .profile {
+            margin-top: 30px;
+        }
+
+    .img-teacher {
+        height: 200px;
+        width: 200px;
+    }
+
+    .history-in {
+        width: 100%;
+        height: 420px;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
+</style>
+<div class="container-fluid CourseView">
+    <div class="popup-his container-fluid">
+        <div class="his-box">
+            <div class="row">
+                <button class="btn-close"><i class='bx bx-x '></i></button>
+            </div>
+            <div class="row profile">
+                <div class="col history-in">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <input class="srcbar" type="text" value="" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+        <section>
+            <!--for demo wrap-->
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Type</th>
+                            <th>Content</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody id="myTable">
+                        <tr>
+                            <td>Cu chi</td>
+                            <td>AUSTRALIAN COMPANY </td>
+                            <td><a href="#" class="btn-detail" style="text-decoration:none;color:#000000">Detail</a></td>
+                            <td>IMG</td>
+                            <td><a class="btn-edit" href="@Url.Action("EditPostAdmin")"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a><a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    $('.btn-detail').click(function () {
+        var pop = $('.popup-his');
+        pop.css("display", "block");
+    });
+    $('.btn-close').click(function () {
+        var pop = $('.popup-his');
+        pop.css("display", "none");
+    });
+</script>
+
+
+

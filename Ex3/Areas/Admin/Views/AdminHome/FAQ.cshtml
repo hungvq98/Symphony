@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
+<style>
+    .Course-cv {
+        height: 880px;
+        overflow-y: scroll;
+    }
+
+</style>
+<div class="container-fluid ">
+    <div class="row Course-cv">
+        <div class="col left-input">
+            <div class="container Exam-cv">
+                <form method="post" action="">
+                    <input type="text" required name="question" value="" placeholder="Question " />
+                    <br />
+                    <br />
+                    <textarea name="editor1" >
+                    </textarea>
+                    <br />
+                    <br />
+
+                    <button>ADD</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor1',{
+        heigth: 800 + 'px',
+        width:100 + '%'
+    });
+</script>
+

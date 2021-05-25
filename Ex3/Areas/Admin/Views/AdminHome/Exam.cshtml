@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Exam";
+    Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
+<style>
+    .Course-cv {
+        height: 880px;
+        overflow-y: scroll;
+    }
+    .Exam-cv {
+        margin-top:16%;
+        margin-left:25%;
+    }
+</style>
+<div class="container-fluid ">
+    <div class="row Course-cv">
+        <div class="col left-input">
+            <div class="container Exam-cv">
+                <form method="post" action="">
+                    <input type="text"  required name="question" value="" placeholder="Question " />
+                    <br />
+                    <input type="text"  required name="question A" value="" placeholder="Answer A" />
+                    <br />
+
+                    <input type="text" required  name="question B" value="" placeholder="Answer B" />
+                    <br />
+
+                    <input type="text" required  name="question C" value="" placeholder="Answer C" />
+                    <br />
+
+                    <input type="text" required name="question D" value="" placeholder="Answer D" />
+                    <br />
+
+                    <input type="text" required  name="course" value="" placeholder="Course" />
+                    <br />
+
+                    <select>
+                        <option required  disabled selected hidden>Select Correct Answer</option>
+                    </select>
+                    <br />
+                    <br />
+
+                    <button>ADD</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor1',{
+        heigth: 700,
+        width:100 + '%'
+    });
+</script>
+
+

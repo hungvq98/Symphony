@@ -10,23 +10,141 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="~/Content/Admin.css" media="all" />
+    <link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
+    <script src="~/Areas/Admin/ckeditor/ckeditor.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+    <style>
+        .pop-Type {
+            height:30%;
+            width:30%;
+            background-color:white;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.5);
+            position:absolute;
+            top:20%;
+            left:30%;
+            border-radius:5px;
+            z-index:5;
+            display:none;
+        }
+        .tble {
+            padding:10px;
+            overflow:hidden;
+            overflow-y:scroll;
+            height:200px;
+        }
+        .tabletype {
+            width: 100%;
+            border-right: 1px solid rgba(0,0,0,0.5);
+            border-left: 1px solid rgba(0,0,0,0.5);
+        }
+        .table-he {
+            height:30px !important;
+            background-color: #eeba10;
+            color:#000000;
+        }
+        .input {
+            padding:10px;
+            
+        }
+        .input form input {
+            border:1px solid #eeba10;
+            outline-color:#eeba10;
+        }
+        .input .btn-add {
+            border:none;
+            background:#eeba10;
+            color:#000000;
+            font-weight:bold;
+            cursor:pointer;
+
+        }
+        .btn-close {
+            background:none;
+            border:none;
+            font-size:20px;
+            cursor:pointer;
+            position:absolute;
+            top:10px;
+            right:10px;
+        }
+    </style>
+    <div class="pop-Type container-fluid">
+        <div class="row input">
+            <form>
+                <button class="btn-close"><i class='bx bx-x '></i></button>
+                <input type="text" name="name" value="" placeholder="ADD" />
+                <button class="btn-add">ADD</button>
+            </form>
+        </div>
+        <div class="row tble">
+            <table class="tabletype">
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <div class="adminpage">
         <div class="menubar">
             <div class="content"><div class="logo-cv"></div></div>
-            <div class="btn-bar"><a href="#">Course</a></div>
-            <div class="btn-bar"><a href="#">exam</a></div>
-            <div class="btn-bar"><a href="#">faqs</a></div>
-            <div class="btn-bar"><a href="#">grade</a></div>
-            <div class="btn-bar"><a href="#">history course</a></div>
-            <div class="btn-bar"><a href="#">post admin</a></div>
-            <div class="btn-bar"><a href="#">Student</a></div>
-            <div class="btn-bar"><a href="#">feedback</a></div>
-            <div class="btn-bar"><a href="#">teacher</a></div>
-            <div class="btn-bar"><a href="#">Type</a></div>
-
+            @*<div class="btn-bar"><a href="#">Course</a></div>
+        <div class="btn-bar"><a href="#">exam</a></div>
+        <div class="btn-bar"><a href="#">faqs</a></div>
+        <div class="btn-bar"><a href="#">grade</a></div>
+        <div class="btn-bar"><a href="#">history course</a></div>
+        <div class="btn-bar"><a href="#">post admin</a></div>
+        <div class="btn-bar"><a href="#">Student</a></div>
+        <div class="btn-bar"><a href="#">feedback</a></div>
+        <div class="btn-bar"><a href="#">teacher</a></div>
+        <div class="btn-bar"><a href="#">Type</a></div>*@
+            <button class="accordion"><a href="@Url.Action("Course")">Course</a></button>
+            <div class="panel">
+                <button class="btn-sub"><a href="@Url.Action("ViewCourse")">View</a></button>
+            </div>
+            <button class="accordion"><a href="@Url.Action("Exam")">Exam</a></button>
+            <div class="panel">
+                <button class="btn-sub"><a href="@Url.Action("ViewExam")">View</a></button>
+            </div>
+            <button class="accordion"><a href="@Url.Action("Student")">Student</a></button>
+            <div class="panel">
+                <button class="btn-sub"><a href="@Url.Action("ViewStudent")">View</a></button>
+            </div>
+            <button class="accordion"><a href="@Url.Action("Teacher")">Teacher</a></button>
+            <div class="panel">
+                <button class="btn-sub"><a href="@Url.Action("ViewTeacher")">View</a></button>
+            </div>
+            <button class="accordion1"><a href="@Url.Action("Feedback")">Feedback</a></button>
+            <button class="accordion"><a href="@Url.Action("PostAdmin")">Post</a></button>
+            <div class="panel">
+                <button class="btn-sub"><a href="@Url.Action("ViewPostAdmin")">View</a></button>
+            </div>
+            <button class="accordion"><a href="#">History</a></button>
+            <div class="panel">
+                <button class="btn-sub"><a href="@Url.Action("HistoryExam")">Exam</a></button>
+                <button class="btn-sub"><a href="@Url.Action("HistoryCourse")">Course</a></button>
+            </div>
+            <button class="accordion"><a href="#">Type </a></button>
+            <div class="panel">
+                <button class="btn-sub" id="btn-add-type"><a href="#">Add</a></button>
+            </div>
+            <button class="accordion"><a href="@Url.Action("FAQ")">FAQ</a></button>
+            <div class="panel">
+                <button class="btn-sub"><a href="@Url.Action("ViewFAQ")">View</a></button>
+            </div>
         </div>
         <div class="content-admin">
             <div class="admin-manage">
@@ -34,6 +152,37 @@
             </div>
         </div>
     </div>
-    
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+    </script>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+        $('#btn-add-type').click(function () {
+            var pop = $('.pop-Type');
+            pop.css("display", "block");
+        })
+        $('.btn-close').click(function () {
+            var pop = $('.pop-Type');
+            pop.css("display", "none");
+        })
+
+    </script>
 </body>
 </html>

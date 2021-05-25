@@ -1,13 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "Course";
+    ViewBag.Title = "EditCourse";
     Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
 }
 
 <link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
 <style>
     .Course-cv {
-        height:880px;
+        height: 880px;
         overflow-y: scroll;
     }
 </style>
@@ -16,8 +16,8 @@
         <div class="col left-input">
             <div class="container">
                 <form method="post" action="">
-                    <input type="text" required  name="namecourse" value="" placeholder="Name " />
-                    <input type="text" required  name="price" value="" placeholder="Price " />
+                    <input type="text"  required name="namecourse" value="" placeholder="Name " />
+                    <input type="text"  required name="price" value="" placeholder="Price " />
                     <input type="text"  required name="time" value="" placeholder="Time " />
                     <input type="text"  required name="material" value="" placeholder="Material" />
                     <select>
@@ -36,13 +36,13 @@
                     <textarea class="Content" name="editor1" placeholder="Content">
                 </textarea>
                     <br />
-                    <button>ADD</button>
+                    <button>UPDATE</button>
                 </form>
             </div>
 
         </div>
 
-        
+
     </div>
 </div>
 <script>
@@ -51,5 +51,4 @@
         width:100 + '%'
     });
 </script>
-
 

@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "EditStudent";
+    Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
+<style>
+    .Course-cv {
+        height: 880px;
+        overflow-y: scroll;
+    }
+
+    .Exam-cv {
+        margin-top: 16%;
+        margin-left: 25%;
+    }
+</style>
+<div class="container-fluid ">
+    <div class="row Course-cv">
+        <div class="col left-input">
+            <div class="container Exam-cv">
+                <form method="post" action="">
+                    <input type="text" required name="fullname" value="" placeholder="Full Name " />
+                    <br />
+                    <input type="text" required name="age" value="" placeholder="Age" />
+                    <br />
+
+                    <input type="email" required name="email" value="" placeholder="Email" />
+                    <br />
+
+                    <input type="text" required name="phone" value="" placeholder="Phone" />
+                    <br />
+
+                    <input type="text" required name="address" value="" placeholder="Address" />
+                    <br />
+
+                    <input type="date" required name="regisdate" value="" placeholder="Date" />
+                    <br />
+
+                    <select>
+                        <option required disabled selected hidden>Select Correct Gender</option>
+                        <option required>Male</option>
+                        <option required>Female</option>
+                    </select>
+                    <br />
+                    <br />
+
+                    <button>UPDATE</button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor1',{
+        heigth: 700,
+        width:100 + '%'
+    });
+</script>
+
+
