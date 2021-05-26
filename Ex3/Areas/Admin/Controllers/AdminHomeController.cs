@@ -540,5 +540,15 @@ namespace Ex3.Areas.Admin.Controllers
             spn.SaveChanges();
             return RedirectToAction("Course");
         }
+        //Register Place
+        public ActionResult RegisterCourse()
+        {
+            return View();
+        }
+        //Add Type
+        public ActionResult Type()
+        {
+            return View();
+        }
     }
 }

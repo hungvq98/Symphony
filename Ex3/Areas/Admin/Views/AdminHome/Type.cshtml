@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewBag.Title = "Type";
+    Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
+}
+
+<style>
+    .Course-cv {
+        height:880px;
+        overflow-y: scroll;
+    }
+    table  {
+        width:100%;
+        height:300px;
+    }
+    .tbl-content {
+        height:500px;
+    }
+
+</style>
+<div class="container-fluid ">
+    <div class="row Course-cv">
+        <div class="col left-input">
+            <div class="container Exam-cv">
+                <form action="@Url.Action("Addexam")" method="post">
+                    <input type="text" required name="question" value="" placeholder="Type " />
+                    <br />
+                    <br />
+                    <button type="submit">ADD</button>
+                    <br />
+                    <input class="srcbar" type="text" value="" id="myInput" onkeyup="myFunction()" placeholder="Search" />
+                    <section>
+                        <!--for demo wrap-->
+                        <div class="tbl-header">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>ACtion</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="tbl-content">
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tbody id="myTable">
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>title</td>
+                                        <td>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                            <a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<script>
+    CKEDITOR.replace('editor1',{
+        heigth: 700,
+        width:100 + '%'
+    });
+</script>
+
+

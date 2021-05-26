@@ -4,10 +4,10 @@
     Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
 }
 
-<link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
+<link rel="stylesheet" href="~/Content/Adminxx.css" media="all" />
 <style>
     .CourseView {
-        width: 2000px;
+        width: 100%;
         overflow-x: scroll;
     }
 
@@ -26,27 +26,27 @@
         position: fixed;
     }
 
-        .popup-his button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            position: absolute;
-            top: 5px;
-            right: 5px;
-        }
+    .popup-his button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
 
-            .popup-his button i {
-                font-weight: bold;
-                font-size: 20px;
-            }
+    .popup-his button i {
+        font-weight: bold;
+        font-size: 20px;
+    }
 
     .his-box {
         position: relative;
     }
 
-        .his-box .profile {
-            margin-top: 30px;
-        }
+    .his-box .profile {
+        margin-top: 30px;
+    }
 
     .img-teacher {
         height: 200px;
@@ -58,6 +58,10 @@
         height: 420px;
         overflow: hidden;
         overflow-y: scroll;
+    }
+    table {
+        width: 100%;
+        table-layout: fixed;
     }
 </style>
 <div class="container-fluid CourseView">
@@ -80,7 +84,7 @@
     <div class="row">
         <input class="srcbar" type="text" value="" id="myInput" onkeyup="myFunction()" placeholder="Search" />
         <br />
-        <section>
+        <section class="dm">
             <!--for demo wrap-->
             <div class="tbl-header">
                 <table cellpadding="0" cellspacing="0" border="0">

@@ -7,14 +7,14 @@
 <link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
 <style>
     .Course-cv {
-        height:880px;
+        height:100%;
         overflow-y: scroll;
     }
 </style>
-<div class="container-fluid ">
-    <div class="row Course-cv">
-        <div class="col left-input">
-            <div class="container">
+<div class="container-fluid Course-cv">
+    <div class="row ">
+        <div class="col left-input ">
+            <div class="container ">
                 <form method="post" action="@Url.Action("Addcourse")" enctype="multipart/form-data">
                     <input type="text" required  name="namecourse" value="" placeholder="Name " />
                     <input type="text" required  name="price" value="" placeholder="Price " />

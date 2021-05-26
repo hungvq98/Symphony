@@ -7,12 +7,12 @@
 <link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
 <style>
     .Course-cv {
-        height: 880px;
+        height: 100%;
         overflow-y: scroll;
     }
 </style>
-<div class="container-fluid ">
-    <div class="row Course-cv">
+<div class="container-fluid Course-cv ">
+    <div class="row ">
         <div class="col left-input">
             <div class="container Exam-cv">
                 <form method="post" action="@Url.Action("Addteacher")" enctype="multipart/form-data">
@@ -40,6 +40,7 @@
                     <p><input type="file" accept="image/*" name="myimg" id="myimg" onchange="loadFile(event)" style="display: none;"></p>
                     <p><label for="myimg" style="cursor: pointer; border:1px solid #eeba10; background-color:#eeba10;width:150px;height:40px;padding:9px;font-weight:bold;">Upload Image<i style="font-size:18px;margin-left:5px;" class='bx bx-upload'></i></label></p>
                     <span style="font-size:18px;font-weight:bold;">History</span>
+                    <br />
                     <textarea class="Content" name="content" id="content" placeholder="Content">
                 </textarea>
                     <br />
