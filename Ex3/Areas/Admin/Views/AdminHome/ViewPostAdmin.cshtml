@@ -59,6 +59,10 @@
         overflow: hidden;
         overflow-y: scroll;
     }
+    .img{
+        width:200px;
+        height:auto;
+    }
 </style>
 <div class="container-fluid CourseView">
     <div class="popup-his container-fluid">
@@ -67,9 +71,13 @@
                 <button class="btn-close"><i class='bx bx-x '></i></button>
             </div>
             <div class="row profile">
-                <div class="col history-in">
-                    <div></div>
-                </div>
+                @foreach (var items in ViewBag.listpost)
+                {
+                    <div class="col history-in">
+                        <div>@Html.Raw(@items.content)</div>
+                    </div>
+                }
+
             </div>
         </div>
     </div>
@@ -93,13 +101,21 @@
             <div class="tbl-content">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tbody id="myTable">
-                        <tr>
-                            <td>Cu chi</td>
-                            <td>AUSTRALIAN COMPANY </td>
-                            <td><a href="#" class="btn-detail" style="text-decoration:none;color:#000000">Detail</a></td>
-                            <td>IMG</td>
-                            <td><a class="btn-edit" href="@Url.Action("EditPostAdmin")"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a><a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a></td>
-                        </tr>
+                        @foreach (var item in ViewBag.listpost)
+                        {
+                            <tr>
+                                <td>@item.title</td>
+                                <td>@item.type</td>
+                                <td><a href="#" class="btn-detail" style="text-decoration:none;color:#000000">Detail</a></td>
+                                <td>
+                                    <img src="~/Upload/imgpost/@item.img" class="img" />
+                                </td>
+                                <td>
+                                <a class="btn-edit" href="@Url.Action("EditPostAdmin",new { idpost=@item.ID })"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                <a class="btn-edit" href="@Url.Action("Removepostadmin",new { idpost=@item.ID })"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a></td>
+                            </tr>
+                        }
+
 
                     </tbody>
                 </table>

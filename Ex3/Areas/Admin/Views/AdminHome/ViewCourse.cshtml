@@ -9,6 +9,10 @@
         width:2000px;
         overflow-x: scroll;
     }
+    .imgcourse{
+        width:200px;
+        height:auto;
+    }
 </style>
 <div class="container-fluid CourseView">
     <div class="row ">
@@ -23,12 +27,11 @@
                             <th>Content</th>
                             <th>Price</th>
                             <th>Grade</th>
-                            <th>Img</th>
+                            <th width="270">Img</th>
                             <th>Time</th>
                             <th>Material</th>
                             <th>Teacher</th>
                             <th>Type</th>
-                            <th>Active</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -37,20 +40,28 @@
             <div class="tbl-content">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tbody id="myTable">
-                        <tr>
-                            <td>Cu chi</td>
-                            <td>AUSTRALIAN COMPANY </td>
-                            <td>$1.38</td>
-                            <td>+2.01</td>
-                            <td>-0.36%</td>
-                            <td>-0.36%</td>
-                            <td>-0.36%</td>
-                            <td>-0.36%</td>
-                            <td>-0.36%</td>
-                            <td>-0.36%</td>
-                            <td><a class="btn-edit" href="@Url.Action("EditCourse")"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a><a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a></td>
-                        </tr>
-                        
+                        @foreach (var item in ViewBag.listcourse)
+                        {
+                            <tr>
+                                <td>@item.name</td>
+                                <td><b> Edit to view</b></td>
+                                <td>@item.price</td>
+                                <td>@item.grade</td>
+                                <td width="270">
+                                    <img src="~/Upload/imgcourse/@item.img" class="imgcourse" />
+                                </td>
+                                <td>@item.time</td>
+                                <td>@item.material</td>
+                                <td>@item.teacher</td>
+                                <td>@item.type</td>
+                               
+                                <td>
+                                    <a class="btn-edit" href="@Url.Action("EditCourse",new { idcourse=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                    <a class="btn-edit" href="@Url.Action("Removecourse",new { idcourse=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                </td>
+                            </tr>
+                        }
+
                     </tbody>
                 </table>
             </div>

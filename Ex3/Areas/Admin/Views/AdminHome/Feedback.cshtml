@@ -67,9 +67,14 @@
                 <button class="btn-close"><i class='bx bx-x '></i></button>
             </div>
             <div class="row profile">
-                <div class="col history-in">
-                    <div>message</div>
-                </div>
+                @foreach (var items in ViewBag.listfeed)
+                {
+                    <div class="col history-in">
+                        <div>message</div>
+                        @items.message
+                    </div>
+                }
+
             </div>
         </div>
     </div>
@@ -83,9 +88,11 @@
                         <tr>
                             <th>Full Name</th>
                             <th>Title</th>
-                            <th>Date</th>
                             <th>Mail</th>
+                            <th>Date</th>
                             <th>Message</th>
+                            <th>Action</th>
+
                         </tr>
                     </thead>
                 </table>
@@ -93,13 +100,18 @@
             <div class="tbl-content">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tbody id="myTable">
+                        @foreach (var item in ViewBag.listfeed)
+                        {
                         <tr>
-                            <td>Cu chi</td>
-                            <td>AUSTRALIAN COMPANY </td>
-                            <td>$1.38</td>
-                            <td>+2.01</td>
+                            <td>@item.fullname</td>
+                            <td>@item.title</td>
+                            <td>@item.email</td>
+                            <td>@item.receiveddate</td>
                             <td><a href="#" class="btn-detail" style="text-decoration:none;color:#000000">Detail</a></td>
+                            <td><a class="btn-edit" href="@Url.Action("Removefeedback", new { idfeed=@item.ID })"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a></td>
                         </tr>
+                        }
+
 
                     </tbody>
                 </table>

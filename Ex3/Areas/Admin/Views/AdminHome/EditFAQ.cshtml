@@ -15,17 +15,22 @@
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container Exam-cv">
-                <form method="post" action="">
-                    <input type="text" required name="question" value="" placeholder="Question " />
-                    <br />
-                    <br />
-                    <textarea name="editor1">
-                    </textarea>
-                    <br />
-                    <br />
+                @foreach (var item in ViewBag.listfaq)
+                {
+                    <form method="post" action="@Url.Action("Updatefaq")">
+                        <input type="hidden" value="@item.ID" name="idfaq" />
+                        <input type="text" required name="question" value="@item.question" placeholder="Question " />
+                        <br />
+                        <br />
+                        <textarea name="content">@item.answer
+                        </textarea>
+                        <br />
+                        <br />
 
-                    <button>UPDATE</button>
-                </form>
+                        <button type="submit">UPDATE</button>
+                    </form>
+                }
+
             </div>
 
         </div>
@@ -33,7 +38,7 @@
     </div>
 </div>
 <script>
-    CKEDITOR.replace('editor1',{
+    CKEDITOR.replace('content',{
         heigth: 800 + 'px',
         width:100 + '%'
     });

@@ -16,16 +16,16 @@
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container Exam-cv">
-                <form method="post" action="">
+                <form method="post" action="@Url.Action("Addfaq")">
                     <input type="text" required name="question" value="" placeholder="Question " />
                     <br />
                     <br />
-                    <textarea name="editor1" >
+                    <textarea name="content" >
                     </textarea>
                     <br />
                     <br />
 
-                    <button>ADD</button>
+                    <button type="submit">ADD</button>
                 </form>
             </div>
 
@@ -34,7 +34,7 @@
     </div>
 </div>
 <script>
-    CKEDITOR.replace('editor1',{
+    CKEDITOR.replace('content',{
         heigth: 800 + 'px',
         width:100 + '%'
     });

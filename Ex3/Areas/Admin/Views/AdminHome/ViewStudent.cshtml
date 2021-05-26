@@ -23,7 +23,7 @@
                             <th>Full Name</th>
                             <th>Age</th>
                             <th>Gender</th>
-                            <th>Mail</th>
+                            <th>EMail</th>
                             <th>Phone</th>
                             <th>Address</th>
                             <th>Register Date</th>
@@ -35,16 +35,22 @@
             <div class="tbl-content">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tbody id="myTable">
-                        <tr>
-                            <td>Cu chi</td>
-                            <td>AUSTRALIAN COMPANY </td>
-                            <td>$1.38</td>
-                            <td>+2.01</td>
-                            <td>-0.36%</td>
-                            <td>-0.36%</td>
-                            <td>-0.36%</td>
-                            <td><a class="btn-edit" href="@Url.Action("EditStudent")"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a><a class="btn-edit" href="#"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a></td>
-                        </tr>
+                        @foreach (var item in ViewBag.liststudent)
+                        {
+                            <tr>
+                                <td>@item.fullname</td>
+                                <td>@item.age</td>
+                                <td>@item.gender</td>
+                                <td>@item.email</td>
+                                <td>@item.phone</td>
+                                <td>@item.address</td>
+                                <td>@item.regisdate</td>
+                                <td>
+                                <a class="btn-edit" href="@Url.Action("EditStudent",new {iduser=@item.ID })"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                <a class="btn-edit" href="@Url.Action("Removestudent",new {iduser=@item.ID })"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a></td>
+                            </tr>
+                        }
+
 
                     </tbody>
                 </table>

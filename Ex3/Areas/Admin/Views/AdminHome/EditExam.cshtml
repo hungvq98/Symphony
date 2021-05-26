@@ -20,32 +20,78 @@
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container Exam-cv">
-                <form method="post" action="">
-                    <input type="text" required name="question" value="" placeholder="Question " />
+                @foreach (var item in ViewBag.listexam)
+                {
+                <form method="post" action="@Url.Action("Updateexam")">
+                    <input type="hidden" value="@item.ID" name="idexam" />
+                    <input type="text" required name="question" value="@item.question" placeholder="Question " />
                     <br />
-                    <input type="text" required name="question A" value="" placeholder="Answer A" />
-                    <br />
-
-                    <input type="text" required name="question B" value="" placeholder="Answer B" />
-                    <br />
-
-                    <input type="text" required  name="question C" value="" placeholder="Answer C" />
+                    <input type="text" required name="answerA" value="@item.answerA" placeholder="Answer A" />
                     <br />
 
-                    <input type="text" required  name="question D" value="" placeholder="Answer D" />
+                    <input type="text" required name="answerB" value="@item.answerB" placeholder="Answer B" />
                     <br />
 
-                    <input type="text" required  name="course" value="" placeholder="Course" />
+                    <input type="text" required name="answerC" value="@item.answerC" placeholder="Answer C" />
                     <br />
 
-                    <select>
-                        <option disabled required  selected hidden>Select Correct Answer</option>
+                    <input type="text" required name="answerD" value="@item.answerD" placeholder="Answer D" />
+                    <br />
+
+                    <select name="course">
+                        <option disabled required selected hidden>Select Course</option>
+                        @foreach (var items in ViewBag.listcourse)
+                        {
+                            if (items.name == item.course)
+                            {
+                                <option selected>@items.name</option>
+                            }
+                            else
+                            {
+                                <option>@items.name</option>
+                            }
+                        }
+                    </select>
+                    <br />
+                    <select name="correct">
+                        <option required disabled selected hidden>Select Correct Answer</option>
+                        @if (item.answercorrect == "A")
+                        {
+                            <option selected>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                         }
+                        @if (item.answercorrect == "B")
+                        {
+                            <option>A</option>
+                            <option selected>B</option>
+                            <option>C</option>
+                            <option>D</option>
+                         }
+                        @if (item.answercorrect == "C")
+                        {
+                            <option selected>A</option>
+                           <option>B</option>
+                             <option selected>C</option>
+                            <option>D</option>
+                         }
+                        @if (item.answercorrect == "D")
+                        {
+                            <option selected>A</option>
+                            <option>B</option>
+                            <option>C</option>
+                           <option selected>D</option>
+                        }
+
                     </select>
                     <br />
                     <br />
 
-                    <button>UPDATE</button>
+                    <button type="submit">UPDATE</button>
                 </form>
+                }
+
             </div>
 
         </div>

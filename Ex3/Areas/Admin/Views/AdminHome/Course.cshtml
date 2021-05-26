@@ -15,38 +15,50 @@
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container">
-                <form method="post" action="">
+                <form method="post" action="@Url.Action("Addcourse")" enctype="multipart/form-data">
                     <input type="text" required  name="namecourse" value="" placeholder="Name " />
                     <input type="text" required  name="price" value="" placeholder="Price " />
                     <input type="text"  required name="time" value="" placeholder="Time " />
                     <input type="text"  required name="material" value="" placeholder="Material" />
-                    <select>
-                        <option disabled required  selected hidden>Select Teacher</option>
+                    <select name="teacher">
+                        <option disabled required selected hidden>Select Teacher</option>
+                        @foreach (var items in ViewBag.listtea)
+                        {
+                            <option>@items.fullname</option>
+                        }
+
                     </select>
-                    <select>
+                    <select name="grade">
                         <option disabled required selected hidden>Select Grade</option>
+                        <option>Primarys school</option>
+                        <option>Junior high school</option>
+                        <option>High school</option>
+                        <option>University</option>
                     </select>
-                    <select>
-                        <option disabled  required selected hidden>Select Type</option>
+                    <select name="type">
+                        <option disabled required selected hidden>Select Type</option>
+                        @foreach (var item in ViewBag.listtype)
+                        {
+                            <option>@item.name</option>
+                        }
+
                     </select>
                     <br />
                     <img id="output" class="img" />
                     <p><input type="file" accept="image/*" name="myimg" id="myimg" onchange="loadFile(event)" style="display: none;"></p>
                     <p><label for="myimg" style="cursor: pointer; border:1px solid #eeba10; background-color:#eeba10;width:150px;height:40px;padding:9px;font-weight:bold;">Upload Image<i style="font-size:18px;margin-left:5px;" class='bx bx-upload'></i></label></p>
-                    <textarea class="Content" name="editor1" placeholder="Content">
+                    <textarea class="Content" name="content" id="content" placeholder="Content">
                 </textarea>
                     <br />
-                    <button>ADD</button>
+                    <button type="submit">ADD</button>
                 </form>
             </div>
 
-        </div>
-
-        
+        </div>       
     </div>
 </div>
 <script>
-    CKEDITOR.replace('editor1',{
+    CKEDITOR.replace('content',{
         heigth: 700,
         width:100 + '%'
     });

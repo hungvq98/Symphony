@@ -15,25 +15,41 @@
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container Exam-cv">
-                <form method="post" action="">
-                    <input type="text" required name="title" value="" placeholder="Title" />
+                @foreach (var item in ViewBag.listpost)
+                {
+                <form method="post" action="@Url.Action("Updatepostadmin")" enctype="multipart/form-data">
+                    <input type="hidden" value="@item.ID" name="idpost" />
+                    <input type="text" required name="title" value="@item.title" placeholder="Title" />
                     <br />
 
-                    <select>
+                    <select name="type">
                         <option required disabled selected hidden>Select Type</option>
+                        @foreach (var items in ViewBag.listtype)
+                        {
+                            if (items.name == item.type)
+                            {
+                                <option selected>@items.name</option>
+                            }
+                            else
+                            {
+                                <option>@items.name</option>
+                            }
+                        }
                     </select>
                     <br />
-                    <img id="output" class="img" />
+                    <img id="output" class="img" src="~/Upload/imgpost/@item.img" />
                     <p><input type="file" accept="image/*" name="myimg" id="myimg" onchange="loadFile(event)" style="display: none;"></p>
                     <p><label for="myimg" style="cursor: pointer; border:1px solid #eeba10; background-color:#eeba10;width:150px;height:40px;padding:9px;font-weight:bold;">Upload Image<i style="font-size:18px;margin-left:5px;" class='bx bx-upload'></i></label></p>
                     <span style="font-size:18px;font-weight:bold;">Content</span>
-                    <textarea class="Content" name="editor1" placeholder="Content">
+                    <textarea class="Content" name="content" placeholder="Content">@item.content
                 </textarea>
                     <br />
                     <br />
 
-                    <button>UPDATE</button>
+                    <button type="submit">UPDATE</button>
                 </form>
+                }
+
             </div>
 
         </div>
@@ -41,7 +57,7 @@
     </div>
 </div>
 <script>
-    CKEDITOR.replace('editor1',{
+    CKEDITOR.replace('content',{
         heigth: 700,
         width:100 + '%'
     });

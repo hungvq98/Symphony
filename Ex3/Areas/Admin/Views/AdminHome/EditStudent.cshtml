@@ -20,34 +20,48 @@
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container Exam-cv">
-                <form method="post" action="">
-                    <input type="text" required name="fullname" value="" placeholder="Full Name " />
-                    <br />
-                    <input type="text" required name="age" value="" placeholder="Age" />
-                    <br />
+                @foreach (var item in ViewBag.liststudent)
+                {
+                    <form method="post" action="@Url.Action("Updatestudent")">
+                        <input type="hidden" value="@item.ID" name="iduser" />
+                        <input type="text" required name="fullname" value="@item.fullname" placeholder="Full Name " />
+                        <br />
+                        <input type="text" required name="age" value="@item.age" placeholder="Age" />
+                        <br />
 
-                    <input type="email" required name="email" value="" placeholder="Email" />
-                    <br />
+                        <input type="email" required name="email" value="@item.email" placeholder="Email" />
+                        <br />
 
-                    <input type="text" required name="phone" value="" placeholder="Phone" />
-                    <br />
+                        <input type="text" required name="phone" value="@item.phone" placeholder="Phone" />
+                        <br />
 
-                    <input type="text" required name="address" value="" placeholder="Address" />
-                    <br />
+                        <input type="text" required name="address" value="@item.address" placeholder="Address" />
+                        <br />
 
-                    <input type="date" required name="regisdate" value="" placeholder="Date" />
-                    <br />
+                        <input readonly type="date" required name="regisdate" value="@item.regisdate" placeholder="Date" />
+                        <br />
 
-                    <select>
-                        <option required disabled selected hidden>Select Correct Gender</option>
-                        <option required>Male</option>
-                        <option required>Female</option>
-                    </select>
-                    <br />
-                    <br />
+                        <select name="gender">
+                            <option required disabled selected hidden>Select Correct Gender</option>
+                            @if (item.gender=="Male")
+                            {
+                                 <option required selected>Male</option>
+                                 <option required>Female</option>
+                            }
+                              @if (item.gender=="Female")
+                            {
+                                 <option required>Male</option>
+                                 <option required selected>Female</option>
+                            }
+                           
+                        </select>
+                        <br />
+                        <br />
 
-                    <button>UPDATE</button>
-                </form>
+                        <button type="submit">UPDATE</button>
+                    </form>
+                }
+
             </div>
 
         </div>

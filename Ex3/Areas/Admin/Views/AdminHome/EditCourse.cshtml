@@ -15,29 +15,87 @@
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container">
-                <form method="post" action="">
-                    <input type="text"  required name="namecourse" value="" placeholder="Name " />
-                    <input type="text"  required name="price" value="" placeholder="Price " />
-                    <input type="text"  required name="time" value="" placeholder="Time " />
-                    <input type="text"  required name="material" value="" placeholder="Material" />
-                    <select>
-                        <option disabled required  selected hidden>Select Teacher</option>
+                @foreach (var item in ViewBag.listcourse)
+                {
+                <form method="post" action="@Url.Action("Updatecourse")" enctype="multipart/form-data">
+                    <input type="hidden" value="@item.ID" name="idcourse" />
+                    <input type="text" required name="namecourse" value="@item.name" placeholder="Name " />
+                    <input type="text" required name="price" value="@item.price" placeholder="Price " />
+                    <input type="text" required name="time" value="@item.time" placeholder="Time " />
+                    <input type="text" required name="material" value="@item.material" placeholder="Material" />
+                    <select name="teacher">
+                        <option disabled required selected hidden>Select Teacher</option>
+                        @foreach (var items in ViewBag.listtea)
+                        {
+                            if (items.fullname == item.teacher)
+                            {
+                <option selected>@items.fullname</option> }
+                                    else
+                                    {
+                <option>@items.fullname</option>}
+                                }
+
                     </select>
-                    <select>
+                    <select name="grade">
                         <option disabled required selected hidden>Select Grade</option>
+                        @if(item.grade== "Primarys school")
+                        {
+                             <option selected>Primarys school</option>
+                            <option>Junior high school</option>
+                            <option>High school</option>
+                            <option>University</option>
+                        }
+                           @if(item.grade== "Junior high school")
+                        {
+                             <option>Primarys school</option>
+                            <option selected>Junior high school</option>
+                            <option>High school</option>
+                            <option>University</option>
+                        }
+                              @if(item.grade== "High school")
+                        {
+                             <option >Primarys school</option>
+                            <option>Junior high school</option>
+                            <option selected>High school</option>
+                            <option>University</option>
+                        }
+                                 @if(item.grade== "University")
+                        {
+                             <option >Primarys school</option>
+                            <option>Junior high school</option>
+                            <option>High school</option>
+                            <option selected>University</option>
+                        }
+                       
                     </select>
-                    <select>
-                        <option disabled  required selected hidden>Select Type</option>
+                    <select name="type">
+                        <option disabled required selected hidden>Select Type</option>
+                        @foreach (var itemss in ViewBag.listtype)
+                        {
+                            if (itemss.name == item.type)
+                            {
+                                <option selected>@itemss.name</option>
+                            }
+                            else
+                            {
+                                <option>@itemss.name</option>
+                            }
+                        }
+
                     </select>
                     <br />
-                    <img id="output" class="img" />
+                    <img id="output" class="img" src="~/Upload/imgcourse/@item.img" />
                     <p><input type="file" accept="image/*" name="myimg" id="myimg" onchange="loadFile(event)" style="display: none;"></p>
                     <p><label for="myimg" style="cursor: pointer; border:1px solid #eeba10; background-color:#eeba10;width:150px;height:40px;padding:9px;font-weight:bold;">Upload Image<i style="font-size:18px;margin-left:5px;" class='bx bx-upload'></i></label></p>
-                    <textarea class="Content" name="editor1" placeholder="Content">
+                    <textarea class="Content" name="editor1" placeholder="Content">@item.content
                 </textarea>
                     <br />
-                    <button>UPDATE</button>
+                    <button type="submit">UPDATE</button>
                 </form>
+                }
+
+
+
             </div>
 
         </div>

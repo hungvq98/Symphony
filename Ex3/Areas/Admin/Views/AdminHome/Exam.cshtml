@@ -19,31 +19,40 @@
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container Exam-cv">
-                <form method="post" action="">
+                <form action="@Url.Action("Addexam")" method="post">
                     <input type="text"  required name="question" value="" placeholder="Question " />
                     <br />
-                    <input type="text"  required name="question A" value="" placeholder="Answer A" />
+                    <input type="text"  required name="answerA" value="" placeholder="Answer A" />
                     <br />
 
-                    <input type="text" required  name="question B" value="" placeholder="Answer B" />
+                    <input type="text" required  name="answerB" value="" placeholder="Answer B" />
                     <br />
 
-                    <input type="text" required  name="question C" value="" placeholder="Answer C" />
+                    <input type="text" required  name="answerC" value="" placeholder="Answer C" />
                     <br />
 
-                    <input type="text" required name="question D" value="" placeholder="Answer D" />
+                    <input type="text" required name="answerD" value="" placeholder="Answer D" />
                     <br />
 
-                    <input type="text" required  name="course" value="" placeholder="Course" />
+                    <select name="course">
+                        <option disabled required selected hidden>Select Course</option>
+                        @foreach (var items in ViewBag.listcourse)
+                        {
+                            <option>@items.name</option>}
+                    </select>
                     <br />
 
-                    <select>
+                    <select name="correct">
                         <option required  disabled selected hidden>Select Correct Answer</option>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                        <option>D</option>
                     </select>
                     <br />
                     <br />
 
-                    <button>ADD</button>
+                    <button type="submit">ADD</button>
                 </form>
             </div>
 
