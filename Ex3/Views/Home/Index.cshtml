@@ -1,40 +1,51 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/HomePage.cshtml";
-}
+@{ ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/HomePage.cshtml"; 
+      if (TempData["message"] != null) {
+        <script type="text/javascript">
+            alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+            } }
 <style>
     .btn-regis button:active {
-        transform:scale(0.95);
+        transform: scale(0.95);
     }
+
     .sub-header .row {
         padding: 0;
     }
+
     .sub-header .container-fluid {
-       
-        margin:0;
+        margin: 0;
     }
+
     .sub-header {
         font-family: 'Rubik', sans-serif;
     }
-    .sub-header .col-6 img {
-        width:90%;
-        z-index:6;
-    }
-    .sub-header .left {
-        padding-left:10%;
-        padding-top:3%;
-    }
-    .sub-header .right{
-        padding-right:5%;
-    }
-    .sub-header .main-para {
-        font-size:50px;
-    }
+
+        .sub-header .col-6 img {
+            width: 90%;
+            z-index: 6;
+        }
+
+        .sub-header .left {
+            padding-left: 10%;
+            padding-top: 3%;
+        }
+
+        .sub-header .right {
+            padding-right: 5%;
+        }
+
+        .sub-header .main-para {
+            font-size: 50px;
+        }
+
     .headline {
-        font-size:20px;
-        font-weight:bold;
+        font-size: 20px;
+        font-weight: bold;
     }
+
     .LoadMore {
         width: 150px;
         height: 40px;
@@ -44,13 +55,15 @@
         outline-color: none;
         color: white;
         font-family: 'Rubik', sans-serif;
-        font-weight:bold;
-        border-radius:5px;
-        cursor:pointer;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
     }
-    .LoadMore:active {
-        transform:scale(0.95);
-    }
+
+        .LoadMore:active {
+            transform: scale(0.95);
+        }
+
     .LoadMore2 {
         width: 150px;
         height: 40px;
@@ -64,15 +77,16 @@
         border-radius: 5px;
         cursor: pointer;
     }
-    .LoadMore2:active {
-        transform: scale(0.95);
-    }
+
+        .LoadMore2:active {
+            transform: scale(0.95);
+        }
+
     .btn-load-cv {
-        margin-right:auto;
-        margin-left:auto;
-        width:150px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 150px;
     }
-    
 </style>
 
 <div class="sub-header">
@@ -220,8 +234,8 @@
             </div>
         </div>
     </div>
-    
-    
+
+
 </div>
 
 <br>
@@ -229,96 +243,24 @@
 <br />
 <div class="container">
     <div class="row">
-        <div class="col items">
-            <div class="card-cv slideup">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/Physics.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
+        @foreach (var item in ViewBag.listcoursenew)
+        {
+<form action="@Url.Action("Exame",new { idcourse = @item.ID })" method="post">
+    <div class="col items">
+        <div class="card-cv slideup">
+            <div class="card" id="card">
+                <div class="teacher"><img id="tchr" width="100" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
+                <div class="teacher-name" id="tchrname">@item.nametea</div>
+                <div class="job" id="job">@item.job</div>
+                <div class="date-course" id="date-course">Start:@item.start - @item.time months</div>
+                <div class="des" id="des">@Html.Raw(@item.content)</div>
+                <div class="name-subject"><span id="name-subject">@item.name</span></div>
+                <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/imgcourse/@item.imgcourse" alt=""></div>
+                <button type="submit" id="btn">Register</button>
             </div>
         </div>
-        <div class="col items">
-            <div class="card-cv slideup">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/Physics.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
-        <div class="col items">
-            <div class="card-cv slideup">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/Physics.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
-        <div class="col items">
-            <div class="card-cv slideup">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/Physics.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
-        <div class="col items">
-            <div class="card-cv slideup">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/Physics.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
-        <div class="col items">
-            <div class="card-cv slideup">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/Physics.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
+    </div>
+</form>}
 
     </div>
     <br />
@@ -330,100 +272,43 @@
 <br>
 <div class="content-Course-cv container">
     <button class="btn-left" onclick="scrollleft();"><img width="50" src="~/Upload/icon/arrowleft.png" alt=""></button>
+
     <div class="content-Course" id="slideCourse">
-        <div class="Card-cv2 slideup">
-            <div class="photo"><img id="img-tec" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-            <div class="content-card" id="content-card">
-                <div class="name-teacher"><strong>Ronaldo</strong></div>
-                <div class="job2">Worker</div>
-                <div class="date2">16/5/2021 - 7 months</div>
-                <div class="des2">Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum sit amet orci laoreet, congue felis vitae, dignissim est.</div>
-            </div>
-            <div class="name-sub2" id="name-sub2">Math Hight-level</div>
-            <button class="btn-card" id="btn-card">Register</button>
-            <div class="card2" style="background-image: url(../Upload/img/student/R1a1a6aac2051037f3b2db77c0536c58a.jpg);background-size: cover;" id="card2">
-                <div class="content-card2">
-                    <div class="name-sub3">Math Hight-level</div>
-                    <hr>
-                    <span>Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum.</span>
-                </div>
-            </div>
-        </div>
-        <div class="Card-cv2 slideup">
-            <div class="photo"><img id="img-tec" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-            <div class="content-card" id="content-card">
-                <div class="name-teacher"><strong>Ronaldo</strong></div>
-                <div class="job2">Worker</div>
-                <div class="date2">16/5/2021 - 7 months</div>
-                <div class="des2">Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum sit amet orci laoreet, congue felis vitae, dignissim est.</div>
-            </div>
-            <div class="name-sub2" id="name-sub2">Math Hight-level</div>
-            <button class="btn-card" id="btn-card">Register</button>
-            <div class="card2" style="background-image: url(../Upload/img/student/R1a1a6aac2051037f3b2db77c0536c58a.jpg);background-size: cover;" id="card2">
-                <div class="content-card2">
-                    <div class="name-sub3">Math Hight-level</div>
-                    <hr>
-                    <span>Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum.</span>
-                </div>
+
+        @foreach (var item in ViewBag.listcourse)
+        {
+<form action="@Url.Action("Exame",new { idcourse=@item.ID })" method="post">
+    <div class="Card-cv2 slideup">
+        <div class="photo"><img id="img-tec" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
+        <div class="content-card" id="content-card">
+            <div class="name-teacher"><b>Name:</b>@item.nametea</div>
+            <div class="job2"><b>Professional:</b>@item.job</div>
+            <div class="date2"><b>Birthday:</b>@item.birthday</div>
+            <div class="des2">
+                Type:@item.type
+                <br />
+                Time:@item.time
+                <br />
+                Start:@item.start
+                <br />
+                End:@item.end
+                <br />
+                @Html.Raw(@item.content)
             </div>
         </div>
-        <div class="Card-cv2 slideup">
-            <div class="photo"><img id="img-tec" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-            <div class="content-card" id="content-card">
-                <div class="name-teacher"><strong>Ronaldo</strong></div>
-                <div class="job2">Worker</div>
-                <div class="date2">16/5/2021 - 7 months</div>
-                <div class="des2">Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum sit amet orci laoreet, congue felis vitae, dignissim est.</div>
-            </div>
-            <div class="name-sub2" id="name-sub2">Math Hight-level</div>
-            <button class="btn-card" id="btn-card">Register</button>
-            <div class="card2" style="background-image: url(../Upload/img/student/R1a1a6aac2051037f3b2db77c0536c58a.jpg);background-size: cover;" id="card2">
-                <div class="content-card2">
-                    <div class="name-sub3">Math Hight-level</div>
-                    <hr>
-                    <span>Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum.</span>
-                </div>
+        <div class="name-sub2" id="name-sub2">@item.name</div>
+        <button type="submit" class="btn-card" id="btn-card">Register</button>
+        <div class="card2" style="background-image: url(../Upload/imgcourse/@item.imgcourse);background-size: cover;" id="card2">
+            <div class="content-card2">
+                <div class="name-sub3">@item.name</div>
+                <hr>
+                <span>Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum.</span>
             </div>
         </div>
-        <div class="Card-cv2 slideup">
-            <div class="photo"><img id="img-tec" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-            <div class="content-card" id="content-card">
-                <div class="name-teacher"><strong>Ronaldo</strong></div>
-                <div class="job2">Worker</div>
-                <div class="date2">16/5/2021 - 7 months</div>
-                <div class="des2">Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum sit amet orci laoreet, congue felis vitae, dignissim est.</div>
-            </div>
-            <div class="name-sub2" id="name-sub2">Math Hight-level</div>
-            <button class="btn-card" id="btn-card">Register</button>
-            <div class="card2" style="background-image: url(../Upload/img/student/R1a1a6aac2051037f3b2db77c0536c58a.jpg);background-size: cover;" id="card2">
-                <div class="content-card2">
-                    <div class="name-sub3">Math Hight-level</div>
-                    <hr>
-                    <span>Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum.</span>
-                </div>
-            </div>
-        </div>
-        <div class="Card-cv2 slideup">
-            <div class="photo"><img id="img-tec" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-            <div class="content-card" id="content-card">
-                <div class="name-teacher"><strong>Ronaldo</strong></div>
-                <div class="job2">Worker</div>
-                <div class="date2">16/5/2021 - 7 months</div>
-                <div class="des2">Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum sit amet orci laoreet, congue felis vitae, dignissim est.</div>
-            </div>
-            <div class="name-sub2" id="name-sub2">Math Hight-level</div>
-            <button class="btn-card" id="btn-card">Register</button>
-            <div class="card2" style="background-image: url(../Upload/img/student/R1a1a6aac2051037f3b2db77c0536c58a.jpg);background-size: cover;" id="card2">
-                <div class="content-card2">
-                    <div class="name-sub3">Math Hight-level</div>
-                    <hr>
-                    <span>Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum.</span>
-                </div>
-            </div>
-        </div>
+    </div>
+</form>}
 
     </div>
-
     <button class="btn-right" onclick="srollright();"><img width="50" src="~/Upload/icon/arrowright.png" alt=""></button>
 
 </div>
@@ -433,99 +318,30 @@
 <br>
 <div class="container">
     <div class="row">
-        <div class="col slideup items2">
-            <div class="card-cv">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/theduc.jpg" alt=""></div>
+        @foreach (var item in ViewBag.listcoursepop)
+        {
+<form action="@Url.Action("Exame",new { idcourse=@item.ID })" method="post">
 
-                    <button id="btn">Register</button>
-                </div>
+
+    <div class="col slideup items2">
+        <div class="card-cv">
+            <div class="card" id="card">
+                <div class="teacher"><img id="tchr" width="100" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
+                <div class="teacher-name" id="tchrname">@item.nametea</div>
+                <div class="job" id="job">@item.job</div>
+                <div class="date-course" id="date-course">Start:@item.start - @item.time months</div>
+                <div class="des" id="des">@Html.Raw(@item.content)</div>
+                <div class="name-subject"><span id="name-subject">@item.name</span></div>
+                <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/imgcourse/@item.imgcourse" alt=""></div>
+                <button type="submit" id="btn">Register</button>
             </div>
         </div>
-        <div class="col slideup items2">
-            <div class="card-cv">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/theduc.jpg" alt=""></div>
+    </div>
+</form>}
 
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
-        <div class="col slideup items2">
-            <div class="card-cv">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/theduc.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
-        <div class="col slideup items2">
-            <div class="card-cv">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/theduc.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
-        <div class="col slideup items2">
-            <div class="card-cv">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/theduc.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
-        <div class="col slideup items2">
-            <div class="card-cv">
-                <div class="card" id="card">
-                    <div class="teacher"><img id="tchr" width="100" src="~/Upload/img/teacher/teacheravatar.jpg" alt=""></div>
-                    <div class="teacher-name" id="tchrname">Dr.Ronaldo,Ph.D</div>
-                    <div class="job" id="job">Software Engineer</div>
-                    <div class="date-course" id="date-course">Start:16/5/2021 - 6 months</div>
-                    <div class="des" id="des">In hac habitasse platea dictumst. Donec varius tellus est, at congue arcu consectetur nec. In eget ante accumsan nulla pharetra accumsan id in arcu. In ac accumsan sem, et accumsan erat.okaw djahd jahjdwoa oao aoiwau uaywy </div>
-                    <div class="name-subject"><span id="name-subject">UI/UX Design</span></div>
-                    <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/img/subject/theduc.jpg" alt=""></div>
-
-                    <button id="btn">Register</button>
-                </div>
-            </div>
-        </div>
 
     </div>
-    
+
     <br />
     <br />
     <br />
@@ -535,38 +351,41 @@
 <br>
 <div class="headline">Send Your Message</div>
 <br>
-<div class="Register-place">
-    <div class="container">
-        <div class="row">
-            
-            <div class="col-7">
-                <div class="register-place-2">
-                    <span>FEEDBACK TO US</span>
-                    <br>
-                    <span>THANKS</span>
-                    <input type="text" placeholder="Full name">
-                    <br>
-                    <input type="email" placeholder="Email">
-                    <br>
-                    <input type="text" placeholder="Type Your Message">
+<form action="@Url.Action("Send")" method="post">
+    <div class="Register-place">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-7">
+                    <div class="register-place-2">
+                        <span>FEEDBACK TO US</span>
+                        <br>
+                        <span>THANKS</span>
+                        <input type="text" placeholder="Full name">
+                        <br>
+                        <input type="text" name="title" placeholder="Title">
+                        <br>
+                        <input type="text" name="message" placeholder="Type Your Message">
+                    </div>
                 </div>
-            </div>
-            <div class="col-5">
-                <div class="book-regis">
-                    <section class="book-cv">
-                        <div class="book-bro">
-                            <img src="~/Upload/img/book/cover2.jpg" alt="">
-                        </div>
-                    </section>
+                <div class="col-5">
+                    <div class="book-regis">
+                        <section class="book-cv">
+                            <div class="book-bro">
+                                <img src="~/Upload/img/book/cover2.jpg" alt="">
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-</div>
 
-<br>
-<div class="btn-regis">
-    <button>Send</button>
-</div>
+    </div>
+
+    <br>
+    <div class="btn-regis">
+        <button>Send</button>
+    </div>
+</form>
+
 

@@ -19,16 +19,33 @@ namespace Ex3.Areas.Admin.Controllers
         public ActionResult Course()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Types.Select(d => new Models.Modelview.Typeview { ID = d.ID, name = d.NameType }).ToList();
-            var results = spn.Teachers.Select(d => new Models.Modelview.Teacherview { fullname = d.Fullname });
+            var results = spn.Teachers.Where(d=>d.Active==true).Select(d => new Models.Modelview.Teacherview { fullname = d.Fullname }).ToList();
             ViewBag.listtea = results;
-            ViewBag.listtype = result;
             return View();
         }
         public ActionResult ViewCourse()
         {
             Models.Entity.SPNEntities spn = new Models.Entity.SPNEntities();
-            var result = spn.Courses.Select(d => new Models.Modelview.Courseview { ID = d.ID, name = d.NameCourse, price = d.Price ?? 0, grade = d.Grade, time = (int)d.Time, material = d.Material, teacher = d.Teacher, type = d.Typecourse, img = d.Img, content = d.CourseContent }).ToList();
+            var result = (from cr in spn.Courses
+                          join te in spn.Teachers
+                          on cr.Idtea equals te.Idtea                          
+                          where cr.Active == true
+                          select new Models.Modelview.Courseview
+                          {
+                              ID = cr.ID,
+                              name = cr.NameCourse,
+                              price = cr.Price ?? 0,
+                              grade = cr.Grade,
+                              content = cr.CourseContent,
+                              img = cr.Img,
+                              material = cr.Material,
+                              time = (int)cr.Time,
+                              startime = cr.StartTime.ToString(),
+                              endtime = cr.EndTime.ToString(),
+                              teacher = te.Fullname,
+                              type = cr.Typecourse
+
+                          }).ToList();
             ViewBag.listcourse = result;
             return View();
         }
@@ -36,11 +53,28 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idcourse;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Courses.Where(d => d.ID == id).Select(d => new Models.Modelview.Courseview { ID = d.ID, name = d.NameCourse, price = d.Price ?? 0, grade = d.Grade, time = (int)d.Time, material = d.Material, teacher = d.Teacher, type = d.Typecourse, img = d.Img, content = d.CourseContent}).ToList();
-            var results = spn.Types.Select(d => new Models.Modelview.Typeview { ID = d.ID, name = d.NameType }).ToList();
-            var resultss = spn.Teachers.Select(d => new Models.Modelview.Teacherview { fullname = d.Fullname });
+            var result = (from cr in spn.Courses
+                          join te in spn.Teachers
+                          on cr.Idtea equals te.Idtea
+                          where cr.ID == id
+                          select new Models.Modelview.Courseview
+                          {
+                              ID = cr.ID,
+                              name = cr.NameCourse,
+                              price = cr.Price ?? 0,
+                              grade = cr.Grade,
+                              content = cr.CourseContent,
+                              img = cr.Img,
+                              material = cr.Material,
+                              time = (int)cr.Time,
+                              startime = cr.StartTime.ToString(),
+                              endtime = cr.EndTime.ToString(),
+                              teacher = te.Fullname,
+                              type = cr.Typecourse
+                          }).ToList();
+            
+            var resultss = spn.Teachers.Where(d=>d.Active==true).Select(d => new Models.Modelview.Teacherview { fullname = d.Fullname }).ToList();
             ViewBag.listtea = resultss;
-            ViewBag.listtype = results;
             ViewBag.listcourse = result;
             return View();
         }
@@ -55,17 +89,24 @@ namespace Ex3.Areas.Admin.Controllers
             cr.Grade = Request.Form["grade"];
             cr.Time = int.Parse(Request.Form["time"]);
             cr.Material = Request.Form["material"];
-            cr.Teacher = Request.Form["teacher"];
-            cr.Typecourse = Request.Form["type"];
             cr.CourseContent = Request.Form["content"];
+            cr.StartTime = DateTime.Parse(Request.Form["start"]);
+            cr.EndTime = DateTime.Parse(Request.Form["end"]);
+            string nametea = Request.Form["teacher"];
+            var teacher = spn.Teachers.Where(d => d.Fullname == nametea).FirstOrDefault();
+            cr.Idtea = teacher.Idtea;         
+            cr.Typecourse = Request.Form["type"];
             cr.Img = myimg.FileName;
             string path = Server.MapPath("~/Upload/imgcourse/") + cr.Img;
             myimg.SaveAs(path);
             cr.CourseContent = Request.Form["content"];
+            cr.Active = true;
             spn.Courses.Add(cr);
             spn.SaveChanges();
             return RedirectToAction("Course");
         }
+        [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Updatecourse(HttpPostedFileBase myimg)
         {
             int id = Int32.Parse(Request.Form["idcourse"]);
@@ -76,9 +117,14 @@ namespace Ex3.Areas.Admin.Controllers
             cr.Grade = Request.Form["grade"];
             cr.Time = int.Parse(Request.Form["time"]);
             cr.Material = Request.Form["material"];
-            cr.Teacher = Request.Form["teacher"];
+            string nametea = Request.Form["teacher"];
+            var teacher = spn.Teachers.Where(d => d.Fullname == nametea).FirstOrDefault();
+            cr.Idtea = teacher.Idtea;
             cr.Typecourse = Request.Form["type"];
             cr.CourseContent = Request.Form["content"];
+            cr.StartTime = DateTime.Parse(Request.Form["start"]);
+            cr.EndTime = DateTime.Parse(Request.Form["end"]);
+            cr.Active = true;
             if (myimg == null)
             {
                 var q = spn.Courses.Where(d => d.ID == id).FirstOrDefault();
@@ -100,8 +146,8 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idcourse;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Courses.Where(d => d.ID == id).FirstOrDefault();
-            spn.Courses.Remove(result);
+            Course cr = spn.Courses.Where(d => d.ID == id).FirstOrDefault();
+            cr.Active = false;
             spn.SaveChanges();
             return RedirectToAction("ViewCourse");
         }
@@ -110,14 +156,28 @@ namespace Ex3.Areas.Admin.Controllers
         {
 
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Courses.Select(d => new Models.Modelview.Courseview { name = d.NameCourse }).ToList();
+            var result = spn.Courses.Where(d=>d.Active==true).Select(d => new Models.Modelview.Courseview { name = d.NameCourse }).ToList();
             ViewBag.listcourse = result;
             return View();
         }
         public ActionResult ViewExam()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Exams.Select(d => new Models.Modelview.Examview { ID = d.ID, answerA = d.AnswerA, answerB = d.AnswerB, answerC = d.AnswerC, answerD = d.AnswerD, answercorrect = d.Answercorrect, course = d.Course, question = d.Nameofquestion }).ToList();
+            var result = (from ex in spn.Exams
+                          join cr in spn.Courses
+                          on ex.IDcourse equals cr.ID
+                          where ex.Active ==true
+                          select new Models.Modelview.Examview
+                          {
+                              ID = ex.ID,
+                              question = ex.Nameofquestion,
+                              answerA = ex.AnswerA,
+                              answerB = ex.AnswerB,
+                              answerC = ex.AnswerC,
+                              answerD = ex.AnswerD,
+                              answercorrect = ex.Answercorrect,
+                              course = cr.NameCourse
+                          }).ToList();
             ViewBag.listexam = result;
             return View();
         }
@@ -125,8 +185,22 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idexam;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Exams.Where(d => d.ID == id).Select(d => new Models.Modelview.Examview { ID = d.ID, answerA = d.AnswerA, answerB = d.AnswerB, answerC = d.AnswerC, answerD = d.AnswerD, answercorrect = d.Answercorrect, course = d.Course, question = d.Nameofquestion }).ToList();
-            var results = spn.Courses.Select(d => new Models.Modelview.Courseview { name = d.NameCourse }).ToList();
+            var result = (from ex in spn.Exams
+                          join cr in spn.Courses
+                          on ex.IDcourse equals cr.ID
+                          where ex.Active == true
+                          select new Models.Modelview.Examview
+                          {
+                              ID = ex.ID,
+                              question = ex.Nameofquestion,
+                              answerA = ex.AnswerA,
+                              answerB = ex.AnswerB,
+                              answerC = ex.AnswerC,
+                              answerD = ex.AnswerD,
+                              answercorrect = ex.Answercorrect,
+                              course = cr.NameCourse
+                          }).ToList();
+            var results = spn.Courses.Where(d=>d.Active==true).Select(d => new Models.Modelview.Courseview { name = d.NameCourse }).ToList();
             ViewBag.listcourse = results;
             ViewBag.listexam = result;
             return View();
@@ -141,7 +215,10 @@ namespace Ex3.Areas.Admin.Controllers
             ex.AnswerC = Request.Form["answerC"];
             ex.AnswerD = Request.Form["answerD"];
             ex.Answercorrect = Request.Form["correct"];
-            ex.Course = Request.Form["course"];
+            string name = Request.Form["course"];
+            var course = spn.Courses.Where(d => d.NameCourse == name).FirstOrDefault();
+            ex.IDcourse = course.ID;
+            ex.Active = true;
             spn.Exams.Add(ex);
             spn.SaveChanges();
             return RedirectToAction("Exam");
@@ -157,7 +234,10 @@ namespace Ex3.Areas.Admin.Controllers
             ex.AnswerC = Request.Form["answerC"];
             ex.AnswerD = Request.Form["answerD"];
             ex.Answercorrect = Request.Form["correct"];
-            ex.Course = Request.Form["course"];
+            string name = Request.Form["course"];
+            var course = spn.Courses.Where(d => d.NameCourse == name).FirstOrDefault();
+            ex.IDcourse = course.ID;
+            ex.Active = true;
             spn.SaveChanges();
             return RedirectToAction("ViewExam");
         }
@@ -165,8 +245,8 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idexam;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Exams.Where(d => d.ID == id).FirstOrDefault();
-            spn.Exams.Remove(result);
+            Exam ex = spn.Exams.First(d => d.ID == id);
+            ex.Active = false;
             spn.SaveChanges();
             return RedirectToAction("ViewExam");
         }
@@ -175,7 +255,7 @@ namespace Ex3.Areas.Admin.Controllers
         public ActionResult ViewStudent()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.UserInfoes.Select(d => new Models.Modelview.Userinfoview { ID = d.ID, fullname = d.FullName, age = d.Age, phone = d.Phone, email = d.Email, gender = d.Gender, address = d.Address, regisdate = d.RegisDate.ToString() }).ToList();
+            var result = spn.UserInfoes.Where(d=>d.Active==true).Select(d => new Models.Modelview.Userinfoview { ID = d.ID, fullname = d.FullName, age = d.Age, phone = d.Phone, email = d.Email, gender = d.Gender, address = d.Address, regisdate = d.RegisDate.ToString() }).ToList();
             ViewBag.liststudent = result;
             return View();
         }
@@ -198,6 +278,7 @@ namespace Ex3.Areas.Admin.Controllers
             uf.Age = Request.Form["age"];
             uf.Gender = Request.Form["gender"];
             uf.Address = Request.Form["address"];
+            uf.Active = true;
             spn.SaveChanges();
             return RedirectToAction("ViewStudent");
         }
@@ -205,8 +286,8 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = iduser;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.UserInfoes.Where(d => d.ID == id).FirstOrDefault();
-            spn.UserInfoes.Remove(result);
+            UserInfo uf = spn.UserInfoes.First(d => d.ID == id);
+            uf.Active = false;
             spn.SaveChanges();
             return RedirectToAction("ViewStudent");
         }
@@ -219,7 +300,7 @@ namespace Ex3.Areas.Admin.Controllers
         public ActionResult ViewTeacher()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Teachers.Select(d => new Models.Modelview.Teacherview { ID = d.Idtea, fullname = d.Fullname, age = d.Age, phone = d.Phone, email = d.Email, birthday = d.Birthday.ToString(), gender = d.Gender, img = d.Img, content = d.Content, professtional = d.Professtional }).ToList();
+            var result = spn.Teachers.Where(d=>d.Active==true).Select(d => new Models.Modelview.Teacherview { ID = d.Idtea, fullname = d.Fullname, age = d.Age, phone = d.Phone, email = d.Email, birthday = d.Birthday.ToString(), gender = d.Gender, img = d.Img, content = d.Content, professtional = d.Professtional }).ToList();
             ViewBag.listtea = result;
             return View();
         }
@@ -244,8 +325,9 @@ namespace Ex3.Areas.Admin.Controllers
             tc.Birthday = DateTime.Parse(Request.Form["birthday"]);
             tc.Gender = Request.Form["gender"];
             tc.Content = Request.Form["content"];
-            tc.Img = myimg.FileName;
             tc.Professtional = Request.Form["profess"];
+            tc.Active = true;
+            tc.Img = myimg.FileName;
             string path = Server.MapPath("~/Upload/imgteacher/") + tc.Img;
             myimg.SaveAs(path);
             spn.Teachers.Add(tc);
@@ -267,6 +349,7 @@ namespace Ex3.Areas.Admin.Controllers
             tc.Gender = Request.Form["gender"];
             tc.Content = Request.Form["content"];
             tc.Professtional = Request.Form["profess"];
+            tc.Active = true;
             if (myimg == null)
             {
                 var q = spn.Teachers.Where(d => d.Idtea == id).FirstOrDefault();
@@ -288,8 +371,8 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idtea;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Teachers.Where(d => d.Idtea == id).FirstOrDefault();
-            spn.Teachers.Remove(result);
+            Teacher tc = spn.Teachers.Where(d => d.Idtea == id).FirstOrDefault();
+            tc.Active = false;
             spn.SaveChanges();
             return RedirectToAction("ViewTeacher");
         }
@@ -300,6 +383,7 @@ namespace Ex3.Areas.Admin.Controllers
             var result = (from fd in spn.Feedbacks
                           join uf in spn.UserInfoes
                           on fd.UserID equals uf.ID
+                          where fd.Active==true
                           select new Models.Modelview.Feedbackview
                           {
                               ID = fd.ID,
@@ -317,8 +401,8 @@ namespace Ex3.Areas.Admin.Controllers
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
             int id = idfeed;
-            var result = spn.Feedbacks.Where(d => d.ID == id).FirstOrDefault();
-            spn.Feedbacks.Remove(result);
+            Feedback fd = spn.Feedbacks.First(d => d.ID == id);
+            fd.Active = false;
             spn.SaveChanges();
             return RedirectToAction("Feedback");
         }
@@ -328,9 +412,12 @@ namespace Ex3.Areas.Admin.Controllers
             Models.Entity.SPNEntities spn = new SPNEntities();
             var result = (from his in spn.HistoryCourses
                           join uf in spn.UserInfoes
-                          on his.IDUser equals uf.ID
+                          on his.IDuser equals uf.ID
                           join cr in spn.Courses
-                          on his.IDCourse equals cr.ID
+                          on his.IDcourse equals cr.ID
+                          join re in spn.RequestCourses
+                          on his.IDrequest equals re.ID
+                          where his.Active == true
                           select new Models.Modelview.Historycourseview
                           {
                               ID = his.ID,
@@ -340,12 +427,12 @@ namespace Ex3.Areas.Admin.Controllers
                               gender = uf.Gender,
                               phone = uf.Phone,
                               course = cr.NameCourse,
+                              time = (int)cr.Time,
                               grade = cr.Grade,
                               price = cr.Price ?? 0,
-                              time = (int)cr.Time,
-                              startime = his.StartTime.ToString(),
-                              endtime = his.EndTime.ToString(),
-                              payment = his.Payment ?? false
+                              startime = cr.StartTime.ToString(),
+                              endtime = cr.EndTime.ToString(),
+                              payment = re.Payment ?? false
                           }).ToList();
             ViewBag.listhis = result;
             return View();
@@ -354,11 +441,12 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idhis;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.HistoryCourses.Where(d => d.ID == id).FirstOrDefault();
-            spn.HistoryCourses.Remove(result);
+            HistoryCourse his = spn.HistoryCourses.First(d => d.ID == id);
+            his.Active = false;
             spn.SaveChanges();
             return RedirectToAction("Historycourse");
         }
+        ///historyexam
         public ActionResult HistoryExam()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
@@ -367,14 +455,15 @@ namespace Ex3.Areas.Admin.Controllers
                           on his.UserID equals uf.ID
                           join cr in spn.Courses
                           on his.CourseID equals cr.ID
+                          where his.Active == true
                           select new Models.Modelview.Historyexamview
                           {
                               ID = his.ID,
                               fullname = uf.FullName,
-                              age = uf.Age,
-                              email = uf.Email,
-                              gender = uf.Gender,
                               phone = uf.Phone,
+                              email = uf.Email,
+                              age = uf.Age,
+                              gender = uf.Gender,
                               course = cr.NameCourse,
                               score = his.Score,
                               dateexam = his.Dateexam.ToString()
@@ -386,8 +475,8 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idhis;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Historyexams.Where(d => d.ID == id).FirstOrDefault();
-            spn.Historyexams.Remove(result);
+            Historyexam his = spn.Historyexams.First(d => d.ID == id);
+            his.Active = false;
             spn.SaveChanges();
             return RedirectToAction("HistoryExam");
         }
@@ -395,14 +484,25 @@ namespace Ex3.Areas.Admin.Controllers
         public ActionResult PostAdmin()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Types.Select(d => new Models.Modelview.Typeview { name = d.NameType }).ToList();
+            var result = spn.Types.Where(d => d.Active == true).Select(d => new Models.Modelview.Typeview { name = d.NameType }).ToList();
             ViewBag.listtype = result;
             return View();
         }
         public ActionResult ViewPostAdmin()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.PostAdmins.Select(d => new Models.Modelview.Postadminview { ID = d.ID, title = d.Title, content = d.Content, type = d.Typepost, img = d.Img }).ToList();
+            var result = (from ps in spn.PostAdmins
+                          join tp in spn.Types
+                          on ps.Typepost equals tp.ID
+                          where ps.Active == true
+                          select new Models.Modelview.Postadminview
+                          {
+                              ID = ps.ID,
+                              title = ps.Title,
+                              content = ps.Content,
+                              img = ps.Img,
+                              type = tp.NameType
+                          }).ToList();
             ViewBag.listpost = result;
             return View();
         }
@@ -410,8 +510,19 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idpost;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.PostAdmins.Where(d => d.ID == id).Select(d => new Models.Modelview.Postadminview { ID = d.ID, title = d.Title, content = d.Content, type = d.Typepost, img = d.Img }).ToList();
-            var results = spn.Types.Select(d => new Models.Modelview.Typeview { name = d.NameType }).ToList();
+            var result = (from ps in spn.PostAdmins
+                          join tp in spn.Types
+                          on ps.Typepost equals tp.ID
+                          where ps.ID == id
+                          select new Models.Modelview.Postadminview
+                          {
+                              ID = ps.ID,
+                              title = ps.Title,
+                              content = ps.Content,
+                              img = ps.Img,
+                              type = tp.NameType
+                          }).ToList();
+            var results = spn.Types.Where(d=>d.Active==true).Select(d => new Models.Modelview.Typeview { name = d.NameType }).ToList();
             ViewBag.listtype = results;
             ViewBag.listpost = result;
             return View();
@@ -424,10 +535,13 @@ namespace Ex3.Areas.Admin.Controllers
             PostAdmin ps = new PostAdmin();
             ps.Title = Request.Form["title"];
             ps.Content = Request.Form["content"];
-            ps.Typepost = Request.Form["type"];
             ps.Img = myimg.FileName;
             string path = Server.MapPath("~/Upload/imgpost/") + ps.Img;
             myimg.SaveAs(path);
+            string name = Request.Form["type"];
+            var type = spn.Types.Where(d => d.NameType == name ).FirstOrDefault();
+            ps.Typepost = type.ID;
+            ps.Active = true;
             spn.PostAdmins.Add(ps);
             spn.SaveChanges();
             return RedirectToAction("Postadmin");
@@ -441,7 +555,10 @@ namespace Ex3.Areas.Admin.Controllers
             PostAdmin ps = spn.PostAdmins.First(d => d.ID == id);
             ps.Title = Request.Form["title"];
             ps.Content = Request.Form["content"];
-            ps.Typepost = Request.Form["type"];
+            string name = Request.Form["type"];
+            var type = spn.Types.Where(d => d.NameType == name).FirstOrDefault();
+            ps.Active = true;
+            ps.Typepost = type.ID;
             if (myimg == null)
             {
                 var q = spn.PostAdmins.Where(d => d.ID == id).FirstOrDefault();
@@ -464,8 +581,8 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idpost;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.PostAdmins.Where(d => d.ID == id).FirstOrDefault();
-            spn.PostAdmins.Remove(result);
+            PostAdmin ps = spn.PostAdmins.First(d => d.ID == id);
+            ps.Active = false;
             spn.SaveChanges(); 
             return RedirectToAction("ViewPostAdmin");
         }
@@ -477,7 +594,7 @@ namespace Ex3.Areas.Admin.Controllers
         public ActionResult ViewFAQ()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Questionfaqs.Select(d => new Models.Modelview.Questionfaqview { ID = d.ID, question = d.Namequestion, answer = d.Answer }).ToList();
+            var result = spn.Questionfaqs.Where(d => d.Active == true).Select(d => new Models.Modelview.Questionfaqview { ID = d.ID, question = d.Namequestion, answer = d.Answer }).ToList();
             ViewBag.listfaq = result;
             return View();
         }
@@ -497,6 +614,7 @@ namespace Ex3.Areas.Admin.Controllers
             Questionfaq qs = new Questionfaq();
             qs.Namequestion = Request.Form["question"];
             qs.Answer = Request.Form["content"];
+            qs.Active = true;
             spn.Questionfaqs.Add(qs);
             spn.SaveChanges();
             return RedirectToAction("FAQ");
@@ -510,6 +628,7 @@ namespace Ex3.Areas.Admin.Controllers
             Questionfaq qs = spn.Questionfaqs.First(d => d.ID == id);
             qs.Namequestion = Request.Form["question"];
             qs.Answer = Request.Form["content"];
+            qs.Active = true;
             spn.SaveChanges();
             return RedirectToAction("ViewFAQ");
         }
@@ -517,38 +636,92 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = idfaq;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Questionfaqs.Where(d => d.ID == id).FirstOrDefault();
-            spn.Questionfaqs.Remove(result);
+            Questionfaq qs = spn.Questionfaqs.First(d => d.ID == id);
+            qs.Active = false;
             spn.SaveChanges();
             return RedirectToAction("ViewFAQ");
+        }
+        
+        //Register Place
+        public ActionResult RegisterCourse()
+        {
+            Models.Entity.SPNEntities spn = new SPNEntities();
+            var result = (from re in spn.RequestCourses
+                          join uf in spn.UserInfoes
+                          on re.IDUser equals uf.ID
+                          join cr in spn.Courses
+                          on re.IDCourse equals cr.ID
+                          where re.Payment == false && re.Active == true
+                          select new Models.Modelview.Requestcourse
+                          {
+                              ID = re.ID,
+                              fullname = uf.FullName,
+                              age = uf.Age,
+                              phone = uf.Phone,
+                              email = uf.Email,
+                              gender = uf.Gender,
+                              course = cr.NameCourse,
+                              grade = cr.Grade,
+                              price = cr.Price ?? 0,
+                              time = (int)cr.Time,
+                              startime = cr.StartTime.ToString(),
+                              endtime = cr.EndTime.ToString(),
+                              payment = re.Payment ?? false
+                          }).ToList();
+            ViewBag.listhis = result;
+            return View();
+        }
+        public ActionResult Acceptcourse(int idhis)
+        {
+            int id = idhis;
+            Models.Entity.SPNEntities spn = new SPNEntities();
+            RequestCourse rs = spn.RequestCourses.First(d => d.ID == id);
+            rs.Payment = true;
+            var q = spn.RequestCourses.Where(d => d.ID == id).FirstOrDefault();
+            HistoryCourse his = new HistoryCourse();
+            his.IDuser = q.IDUser;
+            his.IDcourse = q.IDCourse;
+            his.IDrequest = id;
+            his.Active = true;
+            spn.HistoryCourses.Add(his);
+            spn.SaveChanges();
+            return RedirectToAction("RegisterCourse");
+        }
+        public ActionResult Denycourse(int idhis)
+        {
+            int id = idhis;
+            Models.Entity.SPNEntities spn = new SPNEntities();
+            RequestCourse rs = spn.RequestCourses.First(d => d.ID == id);
+            rs.Active = false;
+            spn.SaveChanges();
+            return RedirectToAction("RegisterCourse");
+        }
+        //Add Type
+        public ActionResult Type()
+        {
+            Models.Entity.SPNEntities spn = new SPNEntities();
+            var result = spn.Types.Where(d => d.Active == true).Select(d => new Models.Modelview.Typeview { ID = d.ID, name = d.NameType }).ToList();
+            ViewBag.listtype = result;
+            return View();
         }
         public ActionResult Addtype()
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
             Models.Entity.Type tp = new Models.Entity.Type();
             tp.NameType = Request.Form["type"];
+            tp.Active = true;
             spn.Types.Add(tp);
             spn.SaveChanges();
-            return RedirectToAction("Course");
+            return RedirectToAction("Type");
         }
         public ActionResult Removetype(int idtype)
         {
             int id = idtype;
             Models.Entity.SPNEntities spn = new SPNEntities();
-            var result = spn.Types.Where(d => d.ID == id).FirstOrDefault();
-            spn.Types.Remove(result);
+            Models.Entity.Type tp = spn.Types.First(d => d.ID == id);
+            tp.Active = false;
             spn.SaveChanges();
-            return RedirectToAction("Course");
-        }
-        //Register Place
-        public ActionResult RegisterCourse()
-        {
-            return View();
-        }
-        //Add Type
-        public ActionResult Type()
-        {
-            return View();
+            return RedirectToAction("Type");
         }
     }
 }

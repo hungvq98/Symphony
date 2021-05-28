@@ -2,27 +2,39 @@
 @{
     ViewBag.Title = "LoginNRegister";
     Layout = "~/Views/Shared/LoginPage.cshtml";
+   
+    if (TempData["message"] != null) {
+    <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+    </script>
+        }
 }
-<link rel="stylesheet" href="~/Content/Loginss.css" media="all" />
+<link rel="stylesheet" href="~/Content/Loginsss.css" media="all" />
 <div class="Login-cv">
     <div class="login-form">
-        <form>
-            <input class="text" type="text" value=""  id="usrname" placeholder="Username" required />
-            <input class="text" type="password" id="pwd" placeholder="Password" required />
+        <form action="@Url.Action("Login")" method="post">
+            <input class="text" type="text" value="" id="usrname" placeholder="Username" name="username" required />
+            <input class="text" type="password" id="pwd" placeholder="Password" name="password" required />
             @*<div class="btn-login-cv"><a href="#">Login</a></div>*@
-        <div class="btn-login-cv" ><input type="submit" class="btn-login" value="Login " /></div>
+            <div class="btn-login-cv"><input type="submit" class="btn-login" value="Login " /></div>
         </form>
     </div>
     <div class="regis-form2" id="regis-form2">
-        <form>
-            <input class="text" type="text" value="" placeholder="Full Name" required />
-            <input class="text" type="text" value="" placeholder="Username" required />
-            <input class="text" type="password" value="" placeholder="Password" required />
-            <input class="text" type="password" value="" placeholder="Confirm Password" required />
-            <input class="text" type="email" value="" placeholder="Email" required />
-            <input class="text" type="text" value="" placeholder="Address" required />
+        <form action="@Url.Action("Register")" method="post">
+            <input class="text" type="text" value="" placeholder="Full Name" name="fullname" required />
+            <input class="text" type="email" value="" placeholder="Email" name="email" required />
+            <input class="text" type="text" value="" placeholder="Phone" name="phone" required />
+            <input class="text" type="text" value="" placeholder="Age" name="age" required />
+            <select name="gender" class="text" required>
+                <option disabled hidden selected>Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <input class="text" type="text" value="" placeholder="Address" name="address" required />
+            <input class="text" type="text" value="" placeholder="Username" name="user" required />
+            <input class="text" type="password" value="" placeholder="Password" name="pass" required />
+            <input class="text" type="password" value="" placeholder="Confirm Password" name="pass2" required />
             @*<div class="btn-login-cv"><a href="#">Register</a></div>*@
-            
             <div class="btn-login-cv"><input class="btn-login" type="submit" value="Sign Up" /></div>
         </form>
     </div>
@@ -33,16 +45,16 @@
             <button onclick="log();" class="login-btn" id="">Login</button>
             <span>Morbi mollis eros ut rhoncus euismod. Duis ut lacus dictum, consequat elit sit amet, aliquam purus. Nulla id nisi tincidunt, viverra sem nec, hendrerit nisl. Ut a scelerisque risus. Etiam interdum congue commodo.</span>
         </div>
-            
 
-        
+
+
         <div class="sign-up-intro" id="sign-up-intro">
             <span>Morbi mollis eros ut rhoncus euismod. Duis ut lacus dictum, consequat elit sit amet, aliquam purus. Nulla id nisi tincidunt, viverra sem nec, hendrerit nisl. Ut a scelerisque risus. Etiam interdum congue commodo.</span>
             <button class="btn-signup" onclick="sig();">Sign Up</button>
         </div>
     </div>
-    
-    
+
+   
 </div>
 <script>
     function sig() {

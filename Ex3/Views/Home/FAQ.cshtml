@@ -15,54 +15,26 @@
         <div class="row searchbar">
             <div class="searchbar-ins"><input type="text" value="" placeholder="What do you need?" data-search /><button><img width="30" src="~/Upload/icon/iconsearch.png" alt="Alternate Text" /></button></div>
         </div>
-        @*vong lap o day*@
-        <div class="row items">
-            <div class="row question-box ">
-                <div class="questions" data-filter-item data-filter-name="oke baby">Oke baby </div>
-                <button><img width="25"  src="~/Upload/icon/down.png" id="btn-down" alt="Alternate Text" /></button>
+        @foreach (var item in ViewBag.listfaq)
+        {
+            <div class="row items">
+                <div class="row question-box ">
+                    <div class="questions" data-filter-item data-filter-name="oke baby">@item.question</div>
+                    <button><img width="25" src="~/Upload/icon/down.png" id="btn-down" alt="Alternate Text" /></button>
 
-                <div class="Answer" id="answer">
-                    <div class="answer-content">
-                        <p class="content-question" id="contentfaq">
-                            Cras viverra in sapien eu auctor. Vivamus maximus malesuada sapien sed imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi dapibus elementum enim, eget elementum purus molestie eu. Sed pellentesque aliquam purus, sit amet feugiat lacus pellentesque vel. Suspendisse at lacus id felis vestibulum porttitor. Quisque gravida convallis sapien. Curabitur posuere euismod ornare. Nunc tempus nulla sit amet scelerisque vehicula. Nulla vitae lacus semper, laoreet dui eu, consectetur ex. Vestibulum sed suscipit lacus. Vestibulum lacinia, quam eget posuere venenatis, ex felis fringilla tortor, faucibus tempor felis arcu in nisl.
-
-                            Integer rutrum a tellus at porttitor. Morbi sit amet neque sollicitudin, aliquet orci vitae, tristique libero. Pellentesque euismod tincidunt nisl. Vivamus lacus odio, fringilla in tortor non, imperdiet luctus nisi. Suspendisse ac nibh molestie, molestie purus in, sagittis quam. Nam aliquet fringilla eros, sed dignissim metus condimentum pharetra. Vestibulum sit amet mollis felis. Duis at laoreet elit. Sed porttitor risus vel eleifend faucibus. Nunc nunc velit, vehicula nec molestie at, porta eget nisi. Morbi vulputate suscipit enim, quis lobortis tellus. Suspendisse libero magna, placerat vel mollis eget, varius sed est. Nam orci ante, aliquam ut sem a, facilisis hendrerit ante. Maecenas et venenatis tellus.
-
-                            Nullam vitae odio sollicitudin, lobortis libero eu, semper tellus. Maecenas tristique felis eu vestibulum laoreet. Duis quis tempor tellus. Fusce quis lobortis ligula, quis facilisis erat. Integer commodo et metus sit amet egestas. Sed ipsum ex, suscipit eget nibh a, efficitur tempor ligula. Curabitur dapibus lacus vel ex aliquam, iaculis ornare ligula tempor. Nam aliquam leo eu hendrerit tempus. Quisque pulvinar sed erat quis placerat. Morbi dapibus sapien at ligula placerat aliquet. Vivamus nunc turpis, sollicitudin convallis lectus non, pharetra vulputate ante. Nulla facilisis ipsum sit amet consequat sodales. Suspendisse ultrices tellus vel felis sagittis, eget posuere leo pellentesque. Pellentesque ut accumsan urna.
-
-                            Donec et fringilla justo. Sed laoreet imperdiet interdum. Aenean molestie, magna in placerat tempor, sem justo scelerisque orci, at congue neque mauris ac mauris. Etiam eu justo eget urna gravida mollis. Quisque purus erat, sollicitudin tristique egestas sit amet, blandit at mi. Ut quis sollicitudin sem. Mauris vehicula, odio eget pretium lacinia, enim enim iaculis tellus, quis tempor metus eros ac elit. Proin dictum efficitur convallis. Nulla facilisi. Quisque tincidunt hendrerit neque, id pretium odio faucibus vel. Phasellus dolor erat, finibus quis gravida sed, commodo nec nisl. Morbi vel orci quis dui rhoncus suscipit sed a erat. Etiam velit metus, efficitur at fermentum sed, condimentum sed leo. Ut nunc nisl, aliquet lobortis felis ut, porta lobortis tortor. Mauris eget felis et elit pretium volutpat vitae et ipsum. Ut gravida ultricies elit, nec tincidunt sem condimentum vel.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim a justo et consectetur. Aenean eu commodo eros. Aliquam aliquam non justo ut tempus. Curabitur placerat odio in ante accumsan laoreet. Nam placerat velit ut elit pulvinar varius. Suspendisse dignissim nisi nec bibendum malesuada. Vivamus nec enim vitae mauris finibus molestie vel ut lectus. Praesent lectus orci, accumsan in mollis in, facilisis ac ex. Morbi sit amet ex tortor. Donec eget arcu id diam consectetur lobortis. Fusce et posuere enim. Phasellus facilisis quis dolor sollicitudin sodales. Praesent hendrerit eu nulla non ullamcorper.
-                        </p>
+                    <div class="Answer" id="answer">
+                        <div class="answer-content">
+                            <p class="content-question" id="contentfaq">
+                                @Html.Raw(@item.answer)
+                            </p>
+                        </div>
                     </div>
-
                 </div>
-
             </div>
-        </div>
-        @*het vong lap*@
-        <div class="row items">
-            <div class="row question-box ">
-                <div class="questions" data-filter-item data-filter-name="what the fuck">What the fuck </div>
-                <button><img width="25" src="~/Upload/icon/down.png" id="btn-down" alt="Alternate Text" /></button>
+        }
 
-                <div class="Answer" id="answer">
-                    <div class="answer-content">
-                        <p class="content-question" id="contentfaq">
-                            Cras viverra in sapien eu auctor. Vivamus maximus malesuada sapien sed imperdiet. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi dapibus elementum enim, eget elementum purus molestie eu. Sed pellentesque aliquam purus, sit amet feugiat lacus pellentesque vel. Suspendisse at lacus id felis vestibulum porttitor. Quisque gravida convallis sapien. Curabitur posuere euismod ornare. Nunc tempus nulla sit amet scelerisque vehicula. Nulla vitae lacus semper, laoreet dui eu, consectetur ex. Vestibulum sed suscipit lacus. Vestibulum lacinia, quam eget posuere venenatis, ex felis fringilla tortor, faucibus tempor felis arcu in nisl.
 
-                            Integer rutrum a tellus at porttitor. Morbi sit amet neque sollicitudin, aliquet orci vitae, tristique libero. Pellentesque euismod tincidunt nisl. Vivamus lacus odio, fringilla in tortor non, imperdiet luctus nisi. Suspendisse ac nibh molestie, molestie purus in, sagittis quam. Nam aliquet fringilla eros, sed dignissim metus condimentum pharetra. Vestibulum sit amet mollis felis. Duis at laoreet elit. Sed porttitor risus vel eleifend faucibus. Nunc nunc velit, vehicula nec molestie at, porta eget nisi. Morbi vulputate suscipit enim, quis lobortis tellus. Suspendisse libero magna, placerat vel mollis eget, varius sed est. Nam orci ante, aliquam ut sem a, facilisis hendrerit ante. Maecenas et venenatis tellus.
-
-                            Nullam vitae odio sollicitudin, lobortis libero eu, semper tellus. Maecenas tristique felis eu vestibulum laoreet. Duis quis tempor tellus. Fusce quis lobortis ligula, quis facilisis erat. Integer commodo et metus sit amet egestas. Sed ipsum ex, suscipit eget nibh a, efficitur tempor ligula. Curabitur dapibus lacus vel ex aliquam, iaculis ornare ligula tempor. Nam aliquam leo eu hendrerit tempus. Quisque pulvinar sed erat quis placerat. Morbi dapibus sapien at ligula placerat aliquet. Vivamus nunc turpis, sollicitudin convallis lectus non, pharetra vulputate ante. Nulla facilisis ipsum sit amet consequat sodales. Suspendisse ultrices tellus vel felis sagittis, eget posuere leo pellentesque. Pellentesque ut accumsan urna.
-
-                            Donec et fringilla justo. Sed laoreet imperdiet interdum. Aenean molestie, magna in placerat tempor, sem justo scelerisque orci, at congue neque mauris ac mauris. Etiam eu justo eget urna gravida mollis. Quisque purus erat, sollicitudin tristique egestas sit amet, blandit at mi. Ut quis sollicitudin sem. Mauris vehicula, odio eget pretium lacinia, enim enim iaculis tellus, quis tempor metus eros ac elit. Proin dictum efficitur convallis. Nulla facilisi. Quisque tincidunt hendrerit neque, id pretium odio faucibus vel. Phasellus dolor erat, finibus quis gravida sed, commodo nec nisl. Morbi vel orci quis dui rhoncus suscipit sed a erat. Etiam velit metus, efficitur at fermentum sed, condimentum sed leo. Ut nunc nisl, aliquet lobortis felis ut, porta lobortis tortor. Mauris eget felis et elit pretium volutpat vitae et ipsum. Ut gravida ultricies elit, nec tincidunt sem condimentum vel.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim a justo et consectetur. Aenean eu commodo eros. Aliquam aliquam non justo ut tempus. Curabitur placerat odio in ante accumsan laoreet. Nam placerat velit ut elit pulvinar varius. Suspendisse dignissim nisi nec bibendum malesuada. Vivamus nec enim vitae mauris finibus molestie vel ut lectus. Praesent lectus orci, accumsan in mollis in, facilisis ac ex. Morbi sit amet ex tortor. Donec eget arcu id diam consectetur lobortis. Fusce et posuere enim. Phasellus facilisis quis dolor sollicitudin sodales. Praesent hendrerit eu nulla non ullamcorper.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
+        
 
 
 

@@ -121,13 +121,11 @@
                             <td>
                                 @if (item.payment == true)
                                 {
-                        <input disabled type="checkbox" value="on" checked /> }
-                                        else
-                                        {
-                        <input disabled type="checkbox" value="on" />}
+                                    <input disabled type="checkbox"checked /> 
+                                }
+                                
                             </td>
                             <td>
-                                <a class="btn-edit" href="@Url.Action("",new { idhis=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
                                 <a class="btn-edit" href="@Url.Action("Removehiscourse",new { idhis=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
                             </td>
 

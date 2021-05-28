@@ -12,34 +12,28 @@
             <div class="quizContainer">
                 <div class="Timer">Time:00:00:00</div>
                 <div class="Timers">Time:00:00:00</div>
-                <div class="answer-box">
-                    <ul class="choiceList">
-                        <div class="question">Question 1: 1+1=?</div>
-                        <li> <input type="radio" id="answer1" class="answer" name="question0" value="A" /> 2 </li>
-                        <li> <input type="radio" id="answer2" class="answer" name="question0" value="B" /> 3</li>
-                        <li> <input type="radio" id="answer3" class="answer" name="question0" value="C" /> 4</li>
-                        <li> <input type="radio" id="answer4" class="answer" name="question0" value="D" /> 5 </li>
-                    </ul>
-                    <ul class="choiceList">
-                        <div class="question">Question 2: 1*1=?</div>
-                        <li> <input type="radio" id="answer1" class="answer" name="question1" value="A" /> 1 </li>
-                        <li> <input type="radio" id="answer2" class="answer" name="question1" value="B" />2</li>
-                        <li> <input type="radio" id="answer3" class="answer" name="question1" value="C" /> 3</li>
-                        <li> <input type="radio" id="answer4" class="answer" name="question1" value="D" /> 4 </li>
-                    </ul>
-                    <ul class="choiceList">
-                        <div class="question">Question 3: 4-1=?</div>
-                        <li> <input type="radio" id="answer1" class="answer" name="question2" value="A" /> 1 </li>
-                        <li> <input type="radio" id="answer2" class="answer" name="question2" value="B" /> 2 </li>
-                        <li> <input type="radio" id="answer3" class="answer" name="question2" value="C" /> 3</li>
-                        <li> <input type="radio" id="answer4" class="answer" name="question2" value="D" /> 4 </li>
-                    </ul>
-                </div>
+                <form action="@Url.Action("Score")" method="post">
+                    <div class="answer-box" id="question">
+                        @foreach (var item in ViewBag.listexam)
+                        {
+                            <ul class="choiceList">
+                                <div class="question">Question:@item.question?</div>
+                                <li> <input type="radio" id="@item.ID" class="answer" name="@item.ID" value="A" /> @item.answerA </li>
+                                <li> <input type="radio" id="@item.ID" class="answer" name="@item.ID" value="B" />@item.answerB </li>
+                                <li> <input type="radio" id="@item.ID" class="answer" name="@item.ID" value="C" /> @item.answerC</li>
+                                <li> <input type="radio" id="@item.ID" class="answer" name="@item.ID" value="D" /> @item.answerD </li>
+                                <li hidden> <input type="radio" id="@item.correct" class="answer" name="@item.correct" value="@item.answercorrect" /></li>                                
+                            </ul>
+                        }
+                    </div>
+                    <input type="text" name="total" id="total" />
+                    <button type="submit">continute</button>
+                </form>
                 <div class="quizMessage">Please choose answer</div>
                 <div class="result" id="myresults"></div>
                 <div class="result_fail">You Failed</div>
                 <div class="result_passed">You Passed</div>
-                <div class="btn-sub"><button id="btn-sub" onclick="returnScore()">Submit</button></div>
+                <div class="btn-sub"><button id="btn-sub" onclick="getscore()">Submit</button></div>
                 <br />
                 <div class="btn-start"><button id="btn-start" onclick="timedCount()">Start</button></div>
             </div>
@@ -47,33 +41,31 @@
     </div>
 </div>
 <script>
-
-
-    var answers = ["A", "A", "C"], //cau dung
-        tot = answers.length;
-
-    function getCheckedValue(radioName) {
-        var radios = document.getElementsByName(radioName); // Get radio group by-name
-        for (var y = 0; y < radios.length; y++)
-            if (radios[y].checked) return radios[y].value; // return the checked value
+    function getscore() {
+        var q = document.getElementById("question").childElementCount;
+        var total = 0;
+        var correct = "correct"
+        for (var i = 1; i <= q; i++) {
+            var z = String(i);
+            var corrects = correct + z;
+            var check = document.getElementById(corrects).value;
+            var rates = document.getElementsByName(z);
+            var rate_value;
+            for (var j = 0; j < rates.length; j++) {
+                if (rates[j].checked) {
+                    rate_value = rates[j].value;
+                    if (rate_value == check) {
+                        total++
+                    }
+                }
+            }
+        }
+        document.getElementById("total").value = total;
     }
+</script>
+<script>
 
-    function getScore() {
-        var score = 0;
-        for (var i = 0; i < tot; i++)
-            if (getCheckedValue("question" + i) === answers[i]) score += 1; // increment only
-        return score;
-    }
-
-    function returnScore() {
-        document.getElementById("myresults").innerHTML =
-            "Your score is " + getScore() + "/" + tot;
-        document.getElementById("myresults").style.display = 'block';
-
-
-    }
-
-    var c = 600;
+    var c = 10;
     var t;
     var btnsub = document.getElementById('btn-sub');
     var btnstart = document.getElementById('btn-start');
@@ -91,7 +83,7 @@
 
         if (c == 0) {
             $('.Timer').html("Time Out!");
-            returnScore();
+            getscore();
 
         } else {
 

@@ -67,7 +67,15 @@
                 <img src="~/Upload/logo/LogoSL.png" alt="">
             </div>
             <div class="loginbtn">
-                <div>LOGIN</div>
+                @if (@Session["login"] != null)
+                {
+                <div>@Session["login"]</div>
+                }
+                else
+                {
+                    <div>LOGIN</div>
+                }
+
             </div>
         </div>
         <div class="title-cv" id="title-cv">
@@ -84,7 +92,16 @@
                 <li><a href="@Url.Action("AboutUs")">about</a></li>
                 <li><a href="@Url.Action("FAQ")">faq</a></li>
                 <li><a href="@Url.Action("Exame")">exame</a></li>
-                <li><a href="@Url.Action("LoginNRegister")">login</a></li>
+                <li>
+                    @if (@Session["login"] != null)
+                    {
+                    <a href="@Url.Action("LoginNRegister")">@Session["login"]</a>
+                    }
+                    else
+                    {
+                         <a href="@Url.Action("LoginNRegister")">login</a>
+                    }
+                </li>
             </ul>
         </div>
     </div>
@@ -97,7 +114,16 @@
             <li><a href="@Url.Action("AboutUs")">about</a></li>
             <li><a href="@Url.Action("FAQ")">faq</a></li>
             <li><a href="@Url.Action("Exame")">exame</a></li>
-            <li><a href="@Url.Action("LoginNRegister")">login</a></li>
+             <li>
+                    @if (@Session["login"] != null)
+                    {
+                    <a href="@Url.Action("LoginNRegister")">@Session["login"]</a>
+                    }
+                    else
+                    {
+                         <a href="@Url.Action("LoginNRegister")">login</a>
+                    }
+                </li>
         </ul>
     </div>
     <div>

@@ -15,5 +15,6 @@ namespace Ex3.Models.Modelview
         public string answerD { get; set; }
         public string answercorrect { get; set; }
         public string course { get; set; }
+        public string correct { get; set; }
     }
 }

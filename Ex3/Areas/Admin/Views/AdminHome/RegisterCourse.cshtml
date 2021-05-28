@@ -95,8 +95,7 @@
                             <th>Time</th>
                             <th>Start</th>
                             <th>End</th>
-                            <th>Payment</th>
-                            <th>Action</th>
+                            <th>Accept/Deny</th>
                         </tr>
                     </thead>
                 </table>
@@ -117,18 +116,10 @@
                                 <td>@item.grade</td>
                                 <td>@item.time</td>
                                 <td>@item.startime</td>
-                                <td>@item.endtime</td>
+                                <td>@item.endtime</td>                              
                                 <td>
-                                    @if (item.payment == true)
-                                    {
-                                        <input disabled type="checkbox" value="on" checked /> }
-                                    else
-                                    {
-                                        <input disabled type="checkbox" value="on" />}
-                                </td>
-                                <td>
-                                    <a class="btn-edit" href="@Url.Action("",new { idhis=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
-                                    <a class="btn-edit" href="@Url.Action("Removehiscourse",new { idhis=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                    <a class="btn-edit" href="@Url.Action("Acceptcourse",new { idhis=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>
+                                    <a class="btn-edit" href="@Url.Action("Denycourse",new { idhis=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
                                 </td>
 
                             </tr>
