@@ -7,8 +7,17 @@
 <link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
 <style>
     .CourseView {
-        width: 2000px;
+        width: 150%;
         overflow-x: scroll;
+    }
+
+    .imgcourse {
+        width: 50px;
+        height: auto;
+    }
+
+    table {
+        width: 100%;
     }
 
     .popup-his {
@@ -99,21 +108,22 @@
                     <tbody id="myTable">
                         @foreach (var item in ViewBag.listhis)
                         {
-                        <tr>
-                            <td>@item.fullname</td>
-                            <td>@item.age</td>
-                            <td>@item.phone</td>
-                            <td>@item.gender</td>
-                            <td>@item.email</td>
-                            <td>@item.course</td>
-                            <td>@item.score</td>
-                            <td>@item.dateexam</td>
-                            <td>
-                                
-                                <a class="btn-edit" href="@Url.Action("Removehistoryexam",new { idhis=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>@item.fullname</td>
+                                <td>@item.age</td>
+                                <td>@item.phone</td>
+                                <td>@item.gender</td>
+                                <td>@item.email</td>
+                                <td>@item.course</td>
+                                <td>@item.score</td>
+                                <td>@item.dateexam</td>
+                                <td>
+                                    <a class="btn-edit" href="@Url.Action("Removehistoryexam",new { idhis=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a>
+                                </td>
+                            </tr>
                         }
+
+                        
 
 
                     </tbody>

@@ -349,7 +349,13 @@ namespace Ex3.Controllers
             pswstr = new String(decoded_char);
             return pswstr;
         }
-
-
+        public ActionResult Forum()
+        {
+            return View();
+        }
+        public ActionResult AccountSetting()
+        {
+            return View();
+        }
     }
 }

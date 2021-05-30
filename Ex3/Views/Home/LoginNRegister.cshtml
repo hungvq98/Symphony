@@ -11,6 +11,7 @@
 }
 <link rel="stylesheet" href="~/Content/Loginsss.css" media="all" />
 <div class="Login-cv">
+    
     <div class="login-form">
         <form action="@Url.Action("Login")" method="post">
             <input class="text" type="text" value="" id="usrname" placeholder="Username" name="username" required />
@@ -20,6 +21,7 @@
         </form>
     </div>
     <div class="regis-form2" id="regis-form2">
+        <a class="homebtn" href="@Url.Action("Index")"><i class='bx bx-left-arrow-alt'></i></a>
         <form action="@Url.Action("Register")" method="post">
             <input class="text" type="text" value="" placeholder="Full Name" name="fullname" required />
             <input class="text" type="email" value="" placeholder="Email" name="email" required />
@@ -47,14 +49,15 @@
         </div>
 
 
-
+        <a class="homebtn" href="@Url.Action("Index")"><i class='bx bx-left-arrow-alt' style="color:white"></i></a>
         <div class="sign-up-intro" id="sign-up-intro">
+
             <span>Morbi mollis eros ut rhoncus euismod. Duis ut lacus dictum, consequat elit sit amet, aliquam purus. Nulla id nisi tincidunt, viverra sem nec, hendrerit nisl. Ut a scelerisque risus. Etiam interdum congue commodo.</span>
             <button class="btn-signup" onclick="sig();">Sign Up</button>
         </div>
     </div>
 
-   
+
 </div>
 <script>
     function sig() {

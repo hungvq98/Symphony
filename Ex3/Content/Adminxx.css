@@ -1,6 +1,9 @@
 ﻿body {
     font-family: 'Rubik', sans-serif;
 }
+* {
+    transition:0.5s;
+}
 
 @media (max-width:479px) {
 }
@@ -75,7 +78,6 @@
         font-weight: bolder;
         outline: none;
         color: #eeba10;
-        border-bottom: 1px solid #ccc;
         position: relative;
     }
 
@@ -230,7 +232,7 @@
         width: 300px;
         margin-right:80px;
         height: 40px;
-        margin-top: 10px;
+        margin-bottom: 10px;
         outline-color: #eeba10;
         padding-left: 20px;
         border: 2px solid #eeba10;

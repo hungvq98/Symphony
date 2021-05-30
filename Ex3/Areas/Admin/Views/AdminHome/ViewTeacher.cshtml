@@ -21,7 +21,7 @@
         padding:20px;
         font-weight:bold;
         border-radius:5px;
-        display:block;
+        display:none;
         position:fixed;
     }
     .popup-his button {
@@ -53,7 +53,7 @@
         overflow-y:scroll;
     }
     .img{
-        width:200px;
+        width:50px;
         height:auto;
     }
     table {
@@ -66,30 +66,35 @@
             <div class="row">
                 <button class="btn-close"><i class='bx bx-x '></i></button>
             </div>
-            <div class="row profile">
-                <div class="col">
-                    @foreach(var items in ViewBag.listtea)
-                    {
-                    <div class="img-teacher">
-                        Img
-                        <img class="img" src="~/Upload/imgteacher/@items.img" />
+           
+            @foreach (var items in ViewBag.listtea)
+            {
+                <div class="row profile">
+                    <div class="col">
+
+                        <div class="img-teacher">
+                            Img
+                            <img class="img" src="~/Upload/imgteacher/@items.img" />
+                        </div>
+
+                        <br />
+                        <div>Name : @items.fullname</div>
+                        <br />
+                        <div>Job : @items.professtional</div>
+                        <br />
+                        <div>Age : @items.age</div>
+                        <br />
+                        
+
                     </div>
-                   
-                    <br />
-                    <div>Name : @items.fullname</div>
-                    <br />
-                    <div>Job : @items.professtional</div>
-                    <br />
-                    <div>Age : @items.age</div>
-                    <br />
-                    }
-                  
+                    <div class="col history-in">
+                        <div>
+                            @Html.Raw(@items.content)
+                        </div>
+                    </div>
                 </div>
-                <div class="col history-in">
-                    <div></div>
-                </div>
+            }
             </div>
-        </div>
     </div>
     <div class="row ">
         <input class="srcbar" type="text" value="" id="myInput" onkeyup="myFunction()" placeholder="Search" />
@@ -125,8 +130,8 @@
                                 <td><a href="#" class="btn-detail" style="text-decoration:none;color:#000000">Detail</a></td>
                                 <td>@item.phone</td>
                                 <td>@item.birthday</td>
-                                <td width="270">
-                                    <img class="img" src="~/Upload/imgteacher/@item.img" />
+                                <td width="270" >
+                                    <img class="img" width="50" height="50" src="~/Upload/imgteacher/@item.img" />
                                 </td>
                                 <td>
                                 <a class="btn-edit" href="@Url.Action("EditTeacher",new { idtea=@item.ID})"><i style="font-size:30px" class='bx bxs-message-square-edit'></i></a>

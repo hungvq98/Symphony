@@ -1,0 +1,99 @@
+﻿body {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+.container-fluid {
+    margin:0;
+    padding:0;
+}
+.sub-head {
+    height:90px;
+    width:100%;
+    background-color:white;
+}
+.offer-faq {
+    height: 400px;
+    background-image: url(../Upload/bg/bestbg.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position-y: center;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 50px;
+    display: grid;
+}
+.searchbar {
+    margin-right:auto;
+    margin-left:auto;
+    height:40px;
+    width:100%;
+    padding:0;
+
+}
+.searchbar input {
+    width:100%;
+    outline-color:#eeba10;
+    border:2px solid #eeba10;
+    padding-left:20px;
+    font-weight:bolder;
+    color:#eeba10;
+}
+.searchbar button {
+    height:40px;
+    width:40px;
+    border:none;
+    background:#eeba10;
+    outline-color:#eeba10;
+    cursor:pointer;
+    
+}
+.searchbar-ins {
+    width:100%;
+    display:flex;
+}
+
+
+.hidden {
+    display:none;
+}
+.items {
+
+}
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 1s;
+    outline:none;
+    outline-color:none;
+}
+
+.active, .accordion:hover {
+    background-color: #eeba10;
+}
+
+.panel {
+    padding: 0;
+    background-color: white;
+    overflow: hidden;
+    height: 0px;
+    transition: 1s;
+}
+#Answeroke {
+    overflow:hidden;
+    overflow-y:auto;
+    height:200px;
+    border:solid 1px #eeba10;
+    padding:20px;
+}
+
+

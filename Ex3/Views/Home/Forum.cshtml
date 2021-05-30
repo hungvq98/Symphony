@@ -1,0 +1,268 @@
+﻿
+@{
+    ViewBag.Title = "Forum";
+    Layout = "~/Views/Shared/HomePage.cshtml";
+}
+<script src="~/Scripts/readMoreJS.min.js" ></script>
+<style>
+    .subheads {
+        height:100px;
+    }
+    .offer-forum {
+        background-image: url(../Upload/bg/bestbg.jpg);
+        background-size:cover;
+        background-attachment:fixed;
+        background-position-y:bottom;
+        clip-path: polygon(0 0, 50% 22%, 100% 0, 100% 100%, 50% 78%, 0 100%);
+        height: 500px;
+    }
+    .head-forum {
+        width:100%;
+        height:100%;
+        text-align:center;
+        font-weight:bolder;
+        font-size:40px;
+        padding:150px 0px 50px 0px;
+        color:#808080;
+    }
+    .newfeed-cover {
+        width:100%;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+        position:relative;
+        border-radius:5px;
+        margin-bottom:20px;
+    }
+    .avatar {
+        width:100%;
+        padding:20px;
+    }
+    .avatar img {
+        width: 80px;
+        height: 80px;
+        border-radius:50%;
+    }
+    .name {
+        font-size:20px;
+        font-weight:bolder;
+        padding-top:20px;
+        padding-left:20px;
+    }
+    .content-newfeed {
+        padding:20px;
+    }
+    .pic img {
+        height: auto;
+        width: 100%;
+    }
+    
+    .action {
+        height: 50px;
+    }
+    .action .col {
+        text-align: center;
+    }
+    .action .like button{
+        padding-top: 5px;
+        background-color:transparent;
+        font-size:30px;
+        border:none;
+        outline:none;
+        cursor:pointer;
+    }
+    .action .like button:active {
+        transform:scale(0.95);
+    }
+    .action .comment button{
+        
+        padding-top: 5px;
+        background-color:transparent;
+        font-size:30px;
+        border:none;
+        outline:none;
+        cursor:pointer;
+    }
+    .action .comment button:active {
+        transform:scale(0.95);
+    }
+    .comment-box {
+        padding:20px;
+        height:100px;
+    }
+    .text-comment {
+        width:100%;
+    }
+    .text-comment form {
+        height: 40px;
+        width: 100%;
+        background: none;
+        display: flex;
+    }
+    .text-comment form input {
+        height:100%;
+        width:100%;
+        background:none;
+        border:none;
+        outline:none;
+        padding-left:30px;
+        font-size:18px;
+        font-weight:bold;  
+        background:#dedede;
+        color:#808080;
+        border-radius:50px;
+
+    }
+    .text-comment .avatar-sm img{
+        height:40px;
+        width:40px;
+        margin-right:5px;
+        border-radius:50%;
+    }
+    ::-webkit-input-placeholder {
+        color:#808080;
+    }
+    .text-comment button {
+        width:50px;
+        border:none;
+        outline:none;
+        background-color:transparent;
+        cursor:pointer;
+
+    }
+    .text-comment button:active {
+        transform:scale(0.95);
+    }
+    .text-comment button i {
+        font-size:35px;
+        color:#eeba10;
+    }
+    .comment-gene {
+        padding-left: 40px;
+        padding-right:40px;
+    }
+    .comment-gene .message-box {
+        padding:20px;
+        background:#dedede;
+        border-radius:10px;
+        margin-bottom:10px;
+        margin-top:5px;
+    }
+    .comment-gene .avatar-sm-usr img {
+        height:40px;
+        width:40px;
+        margin-right:5px;
+        border-radius:50%;
+    }
+    .comment-gene {
+        font-weight:bold;
+        font-size:16px;
+        color:#808080;
+    }
+    .LoadMore4 {
+        padding:10px;
+        border:none;
+        outline:none;
+        background:none;
+        cursor:pointer;
+        font-size:20px;
+    }
+    .LoadMore4:hover {
+        color:#808080;
+    }
+    .items4 {
+        display:none;
+    }
+    
+</style>
+<div class="container-fluid">
+    <div class="row subheads"></div>
+    <div class="row offer-forum">
+        <div class="head-forum">
+            Forum <br />
+            The place to answer all your questions
+        </div>
+    </div>
+    @*vong lap bai viet*@
+    <div class="container newfeed-cover">
+        <div class="row">
+            <div class="avatar col"><img src="~/Upload/Team/Hung.jpg" alt="Alternate Text" /><span class="name">Name</span></div> @*Admin img*@
+        </div>
+        <div class="row content-newfeed dummy">
+            <p>Morbi vehicula tellus non vestibulum aliquet. Etiam viverra nulla justo, in convallis mauris dictum ut. Duis ac elit vel purus mattis pellentesque ut vel magna. Pellentesque iaculis dui sit amet justo lobortis, sit amet porta diam gravida. Sed dolor nibh, facilisis in ligula sit amet, vestibulum convallis mauris. In vitae elementum dolor, egestas ornare neque. Fusce sit amet turpis tincidunt, interdum lorem vitae, accumsan sem. Cras et cursus ligula. Cras porta ultrices turpis eu gravida. Duis sed lacus imperdiet, convallis est in, molestie libero. Nunc laoreet dolor tellus, eget sollicitudin nulla luctus tincidunt. Sed id mauris blandit, congue purus eget, sodales lorem. Aenean hendrerit lectus ac enim fermentum aliquam. Vivamus sem est, aliquet et ultricies ac, sollicitudin at elit.</p>
+        </div>
+        <div class="row picture-new">
+            <div class="pic col">
+                <img src="~/Upload/bg/bg.png" alt="" />
+            </div>
+        </div>
+        <hr />
+        <div class="row action">
+            <div class="col like">
+                <button><i id="hearts" class='bx bxs-heart-circle' style='color:#808080'></i></button>
+            </div>
+            <div class="col comment">
+                <button><i class='bx bxs-message' style='color:#808080'></i></button>
+            </div>
+        </div>
+        <hr />
+        @*Vong lap comment*@
+        <div class="row comment-gene items4">
+            <div class="row">
+                <div class="avatar-sm-usr"><img src="~/Upload/Team/Haru.jpg" alt="Alternate Text" />Haru(UserName)</div> @*Usr img, usr name*@
+            </div>
+            <div class="row message-box dummy">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus hendrerit orci eget diam fermentum, eu fringilla odio  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus hendrerit orci eget diam fermentum, eu fringilla odio lobortis. Donec lacinia  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus hendrerit orci eget diam fermentum, eu fringilla odio lobortis. Donec lacinia lobortis. Donec lacinia fermentum cursus. Aliquam hendrerit pellentesque ligula vel scelerisque. Nam auctor risus quis lacus dignissim, sit amet porttitor libero pretium. Aenean viverra orci quam, at fringilla tellus viverra quis. Praesent convallis non sapien quis ullamcorper. Etiam sit amet justo sed erat vehicula condimentum. Quisque vel dignissim odio, eget convallis nunc.
+                </p>
+            </div>
+        </div>
+        @*Vong lap comment*@
+        <button class="LoadMore4">View more comment</button>
+        <div class="row comment-box">
+            <div class="text-comment">
+                <form>
+                    <div class="avatar-sm"><img src="~/Upload/Team/Hung.jpg" alt="Alternate Text" /></div> @*thang nao dang nhap thi la hinh cua thang do*@
+                    <input type="text" value="" placeholder="Write comment...." />
+                    <button><i class='bx bxs-send' style='color:#808080'></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    @*vong lap bai viet*@
+
+</div>
+
+<script>
+    $readMoreJS.init({
+        target: '.dummy p',
+        numOfWords: 70,
+        toggle: true,                 // If true, user can toggle between 'read more' and 'read less'
+        moreLink: '<span style="color:black;font-weight:bolder;">More</span>',
+        lessLink: '<span style="color:black;font-weight:bolder;">Less</span>'
+    });
+
+    
+
+
+    var hs = document.getElementById('hearts');
+    $('.like button').click(function () {
+        if (hs.style.color == 'red') 
+        {
+           hs.style.color = '#808080';
+        } 
+        else
+        {
+            hs.style.color = 'red';
+        } 
+    });
+
+    $(".items4").slice(0, 1).show();
+    $(".LoadMore4").on("click", function () {
+        $(".items4:hidden").slice(0, 1).show();
+        if ($(".items4:hidden").length == 0) {
+            $(".LoadMore4").fadeOut();
+        }
+    });
+
+</script>
+

@@ -10,8 +10,11 @@
         height: 880px;
         overflow-y: scroll;
     }
+    .texter {
+        color: #eeba10;
+    }
 </style>
-<div class="container-fluid ">
+<div class="container-fluid">
     <div class="row Course-cv">
         <div class="col left-input">
             <div class="container">
@@ -19,11 +22,17 @@
                 {
                 <form method="post" action="@Url.Action("Updatecourse")" enctype="multipart/form-data">
                     <input type="hidden" value="@item.ID" name="idcourse" />
+                    <br />
                     <input type="text" required name="namecourse" value="@item.name" placeholder="Name " />
+                    <br />
                     <input type="text" required name="price" value="@item.price" placeholder="Price " />
+                    <br />
                     <input type="text" required name="time" value="@item.time" placeholder="Time " />
+                    <br />
                     <input type="text" required name="material" value="@item.material" placeholder="Material" />
+                    <div class="texter">Start:</div>
                     <input type="date" required name="start" value="@item.startime" placeholder="Startime" />
+                    <div class="texter">End:</div>
                     <input type="date" required name="end" value="@item.endtime" placeholder="Endtime" />
                     <select name="teacher">
                         <option disabled required selected hidden>Select Teacher</option>
@@ -31,13 +40,13 @@
                         {
                             if (items.fullname == item.teacher)
                             {
-                <option selected>@items.fullname</option>
- }
-            else
-            {
-                <option>@items.fullname</option>
-}
-        }
+                                <option selected>@items.fullname</option>
+                            }
+                            else
+                            {
+                                <option>@items.fullname</option>
+                            }
+                        }
 
                     </select>
                     <select name="grade">
@@ -55,14 +64,14 @@
                             <option selected>Junior high school</option>
                             <option>High school</option>
                             <option>University</option>
-                         }
+                        }
                         @if (item.grade == "High school")
                         {
                             <option>Primarys school</option>
                             <option>Junior high school</option>
                             <option selected>High school</option>
-                           <option>University</option>
-                         }
+                            <option>University</option>
+                        }
                         @if (item.grade == "University")
                         {
                             <option>Primarys school</option>
@@ -72,19 +81,19 @@
                         }
 
                     </select>
-                   <select name="type">
+                    <select name="type">
                         <option disabled required selected hidden>Select Type</option>
                         @if (item.type == "New")
                         {
-                             <option selected>New</option>
-                             <option>Popular</option>
+                            <option selected>New</option>
+                            <option>Popular</option>
                         }
                         @if (item.type == "Popular")
                         {
-                             <option>New</option>
-                             <option selected>Popular</option>
+                            <option>New</option>
+                            <option selected>Popular</option>
                         }
-                       
+
                     </select>
                     <br />
                     <img id="output" class="img" src="~/Upload/imgcourse/@item.img" />

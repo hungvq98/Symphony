@@ -1,12 +1,17 @@
 ﻿
 @{ ViewBag.Title = "Index";
-                Layout = "~/Views/Shared/HomePage.cshtml"; 
-      if (TempData["message"] != null) {
+    Layout = "~/Views/Shared/HomePage.cshtml";
+    if (TempData["message"] != null)
+    {
         <script type="text/javascript">
             alert(@Html.Raw(Json.Encode(TempData["message"])));
         </script>
-            } }
+    } }
 <style>
+    * {
+        scroll-behavior: smooth;
+    }
+
     .btn-regis button:active {
         transform: scale(0.95);
     }
@@ -23,23 +28,23 @@
         font-family: 'Rubik', sans-serif;
     }
 
-        .sub-header .col-6 img {
-            width: 90%;
-            z-index: 6;
-        }
+    .sub-header .col-6 img {
+        width: 90%;
+        z-index: 6;
+    }
 
-        .sub-header .left {
-            padding-left: 10%;
-            padding-top: 3%;
-        }
+    .sub-header .left {
+        padding-left: 10%;
+        padding-top: 3%;
+    }
 
-        .sub-header .right {
-            padding-right: 5%;
-        }
+    .sub-header .right {
+        padding-right: 5%;
+    }
 
-        .sub-header .main-para {
-            font-size: 50px;
-        }
+    .sub-header .main-para {
+        font-size: 50px;
+    }
 
     .headline {
         font-size: 20px;
@@ -60,9 +65,9 @@
         cursor: pointer;
     }
 
-        .LoadMore:active {
-            transform: scale(0.95);
-        }
+    .LoadMore:active {
+        transform: scale(0.95);
+    }
 
     .LoadMore2 {
         width: 150px;
@@ -78,14 +83,36 @@
         cursor: pointer;
     }
 
-        .LoadMore2:active {
-            transform: scale(0.95);
-        }
+    .LoadMore2:active {
+        transform: scale(0.95);
+    }
+    .LoadMore3 {
+        width: 150px;
+        height: 40px;
+        border: none;
+        background-color: #eeba10;
+        outline: none;
+        outline-color: none;
+        color: white;
+        font-family: 'Rubik', sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .LoadMore3:active {
+        transform: scale(0.95);
+    }
 
     .btn-load-cv {
         margin-right: auto;
         margin-left: auto;
         width: 150px;
+    }
+    .slogan a {
+        text-decoration:none;
+        color:white;
+        font-weight:bold;
     }
 </style>
 
@@ -122,7 +149,7 @@
                     <span class="para-title"> totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. </span>
                     <br>
                     <br>
-                    <button>See more</button>
+                    <button><a href="#seemore">See More</a></button>
                 </div>
             </div>
         </div>
@@ -166,7 +193,7 @@
 
 
 <!-- animation -->
-<div class="galaxy-book">
+<div class="galaxy-book" id="seemore">
     <div class="container">
         <div class="row">
             <div class="col-5">
@@ -239,28 +266,30 @@
 </div>
 
 <br>
-<div class="headline">Courses Free</div>
+<div class="headline">New Courses</div>
 <br />
 <div class="container">
     <div class="row">
         @foreach (var item in ViewBag.listcoursenew)
         {
-<form action="@Url.Action("Exame",new { idcourse = @item.ID })" method="post">
-    <div class="col items">
-        <div class="card-cv slideup">
-            <div class="card" id="card">
-                <div class="teacher"><img id="tchr" width="100" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
-                <div class="teacher-name" id="tchrname">@item.nametea</div>
-                <div class="job" id="job">@item.job</div>
-                <div class="date-course" id="date-course">Start:@item.start - @item.time months</div>
-                <div class="des" id="des">@Html.Raw(@item.content)</div>
-                <div class="name-subject"><span id="name-subject">@item.name</span></div>
-                <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/imgcourse/@item.imgcourse" alt=""></div>
-                <button type="submit" id="btn">Register</button>
+
+            <div class="col items">
+                <form action="@Url.Action("Exame",new { idcourse = @item.ID })" method="post">
+                    <div class="card-cv slideup">
+                        <div class="card" id="card">
+                            <div class="teacher"><img id="tchr" width="100" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
+                            <div class="teacher-name" id="tchrname">@item.nametea</div>
+                            <div class="job" id="job">@item.job</div>
+                            <div class="date-course" id="date-course">Start:@item.start - @item.time months</div>
+                            <div class="des" id="des">@Html.Raw(@item.content)</div>
+                            <div class="name-subject"><div id="name-subject">@item.name</div></div>
+                            <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/imgcourse/@item.imgcourse" alt=""></div>
+                            <button type="submit" id="btn">Register</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
-    </div>
-</form>}
+        }
 
     </div>
     <br />
@@ -277,36 +306,37 @@
 
         @foreach (var item in ViewBag.listcourse)
         {
-<form action="@Url.Action("Exame",new { idcourse=@item.ID })" method="post">
-    <div class="Card-cv2 slideup">
-        <div class="photo"><img id="img-tec" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
-        <div class="content-card" id="content-card">
-            <div class="name-teacher"><b>Name:</b>@item.nametea</div>
-            <div class="job2"><b>Professional:</b>@item.job</div>
-            <div class="date2"><b>Birthday:</b>@item.birthday</div>
-            <div class="des2">
-                Type:@item.type
-                <br />
-                Time:@item.time
-                <br />
-                Start:@item.start
-                <br />
-                End:@item.end
-                <br />
-                @Html.Raw(@item.content)
-            </div>
-        </div>
-        <div class="name-sub2" id="name-sub2">@item.name</div>
-        <button type="submit" class="btn-card" id="btn-card">Register</button>
-        <div class="card2" style="background-image: url(../Upload/imgcourse/@item.imgcourse);background-size: cover;" id="card2">
-            <div class="content-card2">
-                <div class="name-sub3">@item.name</div>
-                <hr>
-                <span>Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum.</span>
-            </div>
-        </div>
-    </div>
-</form>}
+            <form action="@Url.Action("Exame",new { idcourse=@item.ID })" method="post">
+                <div class="Card-cv2 slideup">
+                    <div class="photo"><img id="img-tec" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
+                    <div class="content-card" id="content-card">
+                        <div class="name-teacher"><b>Name:</b>@item.nametea</div>
+                        <div class="job2"><b>Professional:</b>@item.job</div>
+                        <div class="date2"><b>Birthday:</b>@item.birthday</div>
+                        <div class="des2">
+                            Type:@item.type
+                            <br />
+                            Time:@item.time
+                            <br />
+                            Start:@item.start
+                            <br />
+                            End:@item.end
+                            <br />
+                            @Html.Raw(@item.content)
+                        </div>
+                    </div>
+                    <div class="name-sub2" id="name-sub2">@item.name</div>
+                    <button type="submit" class="btn-card" id="btn-card">Register</button>
+                    <div class="card2" style="background-image: url(../Upload/imgcourse/@item.imgcourse);background-size: cover;" id="card2">
+                        <div class="content-card2">
+                            <div class="name-sub3">@item.name</div>
+                            <hr>
+                            <span>Pellentesque convallis velit ut pretium sollicitudin. Duis maximus erat vitae ornare sagittis. Sed non quam scelerisque, eleifend nunc eget, eleifend tortor. Vestibulum.</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
 
     </div>
     <button class="btn-right" onclick="srollright();"><img width="50" src="~/Upload/icon/arrowright.png" alt=""></button>
@@ -320,26 +350,23 @@
     <div class="row">
         @foreach (var item in ViewBag.listcoursepop)
         {
-<form action="@Url.Action("Exame",new { idcourse=@item.ID })" method="post">
-
-
-    <div class="col slideup items2">
-        <div class="card-cv">
-            <div class="card" id="card">
-                <div class="teacher"><img id="tchr" width="100" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
-                <div class="teacher-name" id="tchrname">@item.nametea</div>
-                <div class="job" id="job">@item.job</div>
-                <div class="date-course" id="date-course">Start:@item.start - @item.time months</div>
-                <div class="des" id="des">@Html.Raw(@item.content)</div>
-                <div class="name-subject"><span id="name-subject">@item.name</span></div>
-                <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/imgcourse/@item.imgcourse" alt=""></div>
-                <button type="submit" id="btn">Register</button>
+            <div class="col slideup items2">
+                <form action="@Url.Action("Exame",new { idcourse=@item.ID })" method="post">
+                    <div class="card-cv">
+                        <div class="card" id="card">
+                            <div class="teacher"><img id="tchr" width="100" src="~/Upload/imgteacher/@item.imgtea" alt=""></div>
+                            <div class="teacher-name" id="tchrname">@item.nametea</div>
+                            <div class="job" id="job">@item.job</div>
+                            <div class="date-course" id="date-course">Start:@item.start - @item.time months</div>
+                            <div class="des" id="des">@Html.Raw(@item.content)</div>
+                            <div class="name-subject"><div id="name-subject">@item.name</div></div>
+                            <div class="bg-card" id="eclipse"><img style="width:100%;height:auto;" src="~/Upload/imgcourse/@item.imgcourse" alt=""></div>
+                            <button type="submit" id="btn">Register</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </div>
-    </div>
-</form>}
-
-
+        }
     </div>
 
     <br />
@@ -348,7 +375,44 @@
     <div class="btn-load-cv"><button class="LoadMore2">Load More</button></div>
 </div>
 
+<br />
+<div class="headline">Teacher</div>
 <br>
+<br>
+<div class="container" id="teacher">
+    <div class="row">
+        @*vong lap*@
+            <div class="col slideup items3">
+                <form action="" method="post">
+                    <div class="card-cover">
+                        <div class="card-tea">
+                            <div style="background:#eeba10;background-size: cover;" class="bg"></div>
+                            <div class="img-tea">
+                                <img src="img/discordicon7.png" alt=""> @*teacher img*@
+                            </div>
+                            <div class="his-tea">
+                                <div class="his-tea-des">
+                                    <Strong>Quhu</Strong> @*Name Teacher*@
+                                    <br>
+                                    <Strong>Java</Strong> @*Profession Teacher*@
+                                    <br> @*Teacher His*@
+                                    Etiam porttitor eget nisl vitae facilisis. Cras rutrum lacus at blandit scelerisque. Nulla facilisi. Nunc vel risus mi. Vestibulum pharetra orci at turpis ultricies, sed luctus est tempus.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        @*done*@
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <div class="btn-load-cv"><button class="LoadMore3">Load More</button></div>
+</div>
+
+<br />
 <div class="headline">Send Your Message</div>
 <br>
 <form action="@Url.Action("Send")" method="post">

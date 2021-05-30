@@ -4,11 +4,14 @@
     Layout = "~/Areas/Admin/Views/Shared/AdminPage.cshtml";
 }
 
-<link rel="stylesheet" href="~/Content/Adminx.css" media="all" />
+<link rel="stylesheet" href="~/Content/Adminxx.css" media="all" />
 <style>
     .Course-cv {
         height:100%;
         overflow-y: scroll;
+    }
+    .texter {
+        color:#eeba10;
     }
 </style>
 <div class="container-fluid Course-cv">
@@ -17,16 +20,24 @@
             <div class="container ">
                 <form method="post" action="@Url.Action("Addcourse")" enctype="multipart/form-data">
                     <input type="text" required name="namecourse" value="" placeholder="Name " />
+                    <br />
                     <input type="text" required name="price" value="" placeholder="Price " />
+                    <br />
                     <input type="text" required name="time" value="" placeholder="Time " />
+                    <br />
                     <input type="text" required name="material" value="" placeholder="Material" />
+                    <br />
+                    <div class="texter">Start:</div>
                     <input type="date" required name="start" value="" placeholder="Startime" />
+                    <br />
+                    <div class="texter">End:</div>
                     <input type="date" required name="end" value="" placeholder="Endtime" />
                     <select name="teacher">
                         <option disabled required selected hidden>Select Teacher</option>
                         @foreach (var items in ViewBag.listtea)
                         {
-                <option>@items.fullname</option>}
+                            <option>@items.fullname</option>
+                        }
                     </select>
                     <select name="grade">
                         <option disabled required selected hidden>Select Grade</option>

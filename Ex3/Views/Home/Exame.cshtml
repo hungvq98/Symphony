@@ -4,7 +4,28 @@
     Layout = "~/Views/Shared/HomePage.cshtml";
 }
 
-<link rel="stylesheet" href="~/Content/Exam.css" media="all" />
+<style>
+    form {
+        position:relative;
+    }
+    .rule-box {
+        position:absolute;
+        height:100%;
+        width:100%;
+        top:0;
+        background:white;
+    }
+    .rule {
+        margin-right:auto;
+        margin-left:auto;
+        text-align:center;
+        margin-top:5%;
+        font-weight:bolder;
+        font-size:25px;
+    }
+    
+</style>
+<link rel="stylesheet" href="~/Content/Examx.css" media="all" />
 <div class="container-fluid">
     <div class="row sub-head"></div>
     <div class="row quizs">
@@ -13,6 +34,12 @@
                 <div class="Timer">Time:00:00:00</div>
                 <div class="Timers">Time:00:00:00</div>
                 <form action="@Url.Action("Score")" method="post">
+                    <div class="rule-box" id="rule-box">
+                        <div class="rule">♥ Students Answer 10 questions.</div>
+                        <div class="rule">♥ In 10 minutes.</div>
+                        <div class="rule">♥ If correct 6 or more questions will pass.</div>
+
+                    </div>
                     <div class="answer-box" id="question">
                         @foreach (var item in ViewBag.listexam)
                         {
@@ -22,17 +49,14 @@
                                 <li> <input type="radio" id="@item.ID" class="answer" name="@item.ID" value="B" />@item.answerB </li>
                                 <li> <input type="radio" id="@item.ID" class="answer" name="@item.ID" value="C" /> @item.answerC</li>
                                 <li> <input type="radio" id="@item.ID" class="answer" name="@item.ID" value="D" /> @item.answerD </li>
-                                <li hidden> <input type="radio" id="@item.correct" class="answer" name="@item.correct" value="@item.answercorrect" /></li>                                
+                                <li hidden> <input type="radio" id="@item.correct" class="answer" name="@item.correct" value="@item.answercorrect" /></li>
                             </ul>
                         }
                     </div>
-                    <input type="text" name="total" id="total" />
-                    <button type="submit">continute</button>
+                    <input hidden type="text" name="total" id="total" />
+                    <div class="btn-sub"><button id="btn-continue" type="submit">continute</button></div>
                 </form>
-                <div class="quizMessage">Please choose answer</div>
                 <div class="result" id="myresults"></div>
-                <div class="result_fail">You Failed</div>
-                <div class="result_passed">You Passed</div>
                 <div class="btn-sub"><button id="btn-sub" onclick="getscore()">Submit</button></div>
                 <br />
                 <div class="btn-start"><button id="btn-start" onclick="timedCount()">Start</button></div>
@@ -60,7 +84,9 @@
                 }
             }
         }
-        document.getElementById("total").value = total;
+        @*document.getElementById("total").value = total;*@
+        $("#myresults").html(total + "/10");
+
     }
 </script>
 <script>
@@ -69,6 +95,9 @@
     var t;
     var btnsub = document.getElementById('btn-sub');
     var btnstart = document.getElementById('btn-start');
+    var btnconti = document.getElementById('btn-continue');
+    var rule = document.getElementById('rule-box');
+    var resultss = document.getElementById('myresults');
     function timedCount() {
 
         if (c == 185) {
@@ -83,6 +112,7 @@
 
         if (c == 0) {
             $('.Timer').html("Time Out!");
+            $('#myresults').css("display", "block");
             getscore();
 
         } else {
@@ -100,13 +130,15 @@
     }
     $('#btn-start').click(function () {
         btnsub.style.display = 'block';
+        rule.style.display = 'none';
     });
     $('#btn-sub').click(function () {
         btnsub.style.display = 'none';
         $('.Timer').css("display", "none");
         $('.Timers').css("display", "block");
         $('.Timers').html("Complete! ♥");
-
+        $('#myresults').css("display", "block");
+        btnconti.style.display = 'block';
     });
 
 

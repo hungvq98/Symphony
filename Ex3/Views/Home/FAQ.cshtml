@@ -3,7 +3,7 @@
     ViewBag.Title = "FAQ";
     Layout = "~/Views/Shared/HomePage.cshtml";
 }
-<link rel="stylesheet" href="~/Content/FAQzz.css" media="all" />
+<link rel="stylesheet" href="~/Content/FAQzzs.css" media="all" />
 
 <div class="container-fluid">
     <div class="row sub-head"></div>
@@ -15,6 +15,8 @@
         <div class="row searchbar">
             <div class="searchbar-ins"><input type="text" value="" placeholder="What do you need?" data-search /><button><img width="30" src="~/Upload/icon/iconsearch.png" alt="Alternate Text" /></button></div>
         </div>
+        <br />
+        @*
         @foreach (var item in ViewBag.listfaq)
         {
             <div class="row items">
@@ -31,13 +33,19 @@
                     </div>
                 </div>
             </div>
+        }*@
+
+
+        @foreach (var item in ViewBag.listfaq)
+        {
+            <div  data-filter-item data-filter-name="@item.question" class="faq-content">
+                <button  data-filter-item data-filter-name="@item.question" class="accordion">@item.question</button>
+                <div class="panel">
+                    <p id="Answeroke">@Html.Raw(@item.answer)</p>
+                </div>
+            </div>
+            
         }
-
-
-        
-
-
-
 
 
     </div>
@@ -54,5 +62,23 @@
             filterItems.removeClass('hidden');
         }
     });
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            var ans = document.getElementById('Answeroke').offsetHeight;
+
+            if (panel.style.height === ans + 'px') {
+                panel.style.height = "0px";
+                
+            } else {
+                panel.style.height = ans + 'px';
+            }
+        });
+    }
 </script>
 

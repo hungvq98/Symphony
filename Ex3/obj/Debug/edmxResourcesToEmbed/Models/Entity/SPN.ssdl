@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SPNModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameCourse" Type="varchar" MaxLength="100" />
+    <Property Name="CourseContent" Type="varchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="200" />
+    <Property Name="Img" Type="nvarchar" MaxLength="200" />
+    <Property Name="Time" Type="int" />
+    <Property Name="Material" Type="varchar(max)" />
+    <Property Name="Teacher" Type="nvarchar" MaxLength="200" />
+    <Property Name="Typecourse" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Exam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nameofquestion" Type="nvarchar(max)" />
+    <Property Name="AnswerA" Type="nvarchar(max)" />
+    <Property Name="AnswerB" Type="nvarchar(max)" />
+    <Property Name="AnswerC" Type="nvarchar(max)" />
+    <Property Name="AnswerD" Type="nvarchar(max)" />
+    <Property Name="Answercorrect" Type="nvarchar" MaxLength="20" />
+    <Property Name="Course" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="Subject" Type="varchar" MaxLength="500" />
+    <Property Name="Message" Type="varchar(max)" />
+    <Property Name="ReceivedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="HistoryCourse">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDUser" Type="int" />
+    <Property Name="IDCourse" Type="int" />
+    <Property Name="Payment" Type="bit" />
+    <Property Name="StartTime" Type="date" />
+    <Property Name="EndTime" Type="date" />
+  </EntityType>
+  <EntityType Name="Historyexam">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="Score" Type="nvarchar" MaxLength="100" />
+    <Property Name="Dateexam" Type="date" />
+  </EntityType>
+  <EntityType Name="PostAdmin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Typepost" Type="nvarchar" MaxLength="200" />
+    <Property Name="Title" Type="varchar" MaxLength="500" />
+    <Property Name="Img" Type="varchar" MaxLength="200" />
+    <Property Name="Content" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Questionfaq">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Namequestion" Type="nvarchar" MaxLength="500" />
+    <Property Name="Answer" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Idtea" />
+    </Key>
+    <Property Name="Idtea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="100" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="100" />
+    <Property Name="Age" Type="nvarchar" MaxLength="10" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="Birthday" Type="date" />
+    <Property Name="Img" Type="nvarchar" MaxLength="200" />
+    <Property Name="Professtional" Type="nvarchar" MaxLength="200" />
+    <Property Name="Content" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameType" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Age" Type="nvarchar" MaxLength="40" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="150" />
+    <Property Name="Phone" Type="varchar" MaxLength="20" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="UserPassword" Type="varchar" MaxLength="200" />
+    <Property Name="RegisDate" Type="date" />
+  </EntityType>
+  <EntityContainer Name="SPNModelStoreContainer">
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HistoryCourse" EntityType="Self.HistoryCourse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Historyexam" EntityType="Self.Historyexam" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PostAdmin" EntityType="Self.PostAdmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Questionfaq" EntityType="Self.Questionfaq" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

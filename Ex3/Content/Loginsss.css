@@ -2,7 +2,18 @@
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    scroll-behavior:smooth;
     font-family: 'Rubik', sans-serif;
+}
+.homebtn {
+    font-size:30px;
+    position:absolute;
+    top:10px;
+    left:10px;
+}
+.text {
+    font-weight:bold;
+    color:#808080;
 }
 
 @media (max-width:479px) {
@@ -54,13 +65,16 @@
         height: 50px;
         margin-right: auto;
         margin-left: auto;
+        cursor:pointer;
     }
 
-        .btn-login-cv .btn-login {
-            background: none;
-            border: none;
-            color: white;
-        }
+    .btn-login-cv .btn-login {
+        background: none;
+        border: none;
+        color: white;
+        cursor:pointer;
+
+    }
 
     .login-form form {
         width: 272px;
@@ -71,9 +85,9 @@
         left: 68%;
     }
 
-        .login-form form button:active {
-            transform: scale(0.95);
-        }
+    .login-form form button:active {
+        transform: scale(0.95);
+    }
 
     .regis-form {
         background: #eeba10;
@@ -107,20 +121,21 @@
         height: 600px;
         position: relative;
         position: absolute;
-        top: 30%;
+        top: 10%;
         left: 5%;
     }
 
-        .regis-form2 form .text {
-            height: 40px;
-            width: 250px;
-            border-radius: 20px;
-            border: none;
-            background: #fee698;
-            padding-left: 20px;
-            outline: none;
-            margin-bottom: 20px;
-        }
+    .regis-form2 form .text {
+        height: 40px;
+        width: 250px;
+        border-radius: 20px;
+        border: none;
+        background: #fee698;
+        padding-left: 20px;
+        outline: none;
+        margin-bottom: 20px;
+        font-weight:bold;
+    }
 
     .login-form form .btn-login-cv {
         text-align: center;
@@ -187,12 +202,12 @@
         transition: 1.5s;
     }
 
-        .sign-up-intro span {
-            top: 12%;
-            color: white;
-            font-weight: bolder;
-            position: absolute;
-        }
+    .sign-up-intro span {
+        top: 12%;
+        color: white;
+        font-weight: bolder;
+        position: absolute;
+    }
 
     .intro-log {
         transition: 1.5s;
@@ -258,6 +273,7 @@
         padding-left: 20px;
         outline: none;
         margin-bottom: 20px;
+        font-weight: bold;
     }
 
     .login-form form button {
@@ -281,6 +297,8 @@
         background:none;
         border:none;
         color:white;
+        cursor:pointer;
+
     }
     .login-form form {
         width: 272px;
@@ -337,10 +355,10 @@
         margin-bottom: 20px;
     }
     .login-form form .btn-login-cv {
-        text-align:center;
-        padding-top:10px;
+        text-align: center;
+        padding-top: 10px;
         height: 30px;
-        
+        cursor: pointer;
         width: 100px;
         background: #eeba10;
         font-weight: bold;

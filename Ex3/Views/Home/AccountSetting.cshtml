@@ -1,0 +1,189 @@
+﻿
+@{
+    ViewBag.Title = "AccountSetting";
+    Layout = "~/Views/Shared/HomePage.cshtml";
+}
+<style>
+    .subhead-acc {
+        height:100px;
+    }
+    .img-side {
+        margin-top:40px;
+        height:200px;
+        width:200px;
+        border-radius:50%;
+        border:1px solid #808080;
+    }
+    .form-edit {
+        width:100%;
+        padding:50px;
+    }
+    .form-edit form input {
+        padding-left:20px;
+        width:70%;
+        height:40px;
+        margin-top:10px;
+        color:#808080;
+        font-weight:bolder;
+        outline-color:#eeba10;
+    }
+    .form-edit form .btn-tog {
+        padding-top:8px;
+        padding-left:20px;
+        width:70%;
+        height:40px;
+        margin-top:10px;
+        color:white;
+        font-weight:bolder;
+        outline-color:#eeba10;
+        border:none;
+        cursor:pointer;
+        background:#eeba10;
+    }
+    .form-edit form select {
+        padding-left:20px;
+        width:70%;
+        height:40px;
+        margin-top:10px;
+        color:#808080;
+        font-weight:bolder;
+        outline-color:#eeba10;
+    }
+    .changepassform {
+        height:0px;
+        overflow:hidden;
+        transition:0.8s;
+    }
+    .form-edit .btn-update-pro {
+        width: 100px;
+        height: 40px;
+        margin-top: 10px;
+        color: white;
+        font-weight: bolder;
+        outline-color: #eeba10;
+        border: none;
+        cursor: pointer;
+        background: #eeba10;
+    }
+    .mid {
+        position:relative;
+        
+    }
+    .cover {
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    }
+    .btn-his {
+        padding-top: 8px;
+        padding-left: 20px;
+        width: 100%;
+        height: 40px;
+        margin-top: 10px;
+        color: white;
+        font-weight: bolder;
+        outline-color: #eeba10;
+        border: none;
+        cursor: pointer;
+        background: #eeba10;
+    }
+    .his-box {
+        width:100%;
+        height:0px;
+        overflow:hidden;
+        overflow-y:auto;
+        transition:0.8s;
+    }
+    .his-name {
+        height: 30px;
+        padding-left: 20px;
+        font-weight: bolder;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .his-name:hover {
+        background-color:#808080;
+        color:white;
+    }
+    .left-pro {
+        padding-top:50px;
+    }
+    .right-pro {
+        padding-top: 10px;
+    }
+    
+    
+</style>
+<div class="container-fluid">
+    <div class="row subhead-acc"></div>
+    <div class="container">
+        <div class="row cover">
+            <div class="col-3 left-pro">
+                <div id="btn-his-tog" class="btn-his">History</div>
+                <div class="his-box" id="his-box">
+                    @*Vong lap history items*@
+                    <div class="his-name">subject 1</div>
+                    @*done*@
+                </div>
+            </div>
+            <div class="col-6 mid">
+                <div class="form-edit">
+                    <form method="post" action="">
+                        <input type="text" value="" name="name" placeholder="Full Name" />
+                        <input type="text" value="" name="gmail" placeholder="Gmail" />
+                        <input type="text" value="" name="phone" placeholder="Phone" />
+                        <input type="text" value="" name="add" placeholder="Addess" />
+                        <div id="btn-pass-tog" class="btn-tog">Change Password</div>
+                        <div class="changepassform" id="changepassform">
+                            <input type="password" value="" name="oldpass" placeholder="Old Password" />
+                            <input type="password" value="" name="newpass" placeholder="New Password" />
+                            <input type="password" value="" name="cfpass" placeholder="Confirm Password" />
+                            <input type="submit" value="Save" />
+                        </div>
+                        <select>
+                            <option selected disabled hidden>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                        <br />
+                        <br />
+                        <button class="btn-update-pro">Update</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-3 right-pro">
+                <div style="margin-right:auto;margin-left:auto;width:200px"><img id="output" class="img img-side" /></div>
+                <div style="margin-right:auto;margin-left:auto;width:150px">
+                    <p><input type="file" accept="image/*" name="myimg" id="myimg" onchange="loadFile(event)" style="display: none;"></p>
+                    <p><label for="myimg" style="cursor: pointer; border:1px solid #eeba10; background-color:#eeba10;width:150px;height:40px;padding:9px;color:white;font-weight:bold;">Upload Image<i style="font-size:18px;margin-left:5px;color:white" class='bx bx-upload'></i></label></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var formchange = document.getElementById('changepassform');
+    $('#btn-pass-tog').click(function () {
+        if (formchange.style.height == '200px') {
+            formchange.style.height = '0px';
+        }
+        else
+        {
+            formchange.style.height = '200px';
+        }
+    });
+    var formhis = document.getElementById('his-box');
+    $('#btn-his-tog').click(function () {
+        if (formhis.style.height == '350px') {
+            formhis.style.height = '0px';
+        }
+        else {
+            formhis.style.height = '350px';
+        }
+    });
+
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+

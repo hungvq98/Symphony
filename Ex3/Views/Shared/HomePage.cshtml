@@ -4,14 +4,16 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/Content/styless.css">
+    <link rel="stylesheet" href="~/Content/stylessss.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
-    <script src="~/Scripts/javazz.js"></script>
+    <script src="~/Scripts/javazzx.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/Content/stylestars.css">
+    
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <style>
@@ -33,6 +35,9 @@
         .menudrop2 li:hover > a {
             color: white;
         }
+        .menudrop2 li a:hover > .bxs-bell {
+            color: white;
+        }
 
         .menudrop li a {
             text-decoration: none;
@@ -41,6 +46,9 @@
         }
 
         .menudrop li:hover > a {
+            color: white;
+        }
+        .menudrop li a:hover > .bxs-bell {
             color: white;
         }
         .ToTop {
@@ -59,6 +67,98 @@
             font-weight: bolder;
             opacity: 0.8;
         }
+        @*drop*@
+        .dropbtn {
+            background-color: none;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-bs {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left:0;
+        }
+
+        .dropdown-content a {
+            color: black;
+            text-decoration: none;
+            display: block;
+            font-size:14px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #808080;
+            color:azure;
+        }
+
+        .dropdown-bs:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-bs:hover .dropbtn {
+            background-color: none;
+        }
+        @*drop bell*@
+        .dropbtn-bell {
+            background-color: none;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-bs-bell {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content-bell {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left: 0;
+            overflow:hidden;
+            overflow-y:auto
+        }
+
+        .dropdown-content-bell a {
+            color: black;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown-content-bell a:hover {
+            background-color: #808080;
+            color: azure;
+        }
+
+        .dropdown-bs-bell:hover .dropdown-content-bell {
+            left:-362px;
+            display: block;
+            width:400px;
+            height:600px;
+        }
+
+        .dropdown-bs-bell:hover .dropbtn-bell {
+            background-color: none;
+        }
+     
     </style>
     <button class="ToTop">TOP</button>
     <div class="header" id="header">
@@ -91,17 +191,32 @@
                 <li><a href="@Url.Action("Index")">home</a></li>
                 <li><a href="@Url.Action("AboutUs")">about</a></li>
                 <li><a href="@Url.Action("FAQ")">faq</a></li>
-                <li><a href="@Url.Action("Exame")">exame</a></li>
-                <li>
+                <li><a href="@Url.Action("Forum")">Forum</a></li>
+                <li class="dropdown-bs">
                     @if (@Session["login"] != null)
                     {
-                    <a href="@Url.Action("LoginNRegister")">@Session["login"]</a>
+                        <a class="dropbtn" href="@Url.Action("LoginNRegister")">@Session["login"]</a>
+                        <div class="dropdown-content">
+                            <a href="#">Account Setting</a>
+                            <a href="#">Log Out</a>
+                        </div>
                     }
                     else
                     {
-                         <a href="@Url.Action("LoginNRegister")">login</a>
+                        <a href="@Url.Action("LoginNRegister")">login</a>
                     }
                 </li>
+                @if (Session["login"] != null)
+                {
+                    <li class="dropdown-bs-bell">
+                        <a class="dropbtn-bell" href="#"><i class='bx bxs-bell' style='color:#808080;font-size:18px;'></i></a>
+                        <div class="dropdown-content-bell">
+                            @*vong lap thong bao*@
+                            <a href="#"></a>
+                            @*done*@
+                        </div>
+                    </li>
+                }
             </ul>
         </div>
     </div>
@@ -109,21 +224,27 @@
         <button onclick="clicktoinmenu()"><img src="~/Upload/icon/menuicon.png" alt=""></button>
         <ul class="menudrop" id="menudrop">
             <button onclick="clicktooutmenu()"><img src="~/Upload/icon/xicon.png" width="50" alt="Alternate Text" /></button>
-
             <li><a href="@Url.Action("Index")">home</a></li>
             <li><a href="@Url.Action("AboutUs")">about</a></li>
             <li><a href="@Url.Action("FAQ")">faq</a></li>
-            <li><a href="@Url.Action("Exame")">exame</a></li>
-             <li>
-                    @if (@Session["login"] != null)
-                    {
+            <li><a href="@Url.Action("Forum")">Forum</a></li>
+            <li>
+                @if (@Session["login"] != null)
+                {
                     <a href="@Url.Action("LoginNRegister")">@Session["login"]</a>
-                    }
-                    else
-                    {
-                         <a href="@Url.Action("LoginNRegister")">login</a>
-                    }
-                </li>
+
+                }
+                else
+                {
+                    <a href="@Url.Action("LoginNRegister")">login</a>
+                }
+            </li>
+            @if (Session["login"] != null)
+            {
+                <li><a href="@Url.Action("Forum")">Account Setting</a></li>
+                <li><a href="@Url.Action("Forum")">Logout</a></li>
+            }
+            <li><a href="#"><i class='bx bxs-bell' style='color:#808080;font-size:18px;'></i></a></li>
         </ul>
     </div>
     <div>
@@ -212,6 +333,15 @@
                 $(".LoadMore2").fadeOut();
             }
         });
+        $(".items3").slice(0, 3).show();
+        $(".LoadMore3").on("click", function () {
+            $(".items3:hidden").slice(0, 3).show();
+            if ($(".items3:hidden").length == 0) {
+                $(".LoadMore3").fadeOut();
+            }
+        });
+
+       
         /*header scroll*/
         window.onscroll = function sc() {
             if (scrollY > 700) {
