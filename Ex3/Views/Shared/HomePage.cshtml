@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/Content/stylestars.css">
-    
+
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
@@ -158,8 +158,10 @@
         .dropdown-bs-bell:hover .dropbtn-bell {
             background-color: none;
         }
-     
+
     </style>
+   
+  
     <button class="ToTop">TOP</button>
     <div class="header" id="header">
         <div class="heading" id="heading">
@@ -169,7 +171,7 @@
             <div class="loginbtn">
                 @if (@Session["login"] != null)
                 {
-                <div>@Session["login"]</div>
+                    <div>@Session["login"]</div>
                 }
                 else
                 {
@@ -197,8 +199,8 @@
                     {
                         <a class="dropbtn" href="@Url.Action("LoginNRegister")">@Session["login"]</a>
                         <div class="dropdown-content">
-                            <a href="#">Account Setting</a>
-                            <a href="#">Log Out</a>
+                            <a href="@Url.Action("AccountSetting")">Account Setting</a>
+                            <a href="@Url.Action("Logout")">Log Out</a>
                         </div>
                     }
                     else
@@ -206,18 +208,26 @@
                         <a href="@Url.Action("LoginNRegister")">login</a>
                     }
                 </li>
-                @if (Session["login"] != null)
+                @if (@Session["login"] != null)
                 {
+
                     <li class="dropdown-bs-bell">
                         <a class="dropbtn-bell" href="#"><i class='bx bxs-bell' style='color:#808080;font-size:18px;'></i></a>
                         <div class="dropdown-content-bell">
                             @*vong lap thong bao*@
-                            <a href="#"></a>
+                            @foreach (var item in ViewBag.listno)
+                            {
+                                <a href="#">there's a new course: @item.news</a>
+                            }
+
                             @*done*@
                         </div>
                     </li>
+
                 }
+
             </ul>
+
         </div>
     </div>
     <div class="menubar">
@@ -244,11 +254,19 @@
                 <li><a href="@Url.Action("Forum")">Account Setting</a></li>
                 <li><a href="@Url.Action("Forum")">Logout</a></li>
             }
-            <li><a href="#"><i class='bx bxs-bell' style='color:#808080;font-size:18px;'></i></a></li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-bell' style='color:#808080;font-size:18px;'></i>
+
+                </a>
+            </li>
         </ul>
+
+
     </div>
     <div>
         @RenderBody()
+
     </div>
     <br />
     <br />
@@ -292,8 +310,8 @@
         <div class="row">
             <div class="copyright">Copyright 2021 - D e s i g n b y Q u h u</div>
         </div>
-
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script>
         TweenMax.to('.circle-container', 15, { rotation: 360, ease: Power0.easeNone, repeat: -1 });
@@ -341,7 +359,7 @@
             }
         });
 
-       
+
         /*header scroll*/
         window.onscroll = function sc() {
             if (scrollY > 700) {
@@ -370,6 +388,6 @@
             dropmenu2.style.marginRight = '-520px';
         }
     </script>
-</body>
 
+</body>
 </html>

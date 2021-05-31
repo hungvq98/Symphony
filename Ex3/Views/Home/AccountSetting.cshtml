@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "AccountSetting";
     Layout = "~/Views/Shared/HomePage.cshtml";
+      if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+        alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    }
 }
 <style>
     .subhead-acc {
@@ -51,7 +57,7 @@
     }
     .changepassform {
         height:0px;
-        overflow:hidden;
+      @*  overflow:hidden;*@
         transition:0.8s;
     }
     .form-edit .btn-update-pro {
@@ -115,53 +121,67 @@
 <div class="container-fluid">
     <div class="row subhead-acc"></div>
     <div class="container">
+        @foreach (var item in ViewBag.listuser)
+        {
         <div class="row cover">
             <div class="col-3 left-pro">
                 <div id="btn-his-tog" class="btn-his">History</div>
                 <div class="his-box" id="his-box">
-                    @*Vong lap history items*@
-                    <div class="his-name">subject 1</div>
-                    @*done*@
+                    @foreach (var items in ViewBag.listcourse)
+                    {
+                    <div class="his-name">You have successfully registered for the @items.course course</div>
+                    }
                 </div>
             </div>
-            <div class="col-6 mid">
-                <div class="form-edit">
-                    <form method="post" action="">
-                        <input type="text" value="" name="name" placeholder="Full Name" />
-                        <input type="text" value="" name="gmail" placeholder="Gmail" />
-                        <input type="text" value="" name="phone" placeholder="Phone" />
-                        <input type="text" value="" name="add" placeholder="Addess" />
+            <form action="@Url.Action("Updateuser")" method="post" enctype="multipart/form-data">
+                <div class="col-6 mid">
+                    <div class="form-edit">
+                        <input type="hidden" value="@item.ID" name="id" />
+                        <input type="text" value="@item.fullname" name="name" placeholder="Full Name" />
+                        <input type="text" value="@item.email" name="gmail" placeholder="Gmail" />
+                        <input type="text" value="@item.phone" name="phone" placeholder="Phone" />
+                        <input type="text" value="@item.address" name="add" placeholder="Addess" />
                         <div id="btn-pass-tog" class="btn-tog">Change Password</div>
-                        <div class="changepassform" id="changepassform">
-                            <input type="password" value="" name="oldpass" placeholder="Old Password" />
-                            <input type="password" value="" name="newpass" placeholder="New Password" />
-                            <input type="password" value="" name="cfpass" placeholder="Confirm Password" />
-                            <input type="submit" value="Save" />
-                        </div>
-                        <select>
+
+                        <select name="gender">
                             <option selected disabled hidden>Select Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
+                            @if (item.gender == "Male")
+                            {
+            <option selected>Male</option>
+                                <option>Female</option>}
+                            @if (item.gender == "Female")
+                            {
+            <option>Male</option>
+                                <option selected>Female</option>}
                         </select>
                         <br />
                         <br />
-                        <button class="btn-update-pro">Update</button>
-                    </form>
+                        <button class="btn-update-pro" type="submit">Update</button>
+                    </div>
                 </div>
+                <div class="col-3 right-pro">
+                    <div style="margin-right:auto;margin-left:auto;width:200px"><img id="output" src="~/Upload/imguser/@item.img" class="img img-side" /></div>
+                    <div style="margin-right:auto;margin-left:auto;width:150px">
+                        <p><input type="file" accept="image/*" name="myimg" id="myimg" onchange="loadFile(event)" style="display: none;"></p>
+                        <p><label for="myimg" style="cursor: pointer; border:1px solid #eeba10; background-color:#eeba10;width:150px;height:40px;padding:9px;color:white;font-weight:bold;">Upload Image<i style="font-size:18px;margin-left:5px;color:white" class='bx bx-upload'></i></label></p>
+                    </div>
+                </div>
+            </form>
+            <div class="changepassform" id="changepassform">
+                <form action="@Url.Action("Changepass")" method="post">
+                    <input type="password" value="" name="oldpass" placeholder="Old Password" />
+                    <input type="password" value="" name="newpass" placeholder="New Password" />
+                    <input type="password" value="" name="cfpass" placeholder="Confirm Password" />
+                    <input type="submit" value="Save" />
+                </form>
             </div>
-            <div class="col-3 right-pro">
-                <div style="margin-right:auto;margin-left:auto;width:200px"><img id="output" class="img img-side" /></div>
-                <div style="margin-right:auto;margin-left:auto;width:150px">
-                    <p><input type="file" accept="image/*" name="myimg" id="myimg" onchange="loadFile(event)" style="display: none;"></p>
-                    <p><label for="myimg" style="cursor: pointer; border:1px solid #eeba10; background-color:#eeba10;width:150px;height:40px;padding:9px;color:white;font-weight:bold;">Upload Image<i style="font-size:18px;margin-left:5px;color:white" class='bx bx-upload'></i></label></p>
-                </div>
 
-            </div>
-        </div>
+        </div>}
+      
     </div>
 </div>
 <script>
-    var formchange = document.getElementById('changepassform');
+  @*  var formchange = document.getElementById('changepassform');
     $('#btn-pass-tog').click(function () {
         if (formchange.style.height == '200px') {
             formchange.style.height = '0px';
@@ -170,7 +190,7 @@
         {
             formchange.style.height = '200px';
         }
-    });
+    });*@
     var formhis = document.getElementById('his-box');
     $('#btn-his-tog').click(function () {
         if (formhis.style.height == '350px') {

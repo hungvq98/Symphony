@@ -2,18 +2,19 @@
 @{
     ViewBag.Title = "LoginNRegister";
     Layout = "~/Views/Shared/LoginPage.cshtml";
-   
-    if (TempData["message"] != null) {
-    <script type="text/javascript">
+
+    if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
         alert(@Html.Raw(Json.Encode(TempData["message"])));
-    </script>
-        }
+        </script>
+    }
 }
 <link rel="stylesheet" href="~/Content/Loginsss.css" media="all" />
 <div class="Login-cv">
-    
+
     <div class="login-form">
-        <form action="@Url.Action("Login")" method="post">
+        <form  action="@Url.Action("Login")" method="post">
             <input class="text" type="text" value="" id="usrname" placeholder="Username" name="username" required />
             <input class="text" type="password" id="pwd" placeholder="Password" name="password" required />
             @*<div class="btn-login-cv"><a href="#">Login</a></div>*@
@@ -37,18 +38,17 @@
             <input class="text" type="password" value="" placeholder="Password" name="pass" required />
             <input class="text" type="password" value="" placeholder="Confirm Password" name="pass2" required />
             @*<div class="btn-login-cv"><a href="#">Register</a></div>*@
-            <div class="btn-login-cv"><input class="btn-login" type="submit" value="Sign Up" /></div>
+            <div class="btn-login-cv">
+                <input type="submit"  class="btn-login" value="Sign Up" />              
+            </div>
         </form>
     </div>
     <div class="pictures" id="pictures"><img id="pictures-inside" width="500" src="~/Upload/PNG/undraw_professor.png" alt="Alternate Text" /></div>
     <div class="regis-form" id="regis-form">
-
         <div class="intro-log" id="intro-log">
             <button onclick="log();" class="login-btn" id="">Login</button>
             <span>Morbi mollis eros ut rhoncus euismod. Duis ut lacus dictum, consequat elit sit amet, aliquam purus. Nulla id nisi tincidunt, viverra sem nec, hendrerit nisl. Ut a scelerisque risus. Etiam interdum congue commodo.</span>
         </div>
-
-
         <a class="homebtn" href="@Url.Action("Index")"><i class='bx bx-left-arrow-alt' style="color:white"></i></a>
         <div class="sign-up-intro" id="sign-up-intro">
 
@@ -56,9 +56,8 @@
             <button class="btn-signup" onclick="sig();">Sign Up</button>
         </div>
     </div>
-
-
 </div>
+
 <script>
     function sig() {
         var signup = document.getElementById('regis-form');
@@ -90,6 +89,7 @@
 
         }
     }
-    
+
 </script>
+
 

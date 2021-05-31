@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -83,6 +85,7 @@ namespace Ex3.Areas.Admin.Controllers
         public ActionResult Addcourse(HttpPostedFileBase myimg)
         {
             Models.Entity.SPNEntities spn = new Models.Entity.SPNEntities();
+            Models.Entity.SPNEntities spns = new Models.Entity.SPNEntities();
             Course cr = new Course();
             cr.NameCourse = Request.Form["namecourse"];
             cr.Price = double.Parse(Request.Form["price"]);
@@ -103,6 +106,17 @@ namespace Ex3.Areas.Admin.Controllers
             cr.Active = true;
             spn.Courses.Add(cr);
             spn.SaveChanges();
+            var q = spn.UserInfoes.Where(d => d.Active == true).Select(d => new Models.Modelview.Userinfoview { ID = d.ID }).ToList();
+            ViewBag.listuser = q;
+            foreach(var item in ViewBag.listuser)
+            {
+                Notification nt = new Notification();
+                nt.IDuser = item.ID;
+                nt.Notifications= Request.Form["namecourse"];
+                nt.Active = true;
+                spns.Notifications.Add(nt);
+                spns.SaveChanges();
+            }
             return RedirectToAction("Course");
         }
         [HttpPost]
@@ -397,6 +411,10 @@ namespace Ex3.Areas.Admin.Controllers
             ViewBag.listfeed = result;
             return View();  
         }
+        public ActionResult ViewFeedback()
+        {
+            return View();
+        }
         public ActionResult Removefeedback(int idfeed)
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
@@ -404,6 +422,33 @@ namespace Ex3.Areas.Admin.Controllers
             Feedback fd = spn.Feedbacks.First(d => d.ID == id);
             fd.Active = false;
             spn.SaveChanges();
+            return RedirectToAction("Feedback");
+        }
+        public ActionResult Sendemail()
+        {
+            var email = Request.Form["email"];
+            var senderEmail = new MailAddress("minhtan.tn11@gmail.com", "SYMPHONY EDUCATION");
+            var receiverEmail = new MailAddress(email, "Receiver");
+            var password = "thanhnganngo1104";
+            var sub = "Sent request success.";
+            var body = Request.Form["content-send"];
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(senderEmail.Address, password)
+            };
+            using (var mess = new MailMessage(senderEmail, receiverEmail)
+            {
+                Subject = sub,
+                Body = body
+            })
+            {
+                smtp.Send(mess);
+            }
             return RedirectToAction("Feedback");
         }
         //History Course
@@ -498,7 +543,7 @@ namespace Ex3.Areas.Admin.Controllers
                           select new Models.Modelview.Postadminview
                           {
                               ID = ps.ID,
-                              title = ps.Title,
+                              
                               content = ps.Content,
                               img = ps.Img,
                               type = tp.NameType
@@ -517,7 +562,7 @@ namespace Ex3.Areas.Admin.Controllers
                           select new Models.Modelview.Postadminview
                           {
                               ID = ps.ID,
-                              title = ps.Title,
+                              
                               content = ps.Content,
                               img = ps.Img,
                               type = tp.NameType
@@ -533,7 +578,7 @@ namespace Ex3.Areas.Admin.Controllers
         {
             Models.Entity.SPNEntities spn = new SPNEntities();
             PostAdmin ps = new PostAdmin();
-            ps.Title = Request.Form["title"];
+            ps.Idad = 1;
             ps.Content = Request.Form["content"];
             ps.Img = myimg.FileName;
             string path = Server.MapPath("~/Upload/imgpost/") + ps.Img;
@@ -552,8 +597,7 @@ namespace Ex3.Areas.Admin.Controllers
         {
             int id = Int32.Parse(Request.Form["idpost"]);
             Models.Entity.SPNEntities spn = new SPNEntities();
-            PostAdmin ps = spn.PostAdmins.First(d => d.ID == id);
-            ps.Title = Request.Form["title"];
+            PostAdmin ps = spn.PostAdmins.First(d => d.ID == id);            
             ps.Content = Request.Form["content"];
             string name = Request.Form["type"];
             var type = spn.Types.Where(d => d.NameType == name).FirstOrDefault();

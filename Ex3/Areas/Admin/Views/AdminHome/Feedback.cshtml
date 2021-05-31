@@ -78,24 +78,26 @@
             <div class="row">
                 <button class="btn-close"><i class='bx bx-x '></i></button>
             </div>
-            <form method="post" action="">
-                <input type="text" value="" placeholder="To Email" />
-                <input type="text" value="" placeholder="Title" />
-                <br />
-                <br />
-                <textarea name="content-send">
+            @foreach (var itemss in ViewBag.listfeed)
+            {
+                <form method="post" action="@Url.Action("Sendemail")">
+                    <input type="text" name="email" value="@itemss.email" placeholder="To Email" />
+                    <input type="text" value="" placeholder="Title" />
+                    <br />
+                    <br />
+                    <textarea name="content-send">
                 </textarea>
-                <br />
-                <input type="submit" value="Send" />
-            </form>
+                    <br />
+                    <input type="submit" value="Send" />
+                </form>
+            }
             <div class="row profile">
                 @foreach (var items in ViewBag.listfeed)
                 {
-                    <div class="col history-in">
-                        <div>From: @items.email</div>
-                        <div class="message-usr">@items.message</div>
-                    </div>
-                }
+        <div class="col history-in">
+            <div>From: @items.email</div>
+            <div class="message-usr">@items.message</div>
+        </div>}
 
             </div>
         </div>
@@ -129,7 +131,7 @@
                                 <td>@item.title</td>
                                 <td style="text-transform:lowercase" >@item.email</td>
                                 <td>@item.receiveddate</td>
-                                <td><a href="#" class="btn-detail" style="text-decoration:none;color:#000000">Detail</a></td>
+                                <td><a href="" class="btn-detail" style="text-decoration:none;color:#000000">Detail</a></td>
                                 <td><a class="btn-edit" href="@Url.Action("Removefeedback", new { idfeed=@item.ID })"><i style="font-size:30px" class='bx bxs-message-square-x'></i></a></td>
                             </tr>
                         }

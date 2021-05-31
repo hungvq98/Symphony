@@ -382,27 +382,31 @@
 <div class="container" id="teacher">
     <div class="row">
         @*vong lap*@
+        @foreach (var itemss in ViewBag.listte)
+        {
             <div class="col slideup items3">
                 <form action="" method="post">
                     <div class="card-cover">
                         <div class="card-tea">
                             <div style="background:#eeba10;background-size: cover;" class="bg"></div>
                             <div class="img-tea">
-                                <img src="img/discordicon7.png" alt=""> @*teacher img*@
+                                <img src="~/Upload/imgteacher/@itemss.img" alt=""> @*teacher img*@
                             </div>
                             <div class="his-tea">
                                 <div class="his-tea-des">
-                                    <Strong>Quhu</Strong> @*Name Teacher*@
+                                    <Strong>@itemss.fullname</Strong> @*Name Teacher*@
                                     <br>
-                                    <Strong>Java</Strong> @*Profession Teacher*@
+                                    <Strong>@itemss.professtional</Strong> @*Profession Teacher*@
                                     <br> @*Teacher His*@
-                                    Etiam porttitor eget nisl vitae facilisis. Cras rutrum lacus at blandit scelerisque. Nulla facilisi. Nunc vel risus mi. Vestibulum pharetra orci at turpis ultricies, sed luctus est tempus.
+                                        @Html.Raw(itemss.content)
                                 </div>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
+        }
+
         @*done*@
     </div>
 

@@ -77,6 +77,22 @@ namespace Ex3.Controllers
                                end = cr.EndTime.ToString()
 
                            }).AsEnumerable().Reverse().ToList();
+            var teacher=spn.Teachers.Where(d=>d.Active==true).Select(d=>new Models.Modelview.Teacherview { fullname=d.Fullname,img=d.Img,professtional=d.Professtional,content=d.Content}).AsEnumerable().Reverse().ToList();
+
+            if (Session["login"] != null)
+            {
+                string user = Session["login"].ToString();
+                var q = spn.UserInfoes.Where(d => d.UserName == user).FirstOrDefault();
+                int id = q.ID;
+                var noti = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).ToList();
+                ViewBag.listno = noti;
+                var count = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).Count();
+               /* if (count > 0)
+                {
+                    ViewBag.light = "light";
+                }*/
+            }
+            ViewBag.listte = teacher;
             ViewBag.listcourse = result;
             ViewBag.listcoursenew = results;
             ViewBag.listcoursepop = resultss;
@@ -92,6 +108,17 @@ namespace Ex3.Controllers
 
         public ActionResult Contact()
         {
+            Models.Entity.SPNEntities spn = new Models.Entity.SPNEntities();
+            if (Session["login"] != null)
+            {
+                string user = Session["login"].ToString();
+                var q = spn.UserInfoes.Where(d => d.UserName == user).FirstOrDefault();
+                int id = q.ID;
+                var noti = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).ToList();
+                ViewBag.listno = noti;
+                var count = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).Count();
+
+            }
             ViewBag.Message = "Your contact page.";
 
             return View();
@@ -106,13 +133,13 @@ namespace Ex3.Controllers
         {
             Models.Entity.SPNEntities spn = new Models.Entity.SPNEntities();
             var q = spn.UserInfoes.Where(d => d.Active == true).FirstOrDefault();
-            string name= Request.Form["user"];
-            
+            string name= Request.Form["user"];          
             if (q!= null)
             {
                 if (q.UserName==name)
                 {
                     TempData["message"] = "Username already used";
+
                     return RedirectToAction("LoginNRegister");
                 }
                 else
@@ -120,6 +147,7 @@ namespace Ex3.Controllers
                     if(Request.Form["pass"] != Request.Form["pass2"])
                     {
                         TempData["message"] = "Password does not match";
+
                         return RedirectToAction("LoginNRegister");
                     }
                     else
@@ -135,11 +163,13 @@ namespace Ex3.Controllers
                         uf.UserPassword = Encrypt_Password(Request.Form["pass"]);
                         string date = DateTime.Now.ToString("yyyy-MM-dd");
                         uf.RegisDate = DateTime.Parse(date);
+                        uf.Img = "avatardefault.png";
                         uf.Active = true;
                         spn.UserInfoes.Add(uf);
                         Session["login"] = Request.Form["fullname"];                       
                         spn.SaveChanges();
                         return RedirectToAction("Index");
+                        
                     }
                 }                     
             }
@@ -149,6 +179,7 @@ namespace Ex3.Controllers
                 {
                     TempData["message"] = "Password does not match";
                     return RedirectToAction("LoginNRegister");
+
                 }
                 else
                 {
@@ -163,12 +194,14 @@ namespace Ex3.Controllers
                     uf.UserPassword = Encrypt_Password(Request.Form["pass"]);
                     string date = DateTime.Now.ToString("yyyy-MM-dd");
                     uf.RegisDate = DateTime.Parse(date);
+                    uf.Img = "avatardefault.png";
                     uf.Active = true;
                     spn.UserInfoes.Add(uf);
                     spn.SaveChanges();
                     TempData["message"] = "Success";
-                    Session["login"]= Request.Form["user"];                 
+                    Session["login"]= Request.Form["user"];
                     return RedirectToAction("Index");
+                   
                 }   
                             
             }          
@@ -179,7 +212,7 @@ namespace Ex3.Controllers
             Models.Entity.SPNEntities spn = new SPNEntities();
             string user = Request.Form["username"];
             string pass = Request.Form["password"];
-            var q = spn.UserInfoes.Where(d=>d.Active == true).FirstOrDefault();
+            var q = spn.UserInfoes.Where(d=>d.Active == true && d.UserName==user).FirstOrDefault();
             if (q != null)
             {
                 string password = Decrypt_Password(q.UserPassword);
@@ -198,8 +231,9 @@ namespace Ex3.Controllers
                     else
                     {
                         
-                        var result = spn.UserInfoes.Where(d => d.UserName == user && d.Active == true).FirstOrDefault();
-                        Session["login"] = result.UserName;
+                       
+                        Session["login"] = Request.Form["username"];
+                        
                         TempData["message"] = "Success";
                         return RedirectToAction("Index");
                     }
@@ -215,6 +249,17 @@ namespace Ex3.Controllers
         }
         public ActionResult AboutUs()
         {
+            Models.Entity.SPNEntities spn = new Models.Entity.SPNEntities();
+            if (Session["login"] != null)
+            {
+                string user = Session["login"].ToString();
+                var q = spn.UserInfoes.Where(d => d.UserName == user).FirstOrDefault();
+                int id = q.ID;
+                var noti = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).ToList();
+                ViewBag.listno = noti;
+                var count = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).Count();
+                
+            }
             return View();
         }
         [OutputCache(NoStore = true, Duration = 0)]
@@ -324,6 +369,8 @@ namespace Ex3.Controllers
                 fd.Active = true;
                 spn.Feedbacks.Add(fd);
                 spn.SaveChanges();
+                TempData["message"] = "You have successfully submitted your feedback";
+                
                 return RedirectToAction("Index");
             }
       
@@ -349,13 +396,120 @@ namespace Ex3.Controllers
             pswstr = new String(decoded_char);
             return pswstr;
         }
+        
         public ActionResult Forum()
         {
-            return View();
+            Models.Entity.SPNEntities spn = new SPNEntities();
+            if (Session["login"] == null)
+            {
+
+                return RedirectToAction("LoginNRegister");
+            }
+            else
+            {
+                var result = (from ps in spn.PostAdmins
+                              join uf in spn.UserInfoes
+                              on ps.Idad equals uf.ID
+                              where ps.Active == true
+                              select new Models.Modelview.Postadminview
+                              {
+                                  ID=ps.ID,
+                                  content = ps.Content,
+                                  img = ps.Img,
+                                  imgad = uf.Img,
+                                  namead = uf.FullName
+                              }).AsEnumerable().Reverse().ToList();
+                ViewBag.listpost = result;               
+                return View();
+            }          
         }
+       
         public ActionResult AccountSetting()
         {
+            Models.Entity.SPNEntities spn = new SPNEntities();
+            string user = Session["login"].ToString();
+            var q = spn.UserInfoes.Where(d => d.UserName == user && d.Active == true).FirstOrDefault();
+            int id = q.ID;
+            var results = (from his in spn.HistoryCourses
+                          join uf in spn.UserInfoes
+                          on his.IDuser equals uf.ID
+                          join cr in spn.Courses
+                          on his.IDcourse equals cr.ID
+                          where his.IDuser == id
+                          select new Models.Modelview.Historycourseview
+                          {
+                              course = cr.NameCourse
+                          }).ToList();
+            ViewBag.listcourse = results;
+            var result = spn.UserInfoes.Where(d => d.UserName == user && d.Active == true).Select(d => new Models.Modelview.Userinfoview {ID=d.ID, fullname = d.FullName,email=d.Email,phone=d.Phone,address=d.Address,gender=d.Gender,img=d.Img }).ToList();
+            ViewBag.listuser = result;
             return View();
         }
+        public ActionResult Updateuser(HttpPostedFileBase myimg)
+        {
+            int id = Int32.Parse(Request.Form["id"]);
+            Models.Entity.SPNEntities spn = new SPNEntities();
+            UserInfo uf = spn.UserInfoes.First(d => d.ID == id);
+            uf.FullName = Request.Form["name"];
+            uf.Phone = Request.Form["phone"];
+            uf.Email = Request.Form["gmail"];
+            uf.Gender = Request.Form["gender"];
+            uf.Address = Request.Form["add"];
+            if (myimg == null)
+            {
+                var q = spn.UserInfoes.Where(d => d.ID == id).FirstOrDefault();
+                if (q != null)
+                {
+                    uf.Img = q.Img;
+                }
+            }
+            else
+            {
+                uf.Img = myimg.FileName;
+                string path = Server.MapPath("~/Upload/imguser/") + uf.Img;
+                myimg.SaveAs(path);
+            }
+          
+            spn.SaveChanges();
+            return RedirectToAction("AccountSetting");
+        }
+        public ActionResult Changepass()
+        {
+            Models.Entity.SPNEntities spn = new SPNEntities();
+            string user= Session["login"].ToString();
+            string pass = Request.Form["oldpass"];
+            var q = spn.UserInfoes.Where(d => d.UserName == user && d.Active == true).FirstOrDefault();
+            string password = Decrypt_Password(q.UserPassword);
+            if (pass==password)
+            {
+                string passnew = Request.Form["newpass"];
+                string cfpass = Request.Form["cfpass"];
+                if (passnew == cfpass)
+                {
+                    string passnews = Encrypt_Password(passnew);
+                    UserInfo uf = spn.UserInfoes.First(d => d.UserName == user);
+                    uf.UserPassword = passnews;
+                    spn.SaveChanges();
+                    return RedirectToAction("LoginNRegister");
+                }
+                else
+                {
+                    TempData["message"] = "Password does not match";
+                    return RedirectToAction("AccountSetting");
+                }
+            }
+            else
+            {
+                TempData["message"] = "Wrong old password";
+                return RedirectToAction("AccountSetting");
+            }
+            
+        }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("LoginNRegister");
+        }
+      
     }
 }

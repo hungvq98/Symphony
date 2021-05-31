@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "AboutUs";
     Layout = "~/Views/Shared/HomePage.cshtml";
+      if (TempData["message"] != null)
+    {
+        <script type="text/javascript">
+            alert(@Html.Raw(Json.Encode(TempData["message"])));
+        </script>
+    } }
 }
 <link rel="stylesheet" href="~/Content/Aboutxx.css" media="all" />
 
@@ -107,13 +113,14 @@
                 <div class="container">
                     <div class="form-contact">
                         <div class="form-contact-sm">
-                            <form>
+                            <form action="@Url.Action("Send")" method="post">
                                 <h3>Contact Us</h3>
                                 <input type="text" value="" placeholder="Full Name" />
-                                <input type="text" value="" placeholder="Title" />
-                                <textarea name="" placeholder="Type your message"></textarea>
+                                <input type="text" name="title" value="" placeholder="Title" />
+                                <textarea name="message" placeholder="Type your message"></textarea>
+                                <div class="btn-contact"><button type="submit">SEND</button></div>
                             </form>
-                            <div class="btn-contact"><button>SEND</button></div>
+                           
                         </div>
                         <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.2796846752904!2d106.69378432038874!3d10.789877901698512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529a1b2a41a6d%3A0xf1ac6a5097ebbabb!2sMAAC%20Vietnam!5e0!3m2!1svi!2s!4v1621352470682!5m2!1svi!2s" width="1200" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
