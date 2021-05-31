@@ -22,7 +22,10 @@ namespace Ex3.Models.Entity
         public string Img { get; set; }
         public Nullable<int> Time { get; set; }
         public string Material { get; set; }
-        public string Teacher { get; set; }
+        public Nullable<int> Idtea { get; set; }
         public string Typecourse { get; set; }
+        public Nullable<System.DateTime> StartTime { get; set; }
+        public Nullable<System.DateTime> EndTime { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

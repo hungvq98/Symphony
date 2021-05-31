@@ -58,7 +58,6 @@
         font-weight: bolder;
         outline: none;
         color: #eeba10;
-        border-bottom: 1px solid #ccc;
         position:relative;
     }
     .accordion a {

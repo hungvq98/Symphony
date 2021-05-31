@@ -17,8 +17,11 @@
           <Property Name="Img" Type="nvarchar" MaxLength="200" />
           <Property Name="Time" Type="int" />
           <Property Name="Material" Type="varchar(max)" />
-          <Property Name="Teacher" Type="nvarchar" MaxLength="200" />
+          <Property Name="Idtea" Type="int" />
           <Property Name="Typecourse" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartTime" Type="date" />
+          <Property Name="EndTime" Type="date" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -31,7 +34,8 @@
           <Property Name="AnswerC" Type="nvarchar(max)" />
           <Property Name="AnswerD" Type="nvarchar(max)" />
           <Property Name="Answercorrect" Type="nvarchar" MaxLength="20" />
-          <Property Name="Course" Type="nvarchar" MaxLength="100" />
+          <Property Name="IDcourse" Type="int" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -42,17 +46,17 @@
           <Property Name="Subject" Type="varchar" MaxLength="500" />
           <Property Name="Message" Type="varchar(max)" />
           <Property Name="ReceivedDate" Type="date" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="HistoryCourse">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDUser" Type="int" />
-          <Property Name="IDCourse" Type="int" />
-          <Property Name="Payment" Type="bit" />
-          <Property Name="StartTime" Type="date" />
-          <Property Name="EndTime" Type="date" />
+          <Property Name="IDuser" Type="int" />
+          <Property Name="IDcourse" Type="int" />
+          <Property Name="IDrequest" Type="int" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Historyexam">
           <Key>
@@ -63,16 +67,27 @@
           <Property Name="CourseID" Type="int" />
           <Property Name="Score" Type="nvarchar" MaxLength="100" />
           <Property Name="Dateexam" Type="date" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDuser" Type="int" />
+          <Property Name="Notifications" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="PostAdmin">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Typepost" Type="nvarchar" MaxLength="200" />
-          <Property Name="Title" Type="varchar" MaxLength="500" />
+          <Property Name="Typepost" Type="int" />
+          <Property Name="Idad" Type="int" />
           <Property Name="Img" Type="varchar" MaxLength="200" />
           <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Questionfaq">
           <Key>
@@ -81,6 +96,17 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Namequestion" Type="nvarchar" MaxLength="500" />
           <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="RequestCourse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUser" Type="int" />
+          <Property Name="IDCourse" Type="int" />
+          <Property Name="Payment" Type="bit" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -96,6 +122,7 @@
           <Property Name="Img" Type="nvarchar" MaxLength="200" />
           <Property Name="Professtional" Type="nvarchar" MaxLength="200" />
           <Property Name="Content" Type="nvarchar(max)" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
@@ -103,6 +130,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NameType" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -118,6 +146,8 @@
           <Property Name="UserName" Type="varchar" MaxLength="50" />
           <Property Name="UserPassword" Type="varchar" MaxLength="200" />
           <Property Name="RegisDate" Type="date" />
+          <Property Name="Img" Type="nvarchar" MaxLength="400" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityContainer Name="SPNModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
@@ -125,8 +155,10 @@
           <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistoryCourse" EntityType="Self.HistoryCourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Historyexam" EntityType="Self.Historyexam" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostAdmin" EntityType="Self.PostAdmin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Questionfaq" EntityType="Self.Questionfaq" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestCourse" EntityType="Self.RequestCourse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
@@ -148,8 +180,11 @@
           <Property Name="Img" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Time" Type="Int32" />
           <Property Name="Material" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Teacher" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Idtea" Type="Int32" />
           <Property Name="Typecourse" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Precision="0" />
+          <Property Name="EndTime" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -162,7 +197,8 @@
           <Property Name="AnswerC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AnswerD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Answercorrect" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Course" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IDcourse" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="Feedback">
           <Key>
@@ -173,17 +209,17 @@
           <Property Name="Subject" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ReceivedDate" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="HistoryCourse">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDUser" Type="Int32" />
-          <Property Name="IDCourse" Type="Int32" />
-          <Property Name="Payment" Type="Boolean" />
-          <Property Name="StartTime" Type="DateTime" Precision="0" />
-          <Property Name="EndTime" Type="DateTime" Precision="0" />
+          <Property Name="IDuser" Type="Int32" />
+          <Property Name="IDcourse" Type="Int32" />
+          <Property Name="IDrequest" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="Historyexam">
           <Key>
@@ -194,16 +230,27 @@
           <Property Name="CourseID" Type="Int32" />
           <Property Name="Score" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Dateexam" Type="DateTime" Precision="0" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDuser" Type="Int32" />
+          <Property Name="Notifications" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="PostAdmin">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Typepost" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Typepost" Type="Int32" />
+          <Property Name="Idad" Type="Int32" />
           <Property Name="Img" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="Questionfaq">
           <Key>
@@ -212,6 +259,17 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Namequestion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="RequestCourse">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" />
+          <Property Name="IDCourse" Type="Int32" />
+          <Property Name="Payment" Type="Boolean" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="Teacher">
           <Key>
@@ -227,6 +285,7 @@
           <Property Name="Img" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Professtional" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
@@ -234,6 +293,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NameType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -249,6 +309,8 @@
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserPassword" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="RegisDate" Type="DateTime" Precision="0" />
+          <Property Name="Img" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
         <EntityContainer Name="SPNEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Courses" EntityType="Self.Course" />
@@ -256,8 +318,10 @@
           <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
           <EntitySet Name="HistoryCourses" EntityType="Self.HistoryCourse" />
           <EntitySet Name="Historyexams" EntityType="Self.Historyexam" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
           <EntitySet Name="PostAdmins" EntityType="Self.PostAdmin" />
           <EntitySet Name="Questionfaqs" EntityType="Self.Questionfaq" />
+          <EntitySet Name="RequestCourses" EntityType="Self.RequestCourse" />
           <EntitySet Name="Teachers" EntityType="Self.Teacher" />
           <EntitySet Name="Types" EntityType="Self.Type" />
           <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
@@ -279,8 +343,11 @@
                 <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
                 <ScalarProperty Name="Material" ColumnName="Material" />
-                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Idtea" ColumnName="Idtea" />
                 <ScalarProperty Name="Typecourse" ColumnName="Typecourse" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -294,7 +361,8 @@
                 <ScalarProperty Name="AnswerC" ColumnName="AnswerC" />
                 <ScalarProperty Name="AnswerD" ColumnName="AnswerD" />
                 <ScalarProperty Name="Answercorrect" ColumnName="Answercorrect" />
-                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="IDcourse" ColumnName="IDcourse" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -306,6 +374,7 @@
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -313,11 +382,10 @@
             <EntityTypeMapping TypeName="SPNModel.HistoryCourse">
               <MappingFragment StoreEntitySet="HistoryCourse">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-                <ScalarProperty Name="IDCourse" ColumnName="IDCourse" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+                <ScalarProperty Name="IDcourse" ColumnName="IDcourse" />
+                <ScalarProperty Name="IDrequest" ColumnName="IDrequest" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -329,6 +397,17 @@
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="Score" ColumnName="Score" />
                 <ScalarProperty Name="Dateexam" ColumnName="Dateexam" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="SPNModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDuser" ColumnName="IDuser" />
+                <ScalarProperty Name="Notifications" ColumnName="Notifications" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -337,9 +416,10 @@
               <MappingFragment StoreEntitySet="PostAdmin">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Typepost" ColumnName="Typepost" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Idad" ColumnName="Idad" />
                 <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -349,6 +429,18 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Namequestion" ColumnName="Namequestion" />
                 <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestCourses">
+            <EntityTypeMapping TypeName="SPNModel.RequestCourse">
+              <MappingFragment StoreEntitySet="RequestCourse">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDCourse" ColumnName="IDCourse" />
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -365,6 +457,7 @@
                 <ScalarProperty Name="Img" ColumnName="Img" />
                 <ScalarProperty Name="Professtional" ColumnName="Professtional" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -373,6 +466,7 @@
               <MappingFragment StoreEntitySet="Type">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NameType" ColumnName="NameType" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -389,6 +483,8 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
                 <ScalarProperty Name="RegisDate" ColumnName="RegisDate" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

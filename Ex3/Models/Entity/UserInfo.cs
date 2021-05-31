@@ -24,5 +24,7 @@ namespace Ex3.Models.Entity
         public string UserName { get; set; }
         public string UserPassword { get; set; }
         public Nullable<System.DateTime> RegisDate { get; set; }
+        public string Img { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

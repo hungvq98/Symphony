@@ -24,5 +24,6 @@ namespace Ex3.Models.Entity
         public string Img { get; set; }
         public string Professtional { get; set; }
         public string Content { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

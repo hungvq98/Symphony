@@ -767,5 +767,9 @@ namespace Ex3.Areas.Admin.Controllers
             spn.SaveChanges();
             return RedirectToAction("Type");
         }
+        public ActionResult RepFeed()
+        {
+            return View();
+        }
     }
 }

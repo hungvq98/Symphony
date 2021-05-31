@@ -16,5 +16,6 @@ namespace Ex3.Models.Entity
     {
         public int ID { get; set; }
         public string NameType { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

@@ -15,10 +15,9 @@ namespace Ex3.Models.Entity
     public partial class HistoryCourse
     {
         public int ID { get; set; }
-        public Nullable<int> IDUser { get; set; }
-        public Nullable<int> IDCourse { get; set; }
-        public Nullable<bool> Payment { get; set; }
-        public Nullable<System.DateTime> StartTime { get; set; }
-        public Nullable<System.DateTime> EndTime { get; set; }
+        public Nullable<int> IDuser { get; set; }
+        public Nullable<int> IDcourse { get; set; }
+        public Nullable<int> IDrequest { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

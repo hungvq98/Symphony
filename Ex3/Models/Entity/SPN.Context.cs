@@ -30,8 +30,10 @@ namespace Ex3.Models.Entity
         public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<HistoryCourse> HistoryCourses { get; set; }
         public virtual DbSet<Historyexam> Historyexams { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<PostAdmin> PostAdmins { get; set; }
         public virtual DbSet<Questionfaq> Questionfaqs { get; set; }
+        public virtual DbSet<RequestCourse> RequestCourses { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }

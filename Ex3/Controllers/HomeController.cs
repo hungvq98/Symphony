@@ -280,7 +280,15 @@ namespace Ex3.Controllers
                 string user = Session["login"].ToString();
                 var users = spn.UserInfoes.Where(d => d.UserName == user).FirstOrDefault();              
                 var request = spn.RequestCourses.Where(d => d.IDUser == users.ID && d.IDCourse == id && d.Active == true).FirstOrDefault();
-                if(request == null)
+
+                string userx = Session["login"].ToString();
+                var qx = spn.UserInfoes.Where(d => d.UserName == userx).FirstOrDefault();
+                int idx = qx.ID;
+                var noti = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).ToList();
+                ViewBag.listno = noti;
+                var count = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).Count();
+
+                if (request == null)
                 {
                     return View();
                 }
@@ -296,11 +304,9 @@ namespace Ex3.Controllers
                         return View();
                     }
                 }
-               
-
-
             }
             
+
         }
         [OutputCache(NoStore = true, Duration = 0)]
         public ActionResult Score()
@@ -443,6 +449,18 @@ namespace Ex3.Controllers
             ViewBag.listcourse = results;
             var result = spn.UserInfoes.Where(d => d.UserName == user && d.Active == true).Select(d => new Models.Modelview.Userinfoview {ID=d.ID, fullname = d.FullName,email=d.Email,phone=d.Phone,address=d.Address,gender=d.Gender,img=d.Img }).ToList();
             ViewBag.listuser = result;
+
+            
+            if (Session["login"] != null)
+            {
+                string users = Session["login"].ToString();
+                var qs = spn.UserInfoes.Where(d => d.UserName == user).FirstOrDefault();
+                int ids = qs.ID;
+                var noti = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).ToList();
+                ViewBag.listno = noti;
+                var count = spn.Notifications.Where(d => d.IDuser == id && d.Active == true).Select(d => new Models.Modelview.Notificationview { news = d.Notifications }).Count();
+
+            }
             return View();
         }
         public ActionResult Updateuser(HttpPostedFileBase myimg)

@@ -19,5 +19,6 @@ namespace Ex3.Models.Entity
         public string Subject { get; set; }
         public string Message { get; set; }
         public Nullable<System.DateTime> ReceivedDate { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

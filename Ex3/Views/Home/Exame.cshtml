@@ -54,7 +54,8 @@
                         }
                     </div>
                     <input hidden type="text" name="total" id="total" />
-                    <div class="btn-sub"><button id="btn-continue" type="submit">continute</button></div>
+                    <br />
+                    <div class="btn-sub"><button id="btn-continue" type="submit">Continute</button></div>
                 </form>
                 <div class="result" id="myresults"></div>
                 <div class="btn-sub"><button id="btn-sub" onclick="getscore()">Submit</button></div>
@@ -113,6 +114,8 @@
         if (c == 0) {
             $('.Timer').html("Time Out!");
             $('#myresults').css("display", "block");
+            $('#btn-sub').css("display", "none");
+            $('#btn-continue').css("display", "block");
             getscore();
 
         } else {

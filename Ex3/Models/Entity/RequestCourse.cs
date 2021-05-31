@@ -12,13 +12,12 @@ namespace Ex3.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class PostAdmin
+    public partial class RequestCourse
     {
         public int ID { get; set; }
-        public Nullable<int> Typepost { get; set; }
-        public Nullable<int> Idad { get; set; }
-        public string Img { get; set; }
-        public string Content { get; set; }
+        public Nullable<int> IDUser { get; set; }
+        public Nullable<int> IDCourse { get; set; }
+        public Nullable<bool> Payment { get; set; }
         public Nullable<bool> Active { get; set; }
     }
 }

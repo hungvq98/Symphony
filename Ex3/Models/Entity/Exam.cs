@@ -21,6 +21,7 @@ namespace Ex3.Models.Entity
         public string AnswerC { get; set; }
         public string AnswerD { get; set; }
         public string Answercorrect { get; set; }
-        public string Course { get; set; }
+        public Nullable<int> IDcourse { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

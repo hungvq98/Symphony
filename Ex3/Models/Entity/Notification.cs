@@ -12,13 +12,11 @@ namespace Ex3.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class PostAdmin
+    public partial class Notification
     {
         public int ID { get; set; }
-        public Nullable<int> Typepost { get; set; }
-        public Nullable<int> Idad { get; set; }
-        public string Img { get; set; }
-        public string Content { get; set; }
+        public Nullable<int> IDuser { get; set; }
+        public string Notifications { get; set; }
         public Nullable<bool> Active { get; set; }
     }
 }

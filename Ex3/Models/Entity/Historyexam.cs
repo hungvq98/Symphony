@@ -19,5 +19,6 @@ namespace Ex3.Models.Entity
         public Nullable<int> CourseID { get; set; }
         public string Score { get; set; }
         public Nullable<System.DateTime> Dateexam { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }
